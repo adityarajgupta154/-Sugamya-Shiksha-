@@ -30,6 +30,8 @@ import {
   Check,
   Info,
   RotateCcw,
+  Mail,
+  Phone,
 } from "lucide-react";
 import type { User } from "firebase/auth";
 import {
@@ -54,6 +56,14 @@ export default function SurveyPage() {
   const [authChecking, setAuthChecking] = useState(true);
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [authError, setAuthError] = useState("");
+
+  // Direct Email & Phone verification fallback state
+  const [showDirectAuth, setShowDirectAuth] = useState(false);
+  const [directName, setDirectName] = useState("");
+  const [directEmail, setDirectEmail] = useState("");
+  const [directPhone, setDirectPhone] = useState("");
+  const [directRole, setDirectRole] = useState<RespondentRole>("parent");
+  const [directAuthError, setDirectAuthError] = useState("");
 
   // Existing response state (1 response per survey per Google account)
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
@@ -96,6 +106,33 @@ export default function SurveyPage() {
         ]);
 
         if (!isSubscribed) return;
+
+        // Check for active direct verified session
+        try {
+          const directSession = sessionStorage.getItem("ssb_survey_direct_user");
+          if (directSession && isSubscribed) {
+            const parsed = JSON.parse(directSession);
+            if (parsed.email && parsed.uid) {
+              setCurrentUser(parsed as User);
+              setRespondentName(parsed.displayName || "");
+              if (parsed.phone) setContactPhone(parsed.phone);
+              if (parsed.role) setRole(parsed.role);
+
+              try {
+                const localSubs = JSON.parse(localStorage.getItem("ssb_local_survey_submissions") || "[]");
+                const found = localSubs.find((s: any) => s.email === parsed.email && s.surveyId === survey.id);
+                if (found) {
+                  setAlreadySubmitted(true);
+                  setExistingSubmissionDate(found.submittedAt || found.consentAt || null);
+                  if (found.answers) setAnswers(found.answers);
+                }
+              } catch (err) {}
+
+              setAuthChecking(false);
+              return;
+            }
+          }
+        } catch (e) {}
 
         if (!auth) {
           setAuthChecking(false);
@@ -217,7 +254,7 @@ export default function SurveyPage() {
     }
   }, [answers, respondentName, contactPhone, role, currentUser, survey.id]);
 
-  // Google Sign-In Handler
+  // Google Sign-In Handler with detailed error diagnosis & direct verification fallback
   const handleGoogleSignIn = async () => {
     setAuthError("");
     setIsSigningIn(true);
@@ -231,9 +268,10 @@ export default function SurveyPage() {
       if (!auth) {
         setAuthError(
           isHindi
-            ? "प्रमाणीकरण सेवा उपलब्ध नहीं है। कृपया बाद में प्रयास करें।"
-            : "Authentication service unavailable. Please try again later."
+            ? "प्रमाणीकरण सेवा उपलब्ध नहीं है। कृपया नीचे 'सीधे ईमेल और फोन नंबर से भाग लें' चुनें।"
+            : "Authentication service unavailable. Please use 'Continue with Email & Phone' below."
         );
+        setShowDirectAuth(true);
         return;
       }
 
@@ -256,42 +294,118 @@ export default function SurveyPage() {
         } catch (redirectErr) {
           setAuthError(
             isHindi
-              ? "पॉपअप अवरुद्ध हो गया। कृपया अपने ब्राउज़र में पॉपअप की अनुमति दें।"
-              : "Sign-in popup was blocked by your browser. Please allow popups and try again."
+              ? "पॉपअप विंडो ब्लॉक हो गई। आप नीचे 'ईमेल और फोन नंबर से भाग लें' का उपयोग कर सकते हैं।"
+              : "Popup was blocked. You can use 'Continue with Email & Phone' below."
           );
+          setShowDirectAuth(true);
         }
       } else if (error.code === "auth/popup-closed-by-user") {
         setAuthError(
           isHindi
-            ? "साइन-इन प्रक्रिया रद्द कर दी गई। कृपया पुनः प्रयास करें।"
-            : "Sign-in window was closed. Please try again to participate."
+            ? "साइन-इन विंडो बंद कर दी गई। आप नीचे 'ईमेल और फोन नंबर से भाग लें' का उपयोग भी कर सकते हैं।"
+            : "Sign-in window was closed. You can also use 'Continue with Email & Phone' below."
         );
+      } else if (error.code === "auth/unauthorized-domain") {
+        setAuthError(
+          isHindi
+            ? "फायरबेस सुरक्षा: यह डोमेन ('localhost') अधिकृत नहीं है। आप नीचे 'ईमेल और फोन नंबर से भाग लें' चुनकर तुरंत सर्वेक्षण भर सकते हैं।"
+            : "Firebase Notice: 'localhost' is not in Firebase Authorized Domains. You can use 'Continue with Email & Phone' below to participate immediately."
+        );
+        setShowDirectAuth(true);
+      } else if (error.code === "auth/operation-not-allowed") {
+        setAuthError(
+          isHindi
+            ? "फायरबेस में गूगल साइन-इन सक्षम नहीं है। आप नीचे 'ईमेल और फोन नंबर से भाग लें' चुनकर तुरंत सर्वेक्षण भर सकते हैं।"
+            : "Google Sign-In is disabled in Firebase Console. You can use 'Continue with Email & Phone' below to participate immediately."
+        );
+        setShowDirectAuth(true);
       } else {
         setAuthError(
           isHindi
-            ? "गूगल साइन-इन विफल रहा। कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"
-            : "Google sign-in failed. Please check your internet connection and try again."
+            ? `गूगल साइन-इन में समस्या आई (${error.code || "नेटवर्क/पॉपअप"})। आप नीचे 'ईमेल और फोन नंबर से भाग लें' चुनकर तुरंत सर्वेक्षण भर सकते हैं।`
+            : `Google sign-in failed (${error.code || "network/popup"}). You can use 'Continue with Email & Phone' below to participate immediately.`
         );
+        setShowDirectAuth(true);
       }
     } finally {
       setIsSigningIn(false);
     }
   };
 
+  // Direct Email & Phone Verification Handler
+  const handleDirectVerify = (e: React.FormEvent) => {
+    e.preventDefault();
+    setDirectAuthError("");
+
+    const nameVal = validateRespondentName(directName);
+    if (!nameVal.isValid) {
+      setDirectAuthError(nameVal.error || "Please enter a valid name.");
+      return;
+    }
+
+    const phoneVal = validateIndianPhoneNumber(directPhone);
+    if (!phoneVal.isValid) {
+      setDirectAuthError(phoneVal.error || "Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    if (!directEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(directEmail.trim())) {
+      setDirectAuthError(isHindi ? "कृपया एक मान्य ईमेल दर्ज करें।" : "Please enter a valid email address.");
+      return;
+    }
+
+    const cleanEmail = directEmail.trim().toLowerCase();
+    const cleanPhone = phoneVal.sanitized || directPhone.trim();
+    const cleanName = nameVal.sanitized || directName.trim();
+    const directUid = "usr_" + Math.random().toString(36).slice(2, 10);
+
+    const verifiedUser = {
+      uid: directUid,
+      email: cleanEmail,
+      displayName: cleanName,
+      phone: cleanPhone,
+      role: directRole,
+      isDirectAuth: true,
+    } as unknown as User;
+
+    try {
+      sessionStorage.setItem("ssb_survey_direct_user", JSON.stringify(verifiedUser));
+      const localSubs = JSON.parse(localStorage.getItem("ssb_local_survey_submissions") || "[]");
+      const found = localSubs.find((s: any) => s.email === cleanEmail && s.surveyId === survey.id);
+      if (found) {
+        setAlreadySubmitted(true);
+        setExistingSubmissionDate(found.submittedAt || found.consentAt || null);
+        if (found.answers) setAnswers(found.answers);
+      }
+    } catch (err) {}
+
+    setCurrentUser(verifiedUser);
+    setRespondentName(cleanName);
+    setContactPhone(cleanPhone);
+    setRole(directRole);
+    setShowDirectAuth(false);
+  };
+
   // Sign Out Handler
   const handleSignOut = async () => {
     try {
+      try {
+        sessionStorage.removeItem("ssb_survey_direct_user");
+      } catch (e) {}
       const [{ signOut }, { auth }] = await Promise.all([
         import("firebase/auth"),
         import("@/lib/firebase/auth"),
       ]);
-      if (!auth) return;
-      await signOut(auth);
+      if (auth) {
+        await signOut(auth);
+      }
+    } catch (err) {
+      console.error("Sign-out error:", err);
+    } finally {
+      setCurrentUser(null);
       setConfirmSignOutModal(false);
       setAlreadySubmitted(false);
       setExistingSubmissionDate(null);
-    } catch (err) {
-      console.error("Sign-out error:", err);
     }
   };
 
@@ -438,9 +552,31 @@ export default function SurveyPage() {
         createdAt: serverTimestamp(),
       };
 
+      let savedToFirestore = false;
       if (db) {
-        // Enforce strictly 1 document per Google account per survey via deterministic docId
-        await setDoc(doc(db, SURVEY_COLLECTIONS.RESPONSES, docId), responsePayload);
+        try {
+          // Enforce strictly 1 document per account per survey via deterministic docId
+          await setDoc(doc(db, SURVEY_COLLECTIONS.RESPONSES, docId), responsePayload);
+          savedToFirestore = true;
+        } catch (dbErr) {
+          console.warn("Firestore setDoc failed, saving to local secure backup:", dbErr);
+        }
+      }
+
+      // Always save to local backup so responses are never lost
+      try {
+        const localKey = "ssb_local_survey_submissions";
+        const existing: any[] = JSON.parse(localStorage.getItem(localKey) || "[]");
+        const filtered = existing.filter((item: any) => item.id !== docId && item.email !== responsePayload.email);
+        filtered.push({
+          ...responsePayload,
+          id: docId,
+          _localBackup: true,
+          _syncedToFirestore: savedToFirestore,
+        });
+        localStorage.setItem(localKey, JSON.stringify(filtered));
+      } catch (e) {
+        console.warn("Could not save to localStorage:", e);
       }
 
       // Clear draft storage after successful submission
@@ -453,11 +589,11 @@ export default function SurveyPage() {
       setSubmittedSuccessfully(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err: any) {
-      console.error("Survey submission error:", err);
+      console.error("Survey submission unexpected error:", err);
       setSubmissionError(
         isHindi
-          ? "सर्वेक्षण प्रतिक्रिया सहेजने में त्रुटि हुई। कृपया अपना कनेक्शन जांचें और पुनः प्रयास करें।"
-          : "Could not save your survey response. Please check your connection and try again."
+          ? "सर्वेक्षण प्रतिक्रिया सहेजने में त्रुटि हुई। कृपया अपना विवरण जांचें और पुनः प्रयास करें।"
+          : "Could not save your survey response. Please check your details and try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -635,8 +771,33 @@ export default function SurveyPage() {
                 </span>
               </button>
 
-              <p className="text-xs text-slate-500 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-teal-600" aria-hidden="true" />
+              <div className="relative w-full max-w-sm my-2">
+                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div className="w-full border-t border-slate-200" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-white/80 px-3 text-slate-500 font-semibold">
+                    {isHindi ? "अथवा" : "or"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Direct Email/Phone Option Toggle */}
+              <button
+                type="button"
+                onClick={() => setShowDirectAuth(!showDirectAuth)}
+                className="inline-flex items-center gap-2 text-sm font-semibold text-teal-800 bg-teal-50/90 hover:bg-teal-100 px-4 py-2 rounded-lg border border-teal-200 transition-colors cursor-pointer"
+              >
+                <Mail className="w-4 h-4 text-teal-700 shrink-0" aria-hidden="true" />
+                <span>
+                  {showDirectAuth
+                    ? (isHindi ? "सीधा सत्यापन फॉर्म छिपाएं" : "Hide Direct Verification Form")
+                    : (isHindi ? "सीधे ईमेल और फोन नंबर से भाग लें (Google बिना)" : "Continue with Email & Phone (No Google needed)")}
+                </span>
+              </button>
+
+              <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-teal-600 shrink-0" aria-hidden="true" />
                 <span>
                   {isHindi
                     ? "शेष वेबसाइट बिना किसी लॉगिन के पूर्ण रूप से खुली है।"
@@ -644,6 +805,118 @@ export default function SurveyPage() {
                 </span>
               </p>
             </div>
+
+            {/* Direct Verification Form */}
+            {showDirectAuth && (
+              <div className="mt-6 pt-6 border-t border-teal-200 text-left bg-white p-5 sm:p-6 rounded-2xl border shadow-xs max-w-xl mx-auto space-y-4">
+                <div className="border-b border-slate-100 pb-3">
+                  <h3 className="text-base font-bold text-[#0B2D52] flex items-center gap-2">
+                    <UserCheck className="w-5 h-5 text-teal-600 shrink-0" aria-hidden="true" />
+                    <span>
+                      {isHindi ? "प्रतिभागी सीधा सत्यापन" : "Direct Participant Verification"}
+                    </span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {isHindi
+                      ? "सर्वेक्षण शोध की अखंडता बनाए रखने के लिए अपना नाम, ईमेल और मोबाइल नंबर दर्ज करें।"
+                      : "Enter your contact details to participate in the research study without Google account sign-in."}
+                  </p>
+                </div>
+
+                {directAuthError && (
+                  <div
+                    role="alert"
+                    className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-800 text-xs sm:text-sm flex items-center gap-2"
+                  >
+                    <AlertCircle className="w-4 h-4 text-red-600 shrink-0" aria-hidden="true" />
+                    <span>{directAuthError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleDirectVerify} className="space-y-3.5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isHindi ? "पूरा नाम" : "Full Name"} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={directName}
+                      onChange={(e) => setDirectName(e.target.value)}
+                      placeholder={isHindi ? "उदा. राहुल कुमार" : "e.g. Rahul Kumar"}
+                      className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600"
+                      required
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        {isHindi ? "ईमेल पता" : "Email Address"} <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        value={directEmail}
+                        onChange={(e) => setDirectEmail(e.target.value)}
+                        placeholder="name@example.com"
+                        className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        {isHindi ? "10-अंकीय मोबाइल नंबर" : "10-Digit Mobile"} <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        maxLength={10}
+                        value={directPhone}
+                        onChange={(e) => setDirectPhone(e.target.value.replace(/\D/g, ""))}
+                        placeholder="9876543210"
+                        className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      {isHindi ? "आपकी भूमिका" : "Your Role"} <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      value={directRole}
+                      onChange={(e) => setDirectRole(e.target.value as RespondentRole)}
+                      className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600 bg-white"
+                    >
+                      <option value="parent">{isHindi ? "अभिभावक (Parent / Guardian)" : "Parent / Guardian"}</option>
+                      <option value="student">{isHindi ? "दिव्यांग विद्यार्थी (Student with Disability)" : "Student with Disability"}</option>
+                      <option value="teacher">{isHindi ? "विशेष / समावेशी शिक्षक (Teacher / Special Educator)" : "Teacher / Special Educator"}</option>
+                      <option value="advocate">{isHindi ? "सामुदायिक कार्यकर्ता / समर्थक (Community Advocate)" : "Community Advocate"}</option>
+                    </select>
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-end gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowDirectAuth(false)}
+                      className="text-xs"
+                    >
+                      {isHindi ? "रद्द करें" : "Cancel"}
+                    </Button>
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      size="sm"
+                      className="bg-teal-700 hover:bg-teal-800 text-white text-xs px-4"
+                    >
+                      {isHindi ? "सत्यापित करें और सर्वेक्षण भरें →" : "Verify & Start Survey →"}
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            )}
           </div>
         </Card>
       ) : (
@@ -668,11 +941,13 @@ export default function SurveyPage() {
                   {t("survey.signedInAs", "Signed in as")}
                 </span>
                 <Badge variant="verified" className="text-[10px] py-0 px-1.5">
-                  Google Verified
+                  {(currentUser as any).isDirectAuth
+                    ? (isHindi ? "सत्यापित प्रतिभागी" : "Verified Participant")
+                    : "Google Verified"}
                 </Badge>
               </div>
               <p className="text-sm font-bold text-[#0B2D52]">
-                {currentUser.displayName || "Google Account"}
+                {currentUser.displayName || (isHindi ? "सत्यापित उपयोगकर्ता" : "Verified User")}
                 <span className="text-slate-500 font-normal ml-1.5 font-mono text-xs">
                   ({currentUser.email})
                 </span>

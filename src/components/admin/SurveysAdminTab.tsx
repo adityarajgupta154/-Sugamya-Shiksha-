@@ -80,10 +80,7 @@ export function SurveysAdminTab() {
 
   // Dedicated Real-Time Listener for Survey Responses (Unsubscribes on unmount)
   useEffect(() => {
-    if (!isAdmin || !db) return;
-
-    setIsSurveyLoading(true);
-    setSurveyFetchError("");
+    if (!isAdmin) return;
 
     const surveyTitleMap: Record<string, string> = {
       [surveyDef.id]: isHindi ? surveyDef.title_hi : surveyDef.title_en,
@@ -92,6 +89,29 @@ export function SurveysAdminTab() {
         : "Danapur School Accessibility Community Survey 2026",
     };
 
+    const loadLocalSubmissions = (): SurveyResponseDoc[] => {
+      try {
+        const raw = localStorage.getItem("ssb_local_survey_submissions");
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          return parsed.map((d) => normalizeSurveyResponse(d, d.id, surveyTitleMap));
+        }
+      } catch (e) {}
+      return [];
+    };
+
+    if (!db) {
+      const localDocs = loadLocalSubmissions();
+      if (localDocs.length > 0) {
+        setSurveyResponses(localDocs);
+      }
+      return;
+    }
+
+    setIsSurveyLoading(true);
+    setSurveyFetchError("");
+
     const q = collection(db, SURVEY_COLLECTIONS.RESPONSES);
     const unsubscribe = onSnapshot(
       q,
@@ -99,12 +119,19 @@ export function SurveysAdminTab() {
         const docs = snapshot.docs.map((d) =>
           normalizeSurveyResponse(d.data(), d.id, surveyTitleMap)
         );
-        setSurveyResponses(docs);
+        const localDocs = loadLocalSubmissions();
+        const existingIds = new Set(docs.map((d) => d.id));
+        const merged = [...docs, ...localDocs.filter((d) => !existingIds.has(d.id))];
+        setSurveyResponses(merged);
         setIsSurveyLoading(false);
         setSurveyFetchError("");
       },
       (err) => {
         console.error("Firestore onSnapshot error on surveyResponses:", err);
+        const localDocs = loadLocalSubmissions();
+        if (localDocs.length > 0) {
+          setSurveyResponses(localDocs);
+        }
         setSurveyFetchError(
           isHindi
             ? `सर्वेक्षण प्रतिक्रियाएं लोड करने में त्रुटि: ${err.message}`
@@ -189,6 +216,16 @@ export function SurveysAdminTab() {
         console.error("Could not delete survey response from Firestore:", err);
       }
     }
+    try {
+      const raw = localStorage.getItem("ssb_local_survey_submissions");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          const updated = parsed.filter((r: any) => r.id !== respId);
+          localStorage.setItem("ssb_local_survey_submissions", JSON.stringify(updated));
+        }
+      }
+    } catch (e) {}
     setSurveyResponses((prev) => prev.filter((r) => r.id !== respId));
     setResponseDeleteConfirmId(null);
     setSurveySuccess(isHindi ? "प्रतिक्रिया हटा दी गई।" : "Survey response removed.");
