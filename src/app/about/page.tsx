@@ -140,19 +140,52 @@ export default function AboutPage() {
 
     setIsSubmitting(true);
     try {
-      const { db } = await import("@/lib/firebase/firestore");
-      if (db) {
-        const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
-        await addDoc(collection(db, "contactSubmissions"), {
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim() || null,
-          role: formData.role,
-          message: formData.message.trim(),
-          createdAt: serverTimestamp(),
-          status: "unread",
-        });
+      const feedbackPayload = {
+        id: "fb_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7),
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || null,
+        role: formData.role,
+        message: formData.message.trim(),
+        createdAt: new Date().toISOString(),
+        status: "unread",
+      };
+
+      let savedToFirestore = false;
+      try {
+        const { db } = await import("@/lib/firebase/firestore");
+        if (db) {
+          const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+          await addDoc(collection(db, "contactSubmissions"), {
+            name: feedbackPayload.name,
+            email: feedbackPayload.email,
+            phone: feedbackPayload.phone,
+            role: feedbackPayload.role,
+            message: feedbackPayload.message,
+            createdAt: serverTimestamp(),
+            status: "unread",
+          });
+          savedToFirestore = true;
+        }
+      } catch (dbErr) {
+        console.warn("Firestore contact submission error, storing in local fallback:", dbErr);
       }
+
+      // Always save to local storage for zero data loss
+      try {
+        const localKey = "ssb_local_feedback_submissions";
+        const existing = JSON.parse(localStorage.getItem(localKey) || "[]");
+        existing.unshift({
+          ...feedbackPayload,
+          _localBackup: true,
+          _syncedToFirestore: savedToFirestore,
+        });
+        localStorage.setItem(localKey, JSON.stringify(existing));
+        window.dispatchEvent(new CustomEvent("ssb_feedback_submitted"));
+      } catch (storageErr) {
+        console.warn("Could not write feedback to localStorage:", storageErr);
+      }
+
       setSubmitSuccess(true);
       setFormData({
         name: "",
@@ -165,7 +198,7 @@ export default function AboutPage() {
       });
     } catch (err: any) {
       console.error("Error submitting contact form:", err);
-      // Even if Firestore is demo mode, show gracious user feedback
+      // Show gracious user feedback
       setSubmitSuccess(true);
     } finally {
       setIsSubmitting(false);
@@ -318,7 +351,7 @@ export default function AboutPage() {
           <Card as="section" aria-labelledby="contact-form-heading" className="p-6 sm:p-8 border-slate-200 shadow-md sticky top-24 bg-white">
             <CardHeader className="space-y-1 border-b border-slate-100 pb-4">
               <CardTitle as="h2" id="contact-form-heading" className="text-xl">
-                {t("about.formTitle", "Send a Message / Research Query")}
+                {isHindi ? "संदेश एवं प्रतिक्रिया भेजें (Feedback & Inquiry)" : "Send Feedback / Research Query"}
               </CardTitle>
               <p className="text-xs text-slate-600">
                 {t("about.formSubtitle")}

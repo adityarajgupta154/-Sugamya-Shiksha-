@@ -20,6 +20,7 @@ import {
   ShieldAlert,
   Heart,
   ArrowLeftRight,
+  MessageSquare,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 
@@ -49,6 +50,10 @@ const SchoolsAdminTab = dynamic(
 const SurveysAdminTab = dynamic(
   () => import("@/components/admin/SurveysAdminTab").then((m) => m.SurveysAdminTab),
   { loading: tabLoading("Surveys") }
+);
+const FeedbackAdminTab = dynamic(
+  () => import("@/components/admin/FeedbackAdminTab").then((m) => m.FeedbackAdminTab),
+  { loading: tabLoading("Feedback & Inquiries") }
 );
 const ResourcesHubTab = dynamic(
   () => import("@/components/admin/ResourcesHubTab").then((m) => m.ResourcesHubTab),
@@ -169,6 +174,16 @@ export default function AdminDashboardPage() {
         </span>
       ),
       content: <SurveysAdminTab />,
+    },
+    {
+      id: "feedback",
+      label: (
+        <span className="flex items-center gap-2">
+          <MessageSquare className="w-4 h-4 text-teal-600" aria-hidden="true" />
+          <span>{isHindi ? "प्रतिक्रिया व पूछताछ (Feedback)" : "Feedback & Inquiries"}</span>
+        </span>
+      ),
+      content: <FeedbackAdminTab isHindi={isHindi} />,
     },
     {
       id: "resourcesHub",
