@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { DEMO_SCHOOLS, SchoolItem } from "@/data/schoolsData";
+import { mergeSchoolsWithLocal } from "@/lib/customSchoolsStorage";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -176,13 +177,14 @@ export default function SchoolDetailPage() {
         console.info("Firestore offline, falling back to demo data");
       }
 
-      // Fallback to demo data
+      // Fallback to locally persisted custom schools + demo schools
       if (!activeSchool) {
-        const demoSchool = DEMO_SCHOOLS.find(
+        const localList = mergeSchoolsWithLocal(DEMO_SCHOOLS);
+        const match = localList.find(
           (s) => s.id === schoolId && s.published
         );
-        if (demoSchool) {
-          activeSchool = demoSchool;
+        if (match) {
+          activeSchool = match;
         } else {
           setNotFound(true);
         }

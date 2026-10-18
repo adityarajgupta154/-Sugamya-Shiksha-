@@ -46,9 +46,13 @@ const DanapurSchoolsMap = dynamic(
   }
 );
 
+import { mergeSchoolsWithLocal } from "@/lib/customSchoolsStorage";
+
 export default function SchoolsDirectoryPage() {
   const { locale, t } = useLanguage();
-  const [schools, setSchools] = useState<SchoolItem[]>(DEMO_SCHOOLS.filter((s) => s.published));
+  const [schools, setSchools] = useState<SchoolItem[]>(() =>
+    mergeSchoolsWithLocal(DEMO_SCHOOLS).filter((s) => s.published)
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | "government" | "private">("all");
   const [statusFilter, setStatusFilter] = useState<"all" | "audited" | "pending" | "follow_up_required">("all");
@@ -57,28 +61,49 @@ export default function SchoolsDirectoryPage() {
 
   const isHindi = locale === "hi";
 
-  // Load from Firestore if online, filtering published only
+  // Load from Firestore if online, merge with locally saved custom schools, filtering published only
   useEffect(() => {
     let cancelled = false;
+
     async function loadFirestoreSchools() {
+      let baseList = DEMO_SCHOOLS;
       try {
         const { db } = await import("@/lib/firebase/firestore");
-        if (!db || cancelled) return;
-        const { collection, getDocs, query, where, limit } = await import("firebase/firestore");
-        const q = query(collection(db, "schools"), where("published", "==", true), limit(50));
-        const snap = await getDocs(q);
-        if (!snap.empty && !cancelled) {
-          const list = snap.docs.map((d) => ({ id: d.id, ...d.data() } as SchoolItem));
-          setSchools(list);
+        if (db && !cancelled) {
+          const { collection, getDocs, query, where, limit } = await import("firebase/firestore");
+          const q = query(collection(db, "schools"), where("published", "==", true), limit(50));
+          const snap = await getDocs(q);
+          if (!snap.empty && !cancelled) {
+            baseList = snap.docs.map((d) => ({ id: d.id, ...d.data() } as SchoolItem));
+          }
         }
       } catch (err) {
-        // Fall back gracefully to demo data
         console.info("Using demo schools dataset (Firestore offline or no records)");
       }
+
+      if (!cancelled) {
+        const merged = mergeSchoolsWithLocal(baseList);
+        setSchools(merged.filter((s) => s.published));
+      }
     }
+
     loadFirestoreSchools();
+
+    // Listen to real-time custom events when admin adds/edits/deletes a school
+    const handleSync = () => {
+      setSchools((curr) => {
+        const merged = mergeSchoolsWithLocal(curr.length ? curr : DEMO_SCHOOLS);
+        return merged.filter((s) => s.published);
+      });
+    };
+
+    window.addEventListener("ssb_schools_updated", handleSync);
+    window.addEventListener("storage", handleSync);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("ssb_schools_updated", handleSync);
+      window.removeEventListener("storage", handleSync);
     };
   }, []);
 
@@ -93,18 +118,28 @@ export default function SchoolsDirectoryPage() {
       // Status filter
       if (statusFilter !== "all" && school.auditStatus !== statusFilter) return false;
 
-      // Search query
+      // Bilingual Search query (matches Hindi or English name, address, UDISE code or block)
       if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const name = (isHindi ? school.name_hi : school.name_en).toLowerCase();
-        const address = (isHindi ? school.address_hi : school.address_en).toLowerCase();
+        const q = searchQuery.toLowerCase().trim();
+        const nameHi = (school.name_hi || "").toLowerCase();
+        const nameEn = (school.name_en || "").toLowerCase();
+        const addressHi = (school.address_hi || "").toLowerCase();
+        const addressEn = (school.address_en || "").toLowerCase();
         const udise = (school.udiseCode || "").toLowerCase();
-        return name.includes(q) || address.includes(q) || udise.includes(q);
+        const block = (school.block || "").toLowerCase();
+        return (
+          nameHi.includes(q) ||
+          nameEn.includes(q) ||
+          addressHi.includes(q) ||
+          addressEn.includes(q) ||
+          udise.includes(q) ||
+          block.includes(q)
+        );
       }
 
       return true;
     });
-  }, [schools, typeFilter, statusFilter, searchQuery, isHindi]);
+  }, [schools, typeFilter, statusFilter, searchQuery]);
 
   return (
     <div className="flex flex-col w-full py-6 sm:py-10 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6 sm:space-y-8 min-w-0">

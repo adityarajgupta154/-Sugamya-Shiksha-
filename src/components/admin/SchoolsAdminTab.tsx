@@ -9,6 +9,11 @@ import { Modal } from "@/components/ui/Modal";
 import { Plus, Edit, Trash2, Save, MapPin, CheckCircle2 } from "lucide-react";
 import { doc, getDocs, setDoc, deleteDoc, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/firestore";
+import {
+  saveCustomSchool,
+  deleteCustomSchool,
+  mergeSchoolsWithLocal,
+} from "@/lib/customSchoolsStorage";
 
 interface SchoolsAdminTabProps {
   isHindi: boolean;
@@ -40,12 +45,14 @@ const BLANK_SCHOOL: SchoolItem = {
     tactilePath: false,
     emergencyExit: false,
   },
-  published: false,
+  published: true, // Published by default so newly added schools are immediately public
   isDemo: false,
 };
 
 export function SchoolsAdminTab({ isHindi }: SchoolsAdminTabProps) {
-  const [schoolsList, setSchoolsList] = useState<SchoolItem[]>(DEMO_SCHOOLS);
+  const [schoolsList, setSchoolsList] = useState<SchoolItem[]>(() =>
+    mergeSchoolsWithLocal(DEMO_SCHOOLS)
+  );
   const [selectedSchool, setSelectedSchool] = useState<SchoolItem | null>(null);
   const [isEditingSchool, setIsEditingSchool] = useState(false);
   const [isAddingSchool, setIsAddingSchool] = useState(false);
@@ -54,15 +61,20 @@ export function SchoolsAdminTab({ isHindi }: SchoolsAdminTabProps) {
 
   useEffect(() => {
     async function fetchSchools() {
-      if (!db) return;
-      try {
-        const schoolsSnap = await getDocs(collection(db, "schools"));
-        if (!schoolsSnap.empty) {
-          setSchoolsList(schoolsSnap.docs.map((d) => ({ id: d.id, ...d.data() } as SchoolItem)));
+      let baseSchools = DEMO_SCHOOLS;
+      if (db) {
+        try {
+          const schoolsSnap = await getDocs(collection(db, "schools"));
+          if (!schoolsSnap.empty) {
+            baseSchools = schoolsSnap.docs.map(
+              (d) => ({ id: d.id, ...d.data() } as SchoolItem)
+            );
+          }
+        } catch (e) {
+          console.info("schools using local fallback");
         }
-      } catch (e) {
-        console.info("schools using default fallback");
       }
+      setSchoolsList(mergeSchoolsWithLocal(baseSchools));
     }
     fetchSchools();
   }, []);
@@ -72,45 +84,66 @@ export function SchoolsAdminTab({ isHindi }: SchoolsAdminTabProps) {
     const schoolToSave = selectedSchool;
     if (!schoolToSave) return;
 
+    // Ensure bilingual fallbacks so blank fields don't disappear in other language
+    const nameHi = (schoolToSave.name_hi || schoolToSave.name_en || "").trim();
+    const nameEn = (schoolToSave.name_en || schoolToSave.name_hi || "").trim();
+    const addrHi = (schoolToSave.address_hi || schoolToSave.address_en || "").trim();
+    const addrEn = (schoolToSave.address_en || schoolToSave.address_hi || "").trim();
+
     let id = schoolToSave.id;
     if (!id) {
       id =
-        schoolToSave.name_en
+        nameEn
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, "-")
           .replace(/(^-|-$)/g, "")
           .slice(0, 50) || `school-${Date.now()}`;
     }
-    const finalSchool = { ...schoolToSave, id };
 
+    const finalSchool: SchoolItem = {
+      ...schoolToSave,
+      id,
+      name_hi: nameHi,
+      name_en: nameEn,
+      address_hi: addrHi,
+      address_en: addrEn,
+      published: schoolToSave.published !== false, // default true
+    };
+
+    // 1. Immediately save to browser localStorage & broadcast to public pages
+    saveCustomSchool(finalSchool);
+
+    // 2. Also attempt to sync to cloud Firestore
     if (db) {
       try {
         await setDoc(doc(db, "schools", id), finalSchool, { merge: true });
       } catch (err) {
-        console.warn("Could not save school to Firestore, updated local state only:", err);
+        console.warn("Could not save school to Firestore, saved to browser localStorage:", err);
       }
     }
 
-    if (isAddingSchool) {
-      setSchoolsList((curr) => [...curr, finalSchool]);
-    } else {
-      setSchoolsList((curr) =>
-        curr.map((s) => (s.id === finalSchool.id ? finalSchool : s))
-      );
-    }
+    // Update local state
+    setSchoolsList((curr) => {
+      const filtered = curr.filter((s) => s.id !== finalSchool.id);
+      return [finalSchool, ...filtered];
+    });
 
     setSchoolSuccess(
       isHindi
-        ? `विद्यालय "${finalSchool.name_hi}" सफलतापूर्वक ${isAddingSchool ? "जोड़ा" : "अपडेट किया"} गया!`
-        : `School "${finalSchool.name_en}" ${isAddingSchool ? "added" : "updated"} successfully!`
+        ? `विद्यालय "${finalSchool.name_hi}" सुरक्षित हो गया और मुख्य वेबसाइट पर तुरंत दिखाई देगा!`
+        : `School "${finalSchool.name_en}" saved and immediately visible on website!`
     );
     setIsEditingSchool(false);
     setIsAddingSchool(false);
     setSelectedSchool(null);
-    setTimeout(() => setSchoolSuccess(""), 4000);
+    setTimeout(() => setSchoolSuccess(""), 5000);
   };
 
   const handleDeleteSchool = async (schoolId: string) => {
+    // 1. Delete from local storage
+    deleteCustomSchool(schoolId);
+
+    // 2. Also attempt cloud delete
     if (db) {
       try {
         await deleteDoc(doc(db, "schools", schoolId));
@@ -118,9 +151,14 @@ export function SchoolsAdminTab({ isHindi }: SchoolsAdminTabProps) {
         console.warn("Could not delete from Firestore:", err);
       }
     }
+
     setSchoolsList((curr) => curr.filter((s) => s.id !== schoolId));
     setDeleteConfirmId(null);
-    setSchoolSuccess(isHindi ? "विद्यालय रिकॉर्ड हटा दिया गया।" : "School record deleted.");
+    setSchoolSuccess(
+      isHindi
+        ? "विद्यालय रिकॉर्ड हटा दिया गया और वेबसाइट से हटा दिया गया।"
+        : "School record deleted and removed from website."
+    );
     setTimeout(() => setSchoolSuccess(""), 4000);
   };
 

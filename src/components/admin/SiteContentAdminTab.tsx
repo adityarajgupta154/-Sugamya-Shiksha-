@@ -8,26 +8,35 @@ import { Badge } from "@/components/ui/Badge";
 import { Save, CheckCircle2, Inbox } from "lucide-react";
 import { doc, getDoc, setDoc, collection, getDocs, query, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase/firestore";
+import { getCustomSiteContent, saveCustomSiteContent } from "@/lib/customSchoolsStorage";
 
 interface SiteContentAdminTabProps {
   isHindi: boolean;
 }
 
 export function SiteContentAdminTab({ isHindi }: SiteContentAdminTabProps) {
-  const [homeContent, setHomeContent] = useState({
-    heroTitleEn: "Accessible Schools for Every Child, Equal Education for Every Child.",
-    heroHindi: "हर बच्चे के लिए सुगम विद्यालय, हर बच्चे के लिए समान शिक्षा।",
-    heroEnglish: "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
-    heroSublineHi: "दानापुर, पटना, बिहार में विद्यालय सुगम्यता शोध एवं समावेशी शिक्षा को बढ़ावा।",
-    introTitle: "About the Research Initiative",
-    introText: "Sugamya Shiksha Bihar is a dedicated research and resource platform created under the NCPEDP Fellowship. Grounded in the Danapur subdivision of Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
+  const [homeContent, setHomeContent] = useState<Record<string, any>>(() => {
+    const saved = getCustomSiteContent<Record<string, any>>("home");
+    return {
+      heroTitleEn: "Accessible Schools for Every Child, Equal Education for Every Child.",
+      heroHindi: "हर बच्चे के लिए सुगम विद्यालय, हर बच्चे के लिए समान शिक्षा।",
+      heroEnglish: "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
+      heroSublineHi: "दानापुर, पटना, बिहार में विद्यालय सुगम्यता शोध एवं समावेशी शिक्षा को बढ़ावा।",
+      introTitle: "About the Research Initiative",
+      introText: "Sugamya Shiksha Bihar is a dedicated research and resource platform created under the NCPEDP Fellowship. Grounded in the Danapur subdivision of Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
+      ...(saved || {}),
+    };
   });
 
-  const [aboutContent, setAboutContent] = useState({
-    bio_hi: "NCPEDP फेलोशिप के अंतर्गत यह स्वतंत्र शोध परियोजना दानापुर, पटना के विद्यालयों में दिव्यांग बच्चों के लिए भौतिक बुनियादी ढांचे और सार्वभौमिक सुगम्यता की स्थिति का व्यवस्थित अध्ययन कर रही है।",
-    bio_en: "Conducted under the prestigious NCPEDP Fellowship, this independent research initiative systematically investigates physical infrastructure accessibility across Danapur, Patna, Bihar.",
-    methodology_hi: "शोध पद्धति में प्राथमिक ऑन-साइट नापजोख ऑडिट तथा दिव्यांग विद्यार्थियों, अभिभावकों और शिक्षकों के साथ पूर्ण सहमति-आधारित साक्षात्कार शामिल हैं।",
-    methodology_en: "The methodology integrates on-site quantitative measurement audits combined with consent-governed qualitative interviews.",
+  const [aboutContent, setAboutContent] = useState<Record<string, any>>(() => {
+    const saved = getCustomSiteContent<Record<string, any>>("about");
+    return {
+      bio_hi: "NCPEDP फेलोशिप के अंतर्गत यह स्वतंत्र शोध परियोजना दानापुर, पटना के विद्यालयों में दिव्यांग बच्चों के लिए भौतिक बुनियादी ढांचे और सार्वभौमिक सुगम्यता की स्थिति का व्यवस्थित अध्ययन कर रही है।",
+      bio_en: "Conducted under the prestigious NCPEDP Fellowship, this independent research initiative systematically investigates physical infrastructure accessibility across Danapur, Patna, Bihar.",
+      methodology_hi: "शोध पद्धति में प्राथमिक ऑन-साइट नापजोख ऑडिट तथा दिव्यांग विद्यार्थियों, अभिभावकों और शिक्षकों के साथ पूर्ण सहमति-आधारित साक्षात्कार शामिल हैं।",
+      methodology_en: "The methodology integrates on-site quantitative measurement audits combined with consent-governed qualitative interviews.",
+      ...(saved || {}),
+    };
   });
 
   const [contentSuccess, setContentSuccess] = useState("");
@@ -54,6 +63,13 @@ export function SiteContentAdminTab({ isHindi }: SiteContentAdminTabProps) {
 
   useEffect(() => {
     async function fetchSiteData() {
+      // Check local saved content first
+      const localHome = getCustomSiteContent<Record<string, any>>("home");
+      if (localHome) setHomeContent((curr) => ({ ...curr, ...localHome }));
+
+      const localAbout = getCustomSiteContent<Record<string, any>>("about");
+      if (localAbout) setAboutContent((curr) => ({ ...curr, ...localAbout }));
+
       if (!db) return;
 
       try {
@@ -85,17 +101,26 @@ export function SiteContentAdminTab({ isHindi }: SiteContentAdminTabProps) {
     e.preventDefault();
     setIsSavingContent(true);
 
+    // 1. Immediately persist to localStorage and broadcast event
+    saveCustomSiteContent("home", homeContent);
+    saveCustomSiteContent("about", aboutContent);
+
+    // 2. Also attempt cloud sync
     if (db) {
       try {
         await setDoc(doc(db, "siteContent", "home"), homeContent, { merge: true });
         await setDoc(doc(db, "siteContent", "about"), aboutContent, { merge: true });
       } catch (err) {
-        console.warn("Could not save to Firestore, updated local state:", err);
+        console.warn("Could not save to Firestore, saved to browser localStorage:", err);
       }
     }
 
     setIsSavingContent(false);
-    setContentSuccess(isHindi ? "साइट सामग्री सुरक्षित रूप से सहेज ली गई!" : "Site content saved successfully!");
+    setContentSuccess(
+      isHindi
+        ? "साइट सामग्री सुरक्षित हो गई और मुख्य वेबसाइट पर तुरंत दिखाई देगी!"
+        : "Site content saved and immediately visible on website!"
+    );
     setTimeout(() => setContentSuccess(""), 4000);
   };
 

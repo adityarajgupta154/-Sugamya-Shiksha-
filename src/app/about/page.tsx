@@ -21,10 +21,11 @@ import {
   ShieldCheck,
   Phone,
 } from "lucide-react";
+import { getCustomSiteContent } from "@/lib/customSchoolsStorage";
 
 export default function AboutPage() {
   const { locale, t } = useLanguage();
-  const [siteData, setSiteData] = useState<any>(null);
+  const [siteData, setSiteData] = useState<any>(() => getCustomSiteContent("about"));
 
   // Accessible Form State
   const [formData, setFormData] = useState({
@@ -49,6 +50,12 @@ export default function AboutPage() {
     const b = Math.floor(Math.random() * 8) + 1;
     setCaptchaChallenge({ a, b });
 
+    // Check local storage for admin edits immediately
+    const localAbout = getCustomSiteContent("about");
+    if (localAbout) {
+      setSiteData((prev: any) => ({ ...prev, ...localAbout }));
+    }
+
     // Fetch siteContent/about from Firestore if present
     let cancelled = false;
     async function loadAboutContent() {
@@ -59,15 +66,28 @@ export default function AboutPage() {
         const docRef = doc(db, "siteContent", "about");
         const snap = await getDoc(docRef);
         if (snap.exists() && !cancelled) {
-          setSiteData(snap.data());
+          setSiteData((prev: any) => ({ ...snap.data(), ...prev }));
         }
       } catch (err) {
         console.info("Using default seeded about content (Firestore offline/demo)");
       }
     }
     loadAboutContent();
+
+    const handleContentSync = (e: any) => {
+      if (!e.detail || e.detail.section === "about") {
+        const fresh = getCustomSiteContent("about");
+        if (fresh) setSiteData((prev: any) => ({ ...prev, ...fresh }));
+      }
+    };
+
+    window.addEventListener("ssb_site_content_updated", handleContentSync);
+    window.addEventListener("storage", handleContentSync);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("ssb_site_content_updated", handleContentSync);
+      window.removeEventListener("storage", handleContentSync);
     };
   }, []);
 

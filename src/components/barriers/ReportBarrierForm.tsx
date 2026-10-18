@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { DEMO_SCHOOLS, SchoolItem } from "@/data/schoolsData";
+import { mergeSchoolsWithLocal } from "@/lib/customSchoolsStorage";
 import { BARRIER_CATEGORIES } from "@/data/barrierReportsData";
 import {
   BarrierCategory,
@@ -81,21 +82,22 @@ export function ReportBarrierForm({ onSuccess }: ReportBarrierFormProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [rateLimitError, setRateLimitError] = useState<string | null>(null);
 
-  // Load published schools for dropdown
+  // Load published schools for dropdown (merging cloud & custom locally saved schools)
   useEffect(() => {
     async function loadSchools() {
-      if (!db) return;
-      try {
-        const q = query(collection(db, "schools"), where("published", "==", true));
-        const snap = await getDocs(q);
-        if (!snap.empty) {
-          const list: SchoolItem[] = [];
-          snap.forEach((d) => list.push({ id: d.id, ...d.data() } as SchoolItem));
-          setSchools(list);
+      let baseList = DEMO_SCHOOLS;
+      if (db) {
+        try {
+          const q = query(collection(db, "schools"), where("published", "==", true));
+          const snap = await getDocs(q);
+          if (!snap.empty) {
+            baseList = snap.docs.map((d) => ({ id: d.id, ...d.data() } as SchoolItem));
+          }
+        } catch (e) {
+          // Fallback to DEMO_SCHOOLS
         }
-      } catch (e) {
-        // Fallback to DEMO_SCHOOLS
       }
+      setSchools(mergeSchoolsWithLocal(baseList).filter((s) => s.published));
     }
     loadSchools();
   }, []);

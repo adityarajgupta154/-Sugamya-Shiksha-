@@ -25,6 +25,7 @@ import {
   ChevronRight,
   ExternalLink,
 } from "lucide-react";
+import { getCustomSiteContent } from "@/lib/customSchoolsStorage";
 
 // Hero Slides Definition — 2 panoramic assets communicating accessibility and inclusive education in Bihar
 interface HeroSlide {
@@ -82,7 +83,7 @@ export default function HomePage() {
   const { locale, t } = useLanguage();
   const isHindi = locale === "hi";
 
-  const [firestoreContent, setFirestoreContent] = useState<any>(null);
+  const [firestoreContent, setFirestoreContent] = useState<any>(() => getCustomSiteContent("home"));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
 
@@ -130,7 +131,14 @@ export default function HomePage() {
 
   useEffect(() => {
     let cancelled = false;
-    // Defer loading site content so initial render, FCP and LCP are instantaneous
+
+    // Check local storage for admin edits immediately
+    const localContent = getCustomSiteContent("home");
+    if (localContent) {
+      setFirestoreContent((prev: any) => ({ ...prev, ...localContent }));
+    }
+
+    // Defer loading cloud site content so initial render, FCP and LCP are instantaneous
     const timer = setTimeout(async () => {
       try {
         const { db } = await import("@/lib/firebase/firestore");
@@ -138,16 +146,28 @@ export default function HomePage() {
         const { doc, getDoc } = await import("firebase/firestore");
         const homeDoc = await getDoc(doc(db, "siteContent", "home"));
         if (!cancelled && homeDoc.exists()) {
-          setFirestoreContent(homeDoc.data());
+          setFirestoreContent((prev: any) => ({ ...homeDoc.data(), ...prev }));
         }
       } catch (err) {
         // Fallback to static copy
       }
     }, 400);
 
+    const handleContentSync = (e: any) => {
+      if (!e.detail || e.detail.section === "home") {
+        const fresh = getCustomSiteContent("home");
+        if (fresh) setFirestoreContent((prev: any) => ({ ...prev, ...fresh }));
+      }
+    };
+
+    window.addEventListener("ssb_site_content_updated", handleContentSync);
+    window.addEventListener("storage", handleContentSync);
+
     return () => {
       cancelled = true;
       clearTimeout(timer);
+      window.removeEventListener("ssb_site_content_updated", handleContentSync);
+      window.removeEventListener("storage", handleContentSync);
     };
   }, []);
 

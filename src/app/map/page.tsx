@@ -45,12 +45,16 @@ const DanapurSchoolsMap = dynamic(
   }
 );
 
+import { mergeSchoolsWithLocal } from "@/lib/customSchoolsStorage";
+
 export default function InteractiveMapPage() {
   const { locale, t } = useLanguage();
   const isHindi = locale === "hi";
 
   // Data state
-  const [schools, setSchools] = useState<SchoolItem[]>(DEMO_SCHOOLS);
+  const [schools, setSchools] = useState<SchoolItem[]>(() =>
+    mergeSchoolsWithLocal(DEMO_SCHOOLS)
+  );
   const [loading, setLoading] = useState(true);
   const [isPending, startTransition] = useTransition();
 
@@ -64,35 +68,49 @@ export default function InteractiveMapPage() {
   const [viewMode, setViewMode] = useState<"map" | "list" | "split">("map");
   const [selectedSchool, setSelectedSchool] = useState<SchoolItem | null>(null);
 
-  // Load published schools from Firestore
+  // Load published schools from Firestore, merged with local browser storage
   useEffect(() => {
     let cancelled = false;
     async function loadSchools() {
+      let baseList = DEMO_SCHOOLS;
       try {
         const { db } = await import("@/lib/firebase/firestore");
-        if (!db || cancelled) {
-          setLoading(false);
-          return;
-        }
-        const { collection, getDocs, query, where, limit } = await import("firebase/firestore");
-        const q = query(collection(db, "schools"), where("published", "==", true), limit(50));
-        const snap = await getDocs(q);
-        if (!snap.empty && !cancelled) {
-          const list: SchoolItem[] = [];
-          snap.forEach((d) => list.push({ id: d.id, ...d.data() } as SchoolItem));
-          setSchools(list);
+        if (db && !cancelled) {
+          const { collection, getDocs, query, where, limit } = await import("firebase/firestore");
+          const q = query(collection(db, "schools"), where("published", "==", true), limit(50));
+          const snap = await getDocs(q);
+          if (!snap.empty && !cancelled) {
+            baseList = snap.docs.map((d) => ({ id: d.id, ...d.data() } as SchoolItem));
+          }
         }
       } catch (err) {
         console.info("Using demo schools for map (Firestore offline or query error)");
       } finally {
         if (!cancelled) {
+          const merged = mergeSchoolsWithLocal(baseList);
+          setSchools(merged.filter((s) => s.published));
           setLoading(false);
         }
       }
     }
+
     loadSchools();
+
+    // Listen to real-time custom events when admin adds/edits/deletes a school
+    const handleSync = () => {
+      setSchools((curr) => {
+        const merged = mergeSchoolsWithLocal(curr.length ? curr : DEMO_SCHOOLS);
+        return merged.filter((s) => s.published);
+      });
+    };
+
+    window.addEventListener("ssb_schools_updated", handleSync);
+    window.addEventListener("storage", handleSync);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("ssb_schools_updated", handleSync);
+      window.removeEventListener("storage", handleSync);
     };
   }, []);
 
@@ -117,18 +135,28 @@ export default function InteractiveMapPage() {
         if (facilityFilter === "tactilePath" && !school.facilities.tactilePath) return false;
       }
 
-      // Search query filter (name, address, UDISE)
+      // Bilingual search query filter (name, address, UDISE)
       if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const name = (isHindi ? school.name_hi : school.name_en).toLowerCase();
-        const addr = (isHindi ? school.address_hi : school.address_en).toLowerCase();
+        const q = searchQuery.toLowerCase().trim();
+        const nameHi = (school.name_hi || "").toLowerCase();
+        const nameEn = (school.name_en || "").toLowerCase();
+        const addrHi = (school.address_hi || "").toLowerCase();
+        const addrEn = (school.address_en || "").toLowerCase();
         const udise = (school.udiseCode || "").toLowerCase();
-        return name.includes(q) || addr.includes(q) || udise.includes(q);
+        const block = (school.block || "").toLowerCase();
+        return (
+          nameHi.includes(q) ||
+          nameEn.includes(q) ||
+          addrHi.includes(q) ||
+          addrEn.includes(q) ||
+          udise.includes(q) ||
+          block.includes(q)
+        );
       }
 
       return true;
     });
-  }, [schools, typeFilter, statusFilter, facilityFilter, searchQuery, isHindi]);
+  }, [schools, typeFilter, statusFilter, facilityFilter, searchQuery]);
 
   const resetFilters = () => {
     setSearchQuery("");
