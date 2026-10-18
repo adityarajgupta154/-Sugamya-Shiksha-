@@ -7,11 +7,11 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { Lock, ShieldAlert, ArrowRight, CheckCircle2, KeyRound } from "lucide-react";
+import { Lock, ShieldAlert, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const { user, isAdmin, signIn, demoLogin } = useAuth();
+  const { user, isAdmin, signIn } = useAuth();
   const { locale } = useLanguage();
 
   const [email, setEmail] = useState("");
@@ -45,11 +45,6 @@ export default function AdminLoginPage() {
     } else {
       setError(res.error || (isHindi ? "लॉगिन विफल। केवल अधिकृत शोधकर्ता ही लॉगिन कर सकते हैं।" : "Login failed. Only authorized research admins can log in."));
     }
-  };
-
-  const handleDemoSignIn = () => {
-    demoLogin();
-    router.push("/admin");
   };
 
   return (
@@ -124,23 +119,6 @@ export default function AdminLoginPage() {
                 : (isHindi ? "सुरक्षित लॉगिन करें" : "Secure Admin Login")}
             </Button>
           </form>
-
-          {/* Quick Demo Access for reviewers/evaluators */}
-          <div className="mt-6 pt-5 border-t border-slate-100 text-center space-y-2">
-            <p className="text-xs text-slate-500">
-              {isHindi ? "डेमो / समीक्षा पहुंच:" : "Testing / Evaluation Mode:"}
-            </p>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={handleDemoSignIn}
-              leftIcon={<KeyRound className="w-4 h-4 text-teal-700" />}
-              className="w-full text-xs font-semibold text-teal-800 border-teal-300 hover:bg-teal-50"
-            >
-              {isHindi ? "1-क्लिक एडमिन डेमो लॉगिन" : "1-Click Admin Demo Login"}
-            </Button>
-          </div>
         </Card>
       </div>
     </div>
