@@ -1,0 +1,58 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    // Public readable assets (guideline PDFs, campaign materials)
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Repository files (PDF guidelines, survey forms, audit formats, checklists)
+    match /resources/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Fellowship research papers and notes
+    match /researchReports/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Barrier reports photo uploads (public create-only, max 5MB, image types only)
+    match /barrierReports/{reportId}/{fileName} {
+      allow create: if request.resource.size < 5 * 1024 * 1024
+                    && request.resource.contentType.matches('image/.*');
+      allow read: if true;
+      allow delete: if isAdmin();
+    }
+
+    // Verified school audit photos
+    match /schools/{schoolId}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // School audit photos (ramp, toilet, entrance, etc.)
+    match /audits/{auditId}/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Default deny for all other writes
+    match /{allPaths=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

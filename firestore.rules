@@ -1,0 +1,155 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        request.auth.token.email in ["aditya12@gmail.com", "admin@sugamyashikshabihar.org"] ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin")
+      );
+    }
+
+    function isVerified(res) {
+      return res.data.published == true || res.data.status == "verified" || res.data.verificationStatus == "verified";
+    }
+
+    // 1. Guidelines (Public read, admin write)
+    match /guidelines/{guidelineId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 2. Site Content (Public read, admin write)
+    match /siteContent/{contentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 3. Schools (Public read only if published/verified; admin full CRUD)
+    match /schools/{schoolId} {
+      allow read: if isVerified(resource) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // 4. Audits (Public read only if verified; admin write)
+    match /audits/{auditId} {
+      allow read: if isVerified(resource) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // 5. Standards & Scoring Configuration (Public read, admin write)
+    match /standards/{standardId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /scoringConfig/{version} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 6. Barrier Reports (Public create pending; public read verified only; admin full access)
+    match /barrierReports/{reportId} {
+      allow create: if request.resource.data.status == "pending";
+      allow read: if isVerified(resource) || isAdmin();
+      allow update, delete: if isAdmin();
+
+      // Reporter contact details are stored in private sub-collection and NEVER publicly readable
+      match /private/{subdoc} {
+        allow create: if true;
+        allow read, update, delete: if isAdmin();
+      }
+    }
+
+    // 7. Surveys & Survey Responses (PRD 11.2, 11.3 & ADR 0011)
+    match /surveys/{surveyId} {
+      allow read: if isVerified(resource) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /surveyResponses/{responseId} {
+      // Authenticated users can create or update strictly their own response (doc id: surveyId_uid)
+      allow create, update: if isAuthenticated() && (
+        responseId == request.resource.data.surveyId + "_" + request.auth.uid &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.consentGiven == true &&
+        request.resource.data.name is string &&
+        request.resource.data.name.size() >= 2 &&
+        request.resource.data.name.size() <= 100 &&
+        request.resource.data.phone is string &&
+        request.resource.data.phone.size() >= 10 &&
+        request.resource.data.phone.size() <= 15 &&
+        request.resource.data.role in ['student', 'parent', 'teacher', 'advocate']
+      );
+
+      // Respondent can read only their own response; Admin can read all responses
+      allow read: if (isAuthenticated() && resource.data.uid == request.auth.uid) || isAdmin();
+
+      // Only Admin can delete survey responses (supporting India's DPDP Act 2023 data erasure)
+      allow delete: if isAdmin();
+    }
+
+    // 8. Contact Form Submissions (Public create; admin read/delete)
+    match /contactSubmissions/{submissionId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // 9. Community Voices, Awareness Campaign & Before/After Tracker
+    match /communityVoices/{voiceId} {
+      allow create: if request.resource.data.consentRecorded == true;
+      allow read: if (isVerified(resource) && resource.data.consentRecorded == true) || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    match /campaignItems/{itemId} {
+      allow read: if isVerified(resource) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /trackerEntries/{entryId} {
+      allow read: if isVerified(resource) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // 10. Resources, Inclusive Education & Visual Guide (PRD Section 6.1 & Task 8)
+    match /resources/{resourceId} {
+      allow read: if isVerified(resource) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /inclusiveEducation/{itemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /learnTopics/{topicId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /researchReports/{reportId} {
+      allow read: if isVerified(resource) || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // 11. Admin Users (strictly private, user can read own doc to verify role; admin full access)
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    // 12. Default fallback (deny all public)
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

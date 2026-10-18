@@ -1,0 +1,298 @@
+{
+  "site": {
+    "title": "Sugamya Shiksha Bihar",
+    "tagline": "Accessible Schools, Inclusive Futures",
+    "project": "Digital Accessibility Research & Resource Platform",
+    "fellowship": "NCPEDP Fellowship Research Project: Understanding Physical Infrastructure Accessibility of Schools in Danapur, Patna & Inclusive Education"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "accessibilityMenu": "Accessibility Options",
+    "textSize": "Text Size",
+    "textSizeNormal": "Default text size",
+    "textSizeLarge": "Large text size",
+    "textSizeXLarge": "Extra large text size",
+    "highContrast": "High Contrast",
+    "highContrastOn": "Turn high contrast mode on",
+    "highContrastOff": "Turn high contrast mode off",
+    "language": "Language",
+    "switchToHindi": "हिन्दी में पढ़ें",
+    "switchToEnglish": "Read in English",
+    "screenReaderNotification": "Notification",
+    "closeDialog": "Close dialog"
+  },
+  "nav": {
+    "home": "Home",
+    "directory": "School Directory",
+    "audit": "Audit Tool",
+    "guidelines": "Guidelines Library",
+    "inclusiveEducation": "Inclusive Education",
+    "learnAccessibility": "Visual Guide",
+    "dashboard": "Research Dashboard",
+    "map": "School Map",
+    "tracker": "Impact Tracker",
+    "reports": "Reports & Studies",
+    "voices": "Community Voices",
+    "advocacy": "Awareness & Advocacy",
+    "resources": "Resource Centre",
+    "reportBarrier": "Report a Barrier",
+    "about": "About & Contact",
+    "menu": "Menu",
+    "closeMenu": "Close menu"
+  },
+  "common": {
+    "readMore": "Read more",
+    "download": "Download",
+    "viewDetails": "View details",
+    "status": "Status",
+    "verified": "Verified",
+    "pending": "Pending Verification",
+    "rejected": "Rejected",
+    "audited": "Audited",
+    "followUpRequired": "Follow-up Required",
+    "government": "Government",
+    "private": "Private",
+    "officialSource": "Official Source",
+    "externalLink": "Opens in new tab",
+    "demoNotice": "Illustrative demo data — not actual Danapur survey findings.",
+    "scoreDisclaimer": "This is an academic research score based on standard indicators, not an official government certification.",
+    "loading": "Loading...",
+    "search": "Search",
+    "filter": "Filter",
+    "back": "Back"
+  },
+  "home": {
+    "heroTitle": "Accessible Schools for Every Child, Equal Education for Every Child.",
+    "heroSubtitle": "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
+    "heroHindi": "Accessible Schools for Every Child, Equal Education for Every Child.",
+    "heroEnglish": "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
+    "actions": {
+      "exploreSchools": "Explore School Accessibility",
+      "readGuidelines": "Read Guidelines",
+      "participateSurvey": "Participate in Survey",
+      "viewFindings": "View Research Findings"
+    },
+    "introTitle": "About the Research Initiative",
+    "introText": "Sugamya Shiksha Bihar is a dedicated research and resource platform created under the NCPEDP Fellowship. Grounded in the Danapur subdivision of Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
+    "objectivesTitle": "Key Research Objectives",
+    "objectives": [
+      {
+        "title": "Evaluate Physical Accessibility",
+        "desc": "Systematic on-site audits of ramps, accessible toilets, door widths, pathways, tactile indicators, and emergency exits across Danapur schools."
+      },
+      {
+        "title": "Bridge Policy & Practice",
+        "desc": "Translate the Accessibility Code for Educational Institutions 2024 and RPwD Act 2016 into clear, actionable checklists for educators and administrators."
+      },
+      {
+        "title": "Foster Community Action",
+        "desc": "Empower parents, students with disabilities, and teachers to report barriers and record lived experiences with dignity and strict consent."
+      },
+      {
+        "title": "Measure Visible Change",
+        "desc": "Track tangible physical improvements through a verified Before & After tracker to foster institutional accountability."
+      }
+    ],
+    "statsTitle": "Danapur Survey Snapshot",
+    "stats": {
+      "schoolsSurveyed": "Schools Surveyed",
+      "schoolsSurveyedCount": "05",
+      "govtSchools": "Government Schools",
+      "govtSchoolsCount": "03",
+      "privateSchools": "Private Schools",
+      "privateSchoolsCount": "02",
+      "avgScore": "Sample Accessibility Score",
+      "avgScoreVal": "60%"
+    },
+    "campaignTitle": "Awareness & Community Advocacy",
+    "campaignSubtitle": "Building understanding and community mobilisation for barrier-free schools across Bihar.",
+    "campaignItems": [
+      {
+        "type": "Poster & Reel Series",
+        "title": "What Makes a School Ramp Usable?",
+        "desc": "A visual guide illustrating the difference between a 1:12 gentle ramp with double handrails and an unsafe steep ramp."
+      },
+      {
+        "type": "Workshop",
+        "title": "Danapur Educators Accessibility Dialogue",
+        "desc": "Interactive workshop bringing together school principals and teachers on reasonable accommodation and basic modifications."
+      },
+      {
+        "type": "Video Explainer",
+        "title": "Understanding RPwD Act 2016 for Schools",
+        "desc": "Short educational video with Hindi subtitles explaining the statutory obligation to make school buildings accessible."
+      }
+    ],
+    "activitiesTitle": "Latest Research Activities",
+    "activities": [
+      {
+        "date": "October 2026",
+        "title": "Initial Danapur Pilot Audits Commenced",
+        "desc": "Physical measurement audits began across 5 sample schools in Danapur block using the digital audit framework."
+      },
+      {
+        "date": "September 2026",
+        "title": "Accessibility Code 2024 Synthesis Published",
+        "desc": "Easy-Hindi summaries of school building norms published in the platform's Guidelines Library."
+      },
+      {
+        "date": "August 2026",
+        "title": "Community Consultation with Parents & CwSN",
+        "desc": "Conducted consent-driven discussions on daily school transit and sanitation barriers faced by students."
+      }
+    ]
+  },
+  "guidelines": {
+    "title": "Laws, Policies & Accessibility Guidelines",
+    "subtitle": "Clear, accessible explanations of legal frameworks, building standards, and education policies governing inclusive schools.",
+    "primaryReferenceBadge": "Primary Technical Reference",
+    "officialSourcesTitle": "Important Official Sources",
+    "officialSourcesDesc": "Authoritative primary sources and standards documents published by the Government of India and UNICEF.",
+    "sources": [
+      {
+        "title": "Accessibility Code for Educational Institutions",
+        "org": "Ministry of Education, Government of India (January 2024)",
+        "desc": "The primary national technical standard for building and facility accessibility in all schools.",
+        "url": "https://www.education.gov.in"
+      },
+      {
+        "title": "Harmonised Guidelines and Standards for Universal Accessibility in India",
+        "org": "Ministry of Housing and Urban Affairs, Government of India (2021)",
+        "desc": "National comprehensive standards for universal design in public built environments.",
+        "url": "https://mohua.gov.in"
+      },
+      {
+        "title": "Making Schools Accessible to Children with Disabilities",
+        "org": "UNICEF India",
+        "desc": "Practical guidance, case studies, and low-cost barrier removal strategies for Indian schools.",
+        "url": "https://www.unicef.org/india"
+      }
+    ],
+    "mainProvisions": "Main Provisions",
+    "relatedSections": "Related Sections & Clauses",
+    "checklistTitle": "School Compliance Checklist",
+    "officialDocument": "Official Document",
+    "viewDocument": "View Official Source",
+    "easyExplanation": "Easy-Language Summary"
+  },
+  "about": {
+    "title": "About Researcher & Contact",
+    "subtitle": "NCPEDP Fellowship research project examining physical infrastructure accessibility and inclusive education in Danapur, Patna, Bihar.",
+    "fellowshipTitle": "NCPEDP Fellowship Project",
+    "methodologyTitle": "Research Methodology",
+    "objectivesTitle": "Fellowship Objectives",
+    "collaborationsTitle": "Collaborations & Institutional Engagement",
+    "contactInfoTitle": "Contact Information",
+    "formTitle": "Send a Message / Research Query",
+    "formSubtitle": "Submit your academic inquiries, institutional collaboration proposals, or feedback.",
+    "nameLabel": "Your Name",
+    "emailLabel": "Email Address",
+    "phoneLabel": "Phone Number (Optional)",
+    "roleLabel": "Your Role / Organization",
+    "roleOptions": {
+      "student": "Student / Scholar",
+      "parent": "Parent of CwSN",
+      "teacher": "Teacher / School Principal",
+      "advocate": "Disability Rights Advocate / NGO",
+      "official": "Government / Education Official",
+      "other": "Other"
+    },
+    "messageLabel": "Your Message / Query",
+    "submitButton": "Send Message",
+    "submittingButton": "Submitting...",
+    "successTitle": "Message Received Successfully",
+    "successMessage": "Thank you for reaching out. Your message has been safely recorded for the researcher.",
+    "errorMessage": "Could not send your message. Please check the fields and try again.",
+    "captchaMathPrompt": "Spam Verification: What is",
+    "captchaError": "Please answer the spam verification question correctly."
+  },
+  "schools": {
+    "title": "School Accessibility Directory",
+    "subtitle": "Physical infrastructure inventory of government and private schools in Danapur block, inspection status, verified facilities, and research findings.",
+    "filterType": "School Type",
+    "filterStatus": "Audit Status",
+    "allTypes": "All School Types",
+    "allStatuses": "All Audit Statuses",
+    "searchPlaceholder": "Search by school name, location, or UDISE in Danapur...",
+    "resultsCount": "Showing {count} schools",
+    "noSchoolsFound": "No schools match the selected criteria.",
+    "clearFilters": "Reset Filters",
+    "card": {
+      "viewProfile": "View Audit Findings",
+      "score": "Research Score",
+      "lastAudited": "Last Audited",
+      "facilitiesAvailable": "Facilities"
+    },
+    "detail": {
+      "backToDirectory": "Back to School Directory",
+      "udiseCode": "UDISE Code",
+      "blockArea": "Subdivision / Block",
+      "coordinates": "Coordinates",
+      "inspectionSummary": "Physical Inspection Summary",
+      "scorecardTitle": "Accessibility Scorecard",
+      "facilitiesTitle": "Physical Infrastructure Facilities",
+      "findingsTitle": "Verified Field Audit Findings",
+      "notCertifiedNotice": "Academic research score based on standard indicators, not an official government certification."
+    },
+    "facilitiesList": {
+      "ramp": "Ramp with Handrails",
+      "toilet": "Accessible Unisex Toilet",
+      "drinkingWater": "Accessible Drinking Water",
+      "wideDoors": "Wide Classroom Doors (>=900mm)",
+      "tactilePath": "Tactile Guiding Pathway",
+      "emergencyExit": "Step-free Emergency Exit"
+    }
+  },
+  "survey": {
+    "title": "Participate in School Accessibility Survey",
+    "subtitle": "Your lived experience and observations help document physical infrastructure barriers across Danapur schools.",
+    "researchTag": "NCPEDP Fellowship Community Survey",
+    "instructions": "Please answer the questions based on your visits or knowledge of schools in Danapur. All questions marked with an asterisk (*) are mandatory.",
+    "signInRequiredTitle": "Google Sign-In Required for Participation",
+    "signInRequiredDesc": "Sign-in ensures one response per person and protects survey research integrity. Your name, email, and contact number will be stored confidentially for research purposes only and never published.",
+    "signInWithGoogle": "Sign in with Google to Participate",
+    "signingIn": "Signing in with Google...",
+    "signOut": "Sign Out",
+    "signOutConfirm": "Are you sure you want to sign out? Your draft answers will be preserved for your next sign-in.",
+    "signedInAs": "Signed in as",
+    "alreadySubmittedNotice": "You have already participated in this survey. You may review and update your answers below.",
+    "updateButton": "Update Survey Response",
+    "privacyNoticeTitle": "Research Ethics & Privacy Commitment",
+    "privacyNoticeText": "This survey is conducted solely for independent academic research under the NCPEDP Fellowship to evaluate school accessibility in Danapur. Your participation is completely voluntary. Personal identifiers are never sold, shared publicly, or linked to individual school evaluations. All findings are anonymized and reported in aggregate form.",
+    "consentLabel": "I agree that my name, contact number and email will be stored for this research project, used only for research purposes and not shown publicly.",
+    "consentError": "You must agree to the research privacy and data storage terms to submit.",
+    "respondentSection": "1. Verified Respondent Information",
+    "nameLabel": "Full Name",
+    "nameHelp": "Prefilled from your Google account. You may edit your preferred research attribution name.",
+    "phoneLabel": "Contact Number (Indian Mobile)",
+    "phoneHelp": "10-digit mobile number (e.g. 9876543210). Used solely for research verification.",
+    "emailLabel": "Verified Email Address",
+    "emailHelp": "Read-only from your authenticated Google account.",
+    "roleLabel": "Your Role / Association",
+    "roles": {
+      "student": "Student with Disability",
+      "parent": "Parent / Guardian",
+      "teacher": "Teacher / Special Educator",
+      "advocate": "Disability Rights Advocate"
+    },
+    "questionsSection": "2. School Accessibility Questionnaire",
+    "ratingLegend": "Rating: 1 (Very Inaccessible) to 5 (Fully Accessible)",
+    "submitButton": "Submit Survey Response",
+    "submitting": "Submitting Response...",
+    "successTitle": "Thank You for Your Valuable Contribution!",
+    "successMessage": "Your survey response has been securely recorded in our research database. The insights you shared directly support improving physical infrastructure and advancing inclusive education for children in Danapur.",
+    "viewSchools": "Explore School Directory",
+    "backHome": "Return to Homepage",
+    "rateLimitWarning": "You have recently submitted a survey response from this browser. Please wait a few moments before submitting again to prevent duplicates.",
+    "requiredFieldError": "This question requires an answer.",
+    "genericError": "Could not save your survey response. Please check all fields and try again."
+  },
+  "footer": {
+    "aboutProject": "Sugamya Shiksha Bihar is an independent research project conducted under the NCPEDP Fellowship, investigating physical infrastructure barriers in Danapur schools to advance accessible education across Bihar.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact & Fellowship",
+    "location": "Danapur, Patna, Bihar, India",
+    "rights": "All rights reserved. Dedicated to open research and public accessibility.",
+    "accessibilityCommitment": "Designed to conform with WCAG 2.2 Level AA accessibility standards."
+  }
+}
