@@ -10,7 +10,6 @@ import {
   Search,
   ArrowRight,
   Play,
-  Pause,
   Building2,
   FileText,
   Users,
@@ -86,21 +85,18 @@ export default function HomePage() {
   const [firestoreContent, setFirestoreContent] = useState<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
 
-  // Automatic smooth slide rotation every 5.5 seconds; pauses on hover or focus
+  // Automatic smooth slide rotation every 5 seconds continuously in an infinite loop
   useEffect(() => {
-    if (isPaused) return;
-
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
         if (prev < HERO_SLIDES.length) return prev + 1;
         return 1;
       });
-    }, 5500);
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, []);
 
   // Seamless snap back when reaching clone slide (index 3) so forward slide continues infinitely without flicker
   const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
@@ -176,12 +172,8 @@ export default function HomePage() {
           HERO SECTION — Grand Full-Width Panoramic Sliding Banner (Fully Responsive)
           ========================================================================= */}
       <section
-        className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[560px] md:min-h-[600px] lg:min-h-[640px] xl:min-h-[680px] flex items-center border-b border-slate-100 group/hero"
+        className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[560px] md:min-h-[600px] lg:min-h-[640px] xl:min-h-[680px] flex items-center border-b border-slate-100"
         aria-labelledby="hero-heading"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onFocus={() => setIsPaused(true)}
-        onBlur={() => setIsPaused(false)}
       >
         {/* Full-width Panoramic Background Slider Track with Smooth Hardware-Accelerated Animation */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -292,42 +284,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Slide Controls: Pause/Play & Indicators (Bottom Right) */}
-        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex items-center gap-2 bg-white/90 backdrop-blur-xs px-2.5 py-1.5 rounded-full border border-slate-200/90 shadow-2xs">
-          <button
-            type="button"
-            onClick={() => setIsPaused((prev) => !prev)}
-            className="w-7 h-7 rounded-full flex items-center justify-center text-navy-800 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 cursor-pointer"
-            aria-label={isPaused ? "Play slide rotation" : "Pause slide rotation"}
-            title={isPaused ? "Play slide rotation" : "Pause slide rotation"}
-          >
-            {isPaused ? (
-              <Play className="w-3.5 h-3.5 fill-navy-800" aria-hidden="true" />
-            ) : (
-              <Pause className="w-3.5 h-3.5 fill-navy-800" aria-hidden="true" />
-            )}
-          </button>
-          <div className="flex items-center gap-1.5 px-1">
-            {HERO_SLIDES.map((_, dotIdx) => {
-              const activeDot = currentIndex === HERO_SLIDES.length ? 0 : currentIndex;
-              const isActive = activeDot === dotIdx;
-              return (
-                <button
-                  key={dotIdx}
-                  type="button"
-                  onClick={() => {
-                    setIsTransitioning(true);
-                    setCurrentIndex(dotIdx);
-                  }}
-                  className={`h-2 rounded-full transition-all cursor-pointer ${
-                    isActive ? "w-6 bg-[#0B2D52]" : "w-2 bg-slate-300 hover:bg-slate-400"
-                  }`}
-                  aria-label={`Go to slide ${dotIdx + 1}`}
-                />
-              );
-            })}
-          </div>
-        </div>
       </section>
 
       {/* =========================================================================
