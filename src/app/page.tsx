@@ -10,6 +10,7 @@ import {
   Search,
   ArrowRight,
   Play,
+  Pause,
   Building2,
   FileText,
   Users,
@@ -172,92 +173,159 @@ export default function HomePage() {
   return (
     <div className="flex flex-col w-full bg-[#FCFDFE]">
       {/* =========================================================================
-          HERO SECTION — Responsive Stacked on Mobile (<768px), 2-Col on Desktop (>=768px)
+          HERO SECTION — Grand Full-Width Panoramic Sliding Banner (Fully Responsive)
           ========================================================================= */}
       <section
-        className="w-full bg-[#FCFDFE] border-b border-slate-100 overflow-hidden"
+        className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[560px] md:min-h-[600px] lg:min-h-[640px] xl:min-h-[680px] flex items-center border-b border-slate-100 group/hero"
         aria-labelledby="hero-heading"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12 lg:py-16 xl:py-20 lg:min-h-[calc(100svh-5rem)] flex items-center">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center w-full">
-            {/* Mobile First: Image on Mobile (<768px) displays FIRST via order-1 md:order-2 */}
-            <div className="order-1 md:order-2 md:col-span-6 lg:col-span-6 w-full">
-              <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/11] rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-slate-200/80 bg-slate-100">
+        {/* Full-width Panoramic Background Slider Track with Smooth Hardware-Accelerated Animation */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div
+            className="flex w-[400%] h-full motion-reduce:!transition-none"
+            style={{
+              transform: `translate3d(-${(currentIndex * 100) / DISPLAY_SLIDES.length}%, 0, 0)`,
+              transition: isTransitioning
+                ? "transform 1100ms cubic-bezier(0.22, 1, 0.36, 1)"
+                : "none",
+              willChange: "transform",
+            }}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            {DISPLAY_SLIDES.map((slide, idx) => (
+              <div
+                key={slide.id}
+                aria-hidden={idx !== (currentIndex === HERO_SLIDES.length ? 0 : currentIndex)}
+                className="w-1/4 h-full shrink-0 relative overflow-hidden"
+              >
                 <Image
-                  src="/Hopeful Journey to School-opt.png"
-                  alt={
-                    isHindi
-                      ? "धूप खिली सुबह में सुगम्य विद्यालय कॉरिडोर और स्टेनलेस हैंडरेल युक्त रैंप पर आगे बढ़ता व्हीलचेयर युक्त छात्र"
-                      : "Student with backpack in wheelchair moving forward along accessible school corridor with stainless handrails and ramp towards sunny campus"
-                  }
+                  src={slide.src}
+                  alt={isHindi ? slide.alt_hi : slide.alt}
                   fill
-                  priority
+                  priority={idx === 0}
                   quality={85}
-                  sizes="(min-width: 1024px) 50vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover select-none object-[65%_center] md:object-[60%_center] lg:object-center"
+                  sizes="100vw"
+                  className={`object-cover select-none ${slide.objectPosition}`}
                 />
               </div>
+            ))}
+          </div>
+
+          {/* Atmospheric gradient overlay:
+              - Mobile (<sm): Multi-stop vertical wash ensuring text contrast over sliding background
+              - Desktop (>=sm): Horizontal gradient from left to right over the sky/open area */}
+          <div
+            className="absolute inset-0 z-[2] bg-gradient-to-t from-white/95 via-white/80 to-white/20 sm:bg-gradient-to-r sm:from-white/95 sm:via-white/70 sm:to-transparent lg:from-white/90 lg:via-white/40 lg:to-transparent pointer-events-none"
+            aria-hidden="true"
+          />
+
+          {/* Subtle bottom transition into page background */}
+          <div
+            className="absolute bottom-0 left-0 right-0 z-[2] h-10 sm:h-14 bg-gradient-to-t from-[#FCFDFE] via-[#FCFDFE]/40 to-transparent pointer-events-none"
+            aria-hidden="true"
+          />
+        </div>
+
+        {/* Content Container: Positioned over left area with responsive padding */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-10 sm:py-16 md:py-20 lg:py-24">
+          <div className="max-w-xl lg:max-w-xl xl:max-w-2xl space-y-4 sm:space-y-6 text-left">
+            {/* Primary Headline matching Reference Image typography & colors */}
+            <h1
+              id="hero-heading"
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] font-black tracking-tight ${
+                isHindi ? "leading-[1.28] sm:leading-[1.32]" : "leading-[1.14] sm:leading-[1.18]"
+              } font-sans text-balance`}
+            >
+              {isHindi ? (
+                <>
+                  <span className="block text-[#0B2D52]">हर बच्चे के लिए</span>
+                  <span className="block text-[#078F8A]">सुगम विद्यालय,</span>
+                  <span className="block text-[#0B2D52]">हर बच्चे के लिए समान शिक्षा।</span>
+                </>
+              ) : (
+                <>
+                  <span className="block text-[#078F8A]">Accessible Schools</span>
+                  <span className="block text-[#0B2D52]">for Every Child,</span>
+                  <span className="block text-[#0B2D52]">Equal Education for All.</span>
+                </>
+              )}
+            </h1>
+
+            {/* Supporting Text */}
+            <p className="text-sm sm:text-base md:text-lg text-[#243B53] max-w-xl leading-relaxed font-normal">
+              {heroSubline}
+            </p>
+
+            {/* Action Buttons: Stacked full width on mobile for easy tapping, inline row on >=sm */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+              {/* Primary Action Button: Explore School Accessibility */}
+              <Link href="/schools" className="w-full sm:w-auto">
+                <button
+                  type="button"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#0B2D52] hover:bg-[#07213d] text-white px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer min-h-[48px]"
+                >
+                  <Search className="w-4 h-4 text-teal-300 stroke-[2.5]" aria-hidden="true" />
+                  <span>
+                    {isHindi ? "विद्यालय सुगम्यता खोजें" : "Explore School Accessibility"}
+                  </span>
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
+                </button>
+              </Link>
+
+              {/* Secondary Action Button: Watch Project Video */}
+              <Link href="/awareness-advocacy" className="w-full sm:w-auto">
+                <button
+                  type="button"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 text-[#0B2D52] border-2 border-[#0B2D52] hover:border-teal-700 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-xs hover:shadow-md transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer min-h-[48px]"
+                >
+                  <span className="w-6 h-6 rounded-full bg-[#0284C7] text-white flex items-center justify-center shrink-0">
+                    <Play className="w-3.5 h-3.5 fill-white ml-0.5" aria-hidden="true" />
+                  </span>
+                  <span>{isHindi ? "परियोजना वीडियो देखें" : "Watch Project Video"}</span>
+                </button>
+              </Link>
             </div>
+          </div>
+        </div>
 
-            {/* Text Content: Below Image on Mobile, Left Column on Tablet/Desktop */}
-            <div className="order-2 md:order-1 md:col-span-6 lg:col-span-6 space-y-4 sm:space-y-6 text-left">
-              {/* Primary Headline: Fluid typography, zero orphans via text-balance */}
-              <h1
-                id="hero-heading"
-                className={`text-[clamp(1.875rem,1.2rem+3.2vw,3.5rem)] font-black tracking-tight text-balance ${
-                  isHindi ? "leading-[1.3] sm:leading-[1.38]" : "leading-[1.12] sm:leading-[1.16]"
-                } font-sans`}
-              >
-                {isHindi ? (
-                  <>
-                    <span className="block text-[#0B2D52]">हर बच्चे के लिए</span>
-                    <span className="block text-[#078F8A]">सुगम विद्यालय,</span>
-                    <span className="block text-[#0B2D52]">हर बच्चे के लिए समान शिक्षा।</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="block text-[#078F8A]">Accessible Schools</span>
-                    <span className="block text-[#0B2D52]">for Every Child,</span>
-                    <span className="block text-[#0B2D52]">Equal Education for All.</span>
-                  </>
-                )}
-              </h1>
-
-              {/* Supporting Subline */}
-              <p className="text-[clamp(1rem,0.95rem+0.5vw,1.25rem)] text-[#243B53] max-w-[60ch] leading-relaxed font-normal">
-                {heroSubline}
-              </p>
-
-              {/* Action Buttons: Stacked full-width on mobile, inline row on >=sm */}
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-                {/* Primary Action Button: Explore School Accessibility */}
-                <Link href="/schools" className="w-full sm:w-auto">
-                  <button
-                    type="button"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#0B2D52] hover:bg-[#07213d] text-white px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer min-h-[48px]"
-                  >
-                    <Search className="w-4 h-4 text-teal-300 stroke-[2.5]" aria-hidden="true" />
-                    <span>
-                      {isHindi ? "विद्यालय सुगम्यता खोजें" : "Explore School Accessibility"}
-                    </span>
-                    <ArrowRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
-                  </button>
-                </Link>
-
-                {/* Secondary Action Button: Watch Project Video */}
-                <Link href="/awareness-advocacy" className="w-full sm:w-auto">
-                  <button
-                    type="button"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 text-[#0B2D52] border-2 border-[#0B2D52] hover:border-teal-700 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-xs hover:shadow-md transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer min-h-[48px]"
-                  >
-                    <span className="w-6 h-6 rounded-full bg-[#0B2D52] text-white flex items-center justify-center shrink-0">
-                      <Play className="w-3.5 h-3.5 fill-white ml-0.5" aria-hidden="true" />
-                    </span>
-                    <span>{isHindi ? "परियोजना वीडियो देखें" : "Watch Project Video"}</span>
-                  </button>
-                </Link>
-              </div>
-            </div>
+        {/* Slide Controls: Pause/Play & Indicators (Bottom Right) */}
+        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex items-center gap-2 bg-white/90 backdrop-blur-xs px-2.5 py-1.5 rounded-full border border-slate-200/90 shadow-2xs">
+          <button
+            type="button"
+            onClick={() => setIsPaused((prev) => !prev)}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-navy-800 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 cursor-pointer"
+            aria-label={isPaused ? "Play slide rotation" : "Pause slide rotation"}
+            title={isPaused ? "Play slide rotation" : "Pause slide rotation"}
+          >
+            {isPaused ? (
+              <Play className="w-3.5 h-3.5 fill-navy-800" aria-hidden="true" />
+            ) : (
+              <Pause className="w-3.5 h-3.5 fill-navy-800" aria-hidden="true" />
+            )}
+          </button>
+          <div className="flex items-center gap-1.5 px-1">
+            {HERO_SLIDES.map((_, dotIdx) => {
+              const activeDot = currentIndex === HERO_SLIDES.length ? 0 : currentIndex;
+              const isActive = activeDot === dotIdx;
+              return (
+                <button
+                  key={dotIdx}
+                  type="button"
+                  onClick={() => {
+                    setIsTransitioning(true);
+                    setCurrentIndex(dotIdx);
+                  }}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    isActive ? "w-6 bg-[#0B2D52]" : "w-2 bg-slate-300 hover:bg-slate-400"
+                  }`}
+                  aria-label={`Go to slide ${dotIdx + 1}`}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
