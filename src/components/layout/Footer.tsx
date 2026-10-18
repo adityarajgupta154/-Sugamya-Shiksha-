@@ -64,11 +64,11 @@ export function Footer() {
             <h3 className="text-sm font-bold uppercase tracking-wider text-teal-400">
               {t("footer.quickLinks", "Quick Links")}
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-0.5 text-sm">
               <li>
                 <Link
                   href="/guidelines"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.guidelines", "Guidelines Library")}
                 </Link>
@@ -76,7 +76,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/schools"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.directory", "School Directory")}
                 </Link>
@@ -84,7 +84,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/reports"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.dashboard", "Research Dashboard")}
                 </Link>
@@ -92,7 +92,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/map"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.map", "School Accessibility Map")}
                 </Link>
@@ -100,7 +100,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/tracker"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.tracker", "Before & After Tracker")}
                 </Link>
@@ -108,7 +108,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/reports"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.reports", "Research Reports")}
                 </Link>
@@ -116,7 +116,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/report-barrier"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.reportBarrier", "Report an Accessibility Barrier")}
                 </Link>
@@ -124,7 +124,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/community-voices"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.voices", "Community Voices")}
                 </Link>
@@ -132,7 +132,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/awareness-advocacy"
-                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+                  className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] inline-flex items-center py-1.5"
                 >
                   {t("nav.advocacy", "Awareness & Advocacy")}
                 </Link>
@@ -176,15 +176,15 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright line */}
-        <div className="pt-8 border-t border-navy-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        {/* Bottom copyright line with high contrast (>= 4.5:1) and 44px tap targets */}
+        <div className="pt-8 border-t border-navy-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300 font-medium">
           <p>
             © {new Date().getFullYear()} Sugamya Shiksha Bihar. {t("footer.rights")}
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
             <Link
               href="/about"
-              className="hover:text-slate-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+              className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] flex items-center px-1"
             >
               {t("nav.about", "About & Contact")}
             </Link>
@@ -192,12 +192,14 @@ export function Footer() {
             <Link
               href="/admin"
               prefetch={false}
-              className="hover:text-teal-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+              className="hover:text-teal-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded min-h-[44px] flex items-center px-1"
             >
               {locale === "hi" ? "व्यवस्थापक" : "Admin"}
             </Link>
             <span aria-hidden="true">•</span>
-            <span>{locale === "hi" ? "दानापुर, पटना, बिहार" : "Danapur, Patna, Bihar"}</span>
+            <span className="min-h-[44px] flex items-center px-1 text-slate-400">
+              {locale === "hi" ? "दानापुर, पटना, बिहार" : "Danapur, Patna, Bihar"}
+            </span>
           </div>
         </div>
       </div>

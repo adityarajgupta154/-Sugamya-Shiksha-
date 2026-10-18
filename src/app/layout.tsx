@@ -55,7 +55,7 @@ export default function RootLayout({
       dir="ltr"
       className={`text-scale-normal ${inter.variable} ${notoSansDevanagari.variable}`}
     >
-      <body className="min-h-screen flex flex-col font-sans bg-offwhite text-navy-900 selection:bg-teal-200 selection:text-navy-900">
+      <body className="min-h-screen min-h-dvh flex flex-col font-sans bg-offwhite text-navy-900 selection:bg-teal-200 selection:text-navy-900 overflow-x-clip">
         <AnalyticsTracker />
         <AccessibilityProvider>
           <LanguageProvider>

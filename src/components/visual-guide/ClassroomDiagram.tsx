@@ -87,6 +87,7 @@ export function ClassroomDiagram({ altText }: DiagramProps) {
               />
 
               {/* Interactive Hotspot Buttons for Classroom Exploration */}
+              <div className="hidden sm:block">
               {CLASSROOM_HOTSPOTS.map((hotspot) => {
                 const isSelected = selectedSpecId === hotspot.id;
                 return (
@@ -121,7 +122,46 @@ export function ClassroomDiagram({ altText }: DiagramProps) {
                   </button>
                 );
               })}
+              </div>
             </div>
+          </div>
+
+          {/* Mobile Callout Legend List (<sm) - Eliminates overlapping dots on small screens */}
+          <div className="sm:hidden grid grid-cols-2 gap-2 pt-1">
+            {CLASSROOM_HOTSPOTS.map((hotspot) => {
+              const isSelected = selectedSpecId === hotspot.id;
+              return (
+                <button
+                  key={hotspot.id}
+                  type="button"
+                  onClick={() => setSelectedSpecId(hotspot.id)}
+                  className={`flex items-center gap-2 p-2 rounded-xl text-left border transition-all min-h-[44px] ${
+                    isSelected
+                      ? "bg-blue-50 border-[#0066FF] shadow-2xs"
+                      : "bg-white border-slate-200 hover:bg-slate-50"
+                  }`}
+                  aria-label={`${hotspot.label_en}: ${hotspot.val}`}
+                >
+                  <span
+                    className={`w-6 h-6 rounded-full text-xs font-black flex items-center justify-center shrink-0 ${
+                      isSelected
+                        ? "bg-[#0066FF] text-white"
+                        : "bg-blue-100 text-[#0066FF]"
+                    }`}
+                  >
+                    {hotspot.num}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-bold text-navy-900 truncate">
+                      {isHi ? hotspot.label_hi : hotspot.label_en}
+                    </p>
+                    <p className="text-[11px] text-blue-600 font-semibold truncate">
+                      {hotspot.val}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
           {/* ACTIVE SPECIFICATION SPOTLIGHT CARD (Simple Student-Friendly Language) */}
@@ -148,7 +188,7 @@ export function ClassroomDiagram({ altText }: DiagramProps) {
                 </div>
               </div>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-sky-50 text-[#0284C7] border border-sky-200 self-start md:self-auto">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-sans font-medium break-words max-w-full bg-sky-50 text-[#0284C7] border border-sky-200 self-start md:self-auto">
                 <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
                 <span>Accessibility Code 2024 (Cl. 4.2 &amp; Harmonised Cl. 6.2)</span>
               </span>

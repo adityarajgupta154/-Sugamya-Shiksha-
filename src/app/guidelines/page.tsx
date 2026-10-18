@@ -40,7 +40,7 @@ export default function GuidelinesPage() {
       <div className="space-y-4 max-w-3xl">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 text-teal-900 text-xs font-bold border border-teal-300">
           <Bookmark className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
-          <span>Section 4 • PRD Laws, Policies & Guidelines Library</span>
+          <span>{locale === "hi" ? "दिशानिर्देश एवं नीतियां" : "Laws, Policies & Guidelines"}</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-navy-800 tracking-tight font-hindi">
           {t("guidelines.title", "Laws, Policies & Accessibility Guidelines")}

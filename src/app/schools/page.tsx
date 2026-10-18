@@ -107,23 +107,23 @@ export default function SchoolsDirectoryPage() {
   }, [schools, typeFilter, statusFilter, searchQuery, isHindi]);
 
   return (
-    <div className="flex flex-col w-full py-10 px-4 sm:px-8 max-w-7xl mx-auto space-y-8">
+    <div className="flex flex-col w-full py-6 sm:py-10 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6 sm:space-y-8 min-w-0">
       {/* Header Banner */}
-      <div className="space-y-4 max-w-3xl">
+      <div className="space-y-3 sm:space-y-4 max-w-3xl">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 text-teal-900 text-xs font-bold border border-teal-300">
           <Building2 className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
-          <span>Section 2 • PRD School Accessibility Directory</span>
+          <span>{isHindi ? "विद्यालय सुगम्यता निर्देशिका" : "School Accessibility Directory"}</span>
         </div>
-        <h1 className="text-3xl sm:text-5xl font-black text-navy-800 tracking-tight font-hindi">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-navy-800 tracking-tight font-hindi">
           {t("schools.title", "School Accessibility Directory")}
         </h1>
-        <p className="text-base sm:text-xl text-slate-600 leading-relaxed">
+        <p className="text-sm sm:text-lg text-slate-600 leading-relaxed font-normal">
           {t("schools.subtitle")}
         </p>
       </div>
 
       {/* Mandatory Demo Data Notice Banner */}
-      <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
+      <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs sm:text-sm">
         <div className="flex items-center gap-2 font-medium">
           <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" aria-hidden="true" />
           <span>
@@ -139,22 +139,22 @@ export default function SchoolsDirectoryPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-center">
-          {/* Search Input (5 cols) */}
-          <div className="lg:col-span-5">
+      <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center">
+          {/* Search Input (5 cols on md+) */}
+          <div className="md:col-span-5">
             <Input
               label={t("common.search", "Search")}
               hideLabel
-              placeholder={t("schools.searchPlaceholder")}
+              placeholder={isHindi ? "विद्यालय, क्षेत्र या UDISE खोजें" : "Search school, area or UDISE"}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="h-11 text-sm"
             />
           </div>
 
-          {/* School Type Filter (3 cols) */}
-          <div className="lg:col-span-3">
+          {/* School Type Filter (3 cols on md+) */}
+          <div className="md:col-span-3">
             <label htmlFor="school-type-select" className="sr-only">
               {t("schools.filterType")}
             </label>
@@ -177,8 +177,8 @@ export default function SchoolsDirectoryPage() {
             </select>
           </div>
 
-          {/* Audit Status Filter (3 cols) */}
-          <div className="lg:col-span-3">
+          {/* Audit Status Filter (3 cols on md+) */}
+          <div className="md:col-span-3">
             <label htmlFor="school-status-select" className="sr-only">
               {t("schools.filterStatus")}
             </label>
@@ -204,8 +204,8 @@ export default function SchoolsDirectoryPage() {
             </select>
           </div>
 
-          {/* Reset Filters (1 col) */}
-          <div className="lg:col-span-1 flex justify-end">
+          {/* Reset Filters (1 col on md+) */}
+          <div className="md:col-span-1 flex justify-start md:justify-end">
             <Button
               variant="ghost"
               size="sm"
@@ -217,7 +217,7 @@ export default function SchoolsDirectoryPage() {
                 });
               }}
               title={t("schools.clearFilters")}
-              className="text-xs text-slate-500 hover:text-navy-900 whitespace-nowrap"
+              className="text-xs text-slate-500 hover:text-navy-900 whitespace-nowrap min-h-[44px]"
             >
               {isHindi ? "रीसेट" : "Reset"}
             </Button>
@@ -303,7 +303,7 @@ export default function SchoolsDirectoryPage() {
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 cv-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 cv-auto min-w-0">
           {filteredSchools.map((school) => (
             <SchoolCardItem
               key={school.id}

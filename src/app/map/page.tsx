@@ -143,7 +143,7 @@ export default function InteractiveMapPage() {
       <div className="space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 text-teal-900 text-xs font-bold border border-teal-300">
           <Compass className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
-          <span>Section 7 • PRD 6.2-B Danapur School Accessibility Map</span>
+          <span>{isHindi ? "दानापुर विद्यालय सुगम्यता मानचित्र" : "Danapur School Accessibility Map"}</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-navy-900 tracking-tight font-hindi">

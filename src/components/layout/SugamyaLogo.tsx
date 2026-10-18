@@ -12,7 +12,7 @@ export function SugamyaLogo({ compact = false, className = "", imgClassName = ""
   return (
     <Link
       href="/"
-      className={`flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded-lg p-1 transition-all ${className}`}
+      className={`flex items-center gap-2 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 rounded-lg p-1 transition-all min-w-0 ${className}`}
       aria-label="Sugamya Shiksha Bihar — Home"
     >
       {/* Official Emblem Logo */}
@@ -24,17 +24,17 @@ export function SugamyaLogo({ compact = false, className = "", imgClassName = ""
           height={77}
           sizes="104px"
           priority
-          className={`h-11 sm:h-12 w-auto max-w-none object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105 ${imgClassName}`}
+          className={`h-8 sm:h-10 md:h-12 w-auto max-w-none object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105 ${imgClassName}`}
         />
       </div>
 
       {/* Brand Text */}
-      <div className="flex flex-col text-left">
-        <span className="text-lg sm:text-xl font-black text-[#0B2D52] tracking-tight leading-tight group-hover:text-teal-700 transition-colors">
+      <div className="flex flex-col text-left min-w-0">
+        <span className="text-sm sm:text-base md:text-lg lg:text-xl font-black text-[#0B2D52] tracking-tight leading-tight group-hover:text-teal-700 transition-colors truncate">
           Sugamya Shiksha Bihar
         </span>
         {!compact && (
-          <span className="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight tracking-normal">
+          <span className="hidden md:block text-[11px] sm:text-xs text-slate-500 font-medium leading-tight tracking-normal truncate">
             NCPEDP Fellowship Research Project • Danapur
           </span>
         )}

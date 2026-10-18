@@ -33,7 +33,7 @@ export function SchematicShell({ data, children }: SchematicShellProps) {
         <div className="space-y-1.5 max-w-2xl">
           <div className="flex items-center gap-2 flex-wrap mb-2">
             <span
-              className={`inline-flex items-center gap-1.5 text-xs font-mono font-semibold px-2.5 py-1 rounded-md ${
+              className={`inline-flex items-center gap-1.5 text-xs font-sans font-medium px-2.5 py-1 rounded-md break-words max-w-full ${
                 highContrast
                   ? "bg-white text-black font-bold"
                   : "bg-white/95 border border-sky-200 text-[#078F8A] shadow-2xs"

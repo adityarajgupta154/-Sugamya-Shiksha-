@@ -188,7 +188,7 @@ export function RampDiagram({ altText }: DiagramProps) {
                     style={{ top: hotspot.top, left: hotspot.left }}
                     onClick={() => setSelectedHotspotId(hotspot.id)}
                     onMouseEnter={() => setSelectedHotspotId(hotspot.id)}
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer ${
+                    className={`hidden sm:flex absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full items-center justify-center font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer ${
                       isSelected
                         ? "bg-amber-500 text-white ring-4 ring-amber-300 scale-125 z-20"
                         : "bg-[#0284C7] text-white hover:bg-sky-500 hover:scale-110 z-10"
@@ -197,6 +197,39 @@ export function RampDiagram({ altText }: DiagramProps) {
                     title={`${hotspot.label_en} / ${hotspot.label_hi}: ${hotspot.val}`}
                   >
                     {hotspot.num}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobile-Friendly Numbered Callouts Legend List (Below Image on Mobile < sm) */}
+          <div className="sm:hidden space-y-2">
+            <span className="text-xs font-bold text-slate-500 block uppercase tracking-wider">
+              {isHi ? "मानक बिंदु चुनें (Tap to inspect):" : "Select Specification Marker:"}
+            </span>
+            <div className="grid grid-cols-2 gap-2">
+              {RAMP_3D_HOTSPOTS.map((hotspot) => {
+                const isSelected = selectedHotspotId === hotspot.id;
+                return (
+                  <button
+                    key={hotspot.id}
+                    type="button"
+                    onClick={() => setSelectedHotspotId(hotspot.id)}
+                    className={`flex items-center gap-2 p-2 rounded-xl text-left text-xs font-bold transition-all min-h-[44px] ${
+                      isSelected
+                        ? "bg-[#0B2D52] text-white shadow-xs ring-2 ring-teal-500"
+                        : "bg-white text-slate-700 border border-slate-200 hover:bg-sky-50"
+                    }`}
+                  >
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 font-extrabold text-xs ${
+                        isSelected ? "bg-amber-400 text-navy-950" : "bg-[#0284C7] text-white"
+                      }`}
+                    >
+                      {hotspot.num}
+                    </span>
+                    <span className="truncate">{isHi ? hotspot.label_hi : hotspot.label_en}</span>
                   </button>
                 );
               })}
@@ -222,7 +255,7 @@ export function RampDiagram({ altText }: DiagramProps) {
                 </div>
               </div>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-sky-50 text-[#0284C7] border border-sky-200 self-start md:self-auto">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-sans font-semibold bg-sky-50 text-[#0284C7] border border-sky-200 self-start md:self-auto break-words">
                 <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
                 <span>Accessibility Code 2024 (Cl. 3.2)</span>
               </span>

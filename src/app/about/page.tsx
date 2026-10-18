@@ -158,7 +158,7 @@ export default function AboutPage() {
       <div className="space-y-4 max-w-3xl">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 text-teal-900 text-xs font-bold border border-teal-300">
           <GraduationCap className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
-          <span>Section 12 • PRD About Researcher & Contact</span>
+          <span>{locale === "hi" ? "शोधकर्ता एवं संपर्क" : "About Researcher & Contact"}</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-navy-800 tracking-tight font-hindi">
           {t("about.title", "About Researcher & Contact")}

@@ -64,12 +64,12 @@ export default function TrackerPage() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+    <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8 sm:space-y-12 min-w-0 max-w-full">
       {/* Hero Section */}
       <section className="text-center max-w-3xl mx-auto space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-teal-100 text-teal-900 border border-teal-300">
           <Sparkles className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
-          <span>{isHi ? "विशिष्ट शोध विशेषता E • PRD 6.2-E" : "Unique Feature E • PRD 6.2-E"}</span>
+          <span>{isHi ? "सुधार ट्रैकर" : "Accessibility Improvement Tracker"}</span>
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-navy-950 tracking-tight">
           {isHi

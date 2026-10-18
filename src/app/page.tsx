@@ -172,150 +172,126 @@ export default function HomePage() {
   return (
     <div className="flex flex-col w-full bg-[#FCFDFE]">
       {/* =========================================================================
-          HERO SECTION — Full-width Panoramic Background Slider with Smooth Slide Animation
+          HERO SECTION — Responsive Stacked on Mobile (<768px), 2-Col on Desktop (>=768px)
           ========================================================================= */}
       <section
-        className="relative w-full overflow-hidden min-h-[500px] sm:min-h-[540px] md:min-h-[580px] lg:min-h-[620px] xl:min-h-[660px] flex items-center border-b border-slate-100 group/hero"
+        className="w-full bg-[#FCFDFE] border-b border-slate-100 overflow-hidden"
         aria-labelledby="hero-heading"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onFocus={() => setIsPaused(true)}
-        onBlur={() => setIsPaused(false)}
       >
-        {/* Full-width Panoramic Hero Background Slider Track with Butter-Smooth Hardware-Accelerated Slide Animation */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div
-            className="flex w-[400%] h-full motion-reduce:!transition-none"
-            style={{
-              transform: `translate3d(-${(currentIndex * 100) / DISPLAY_SLIDES.length}%, 0, 0)`,
-              transition: isTransitioning
-                ? "transform 1100ms cubic-bezier(0.22, 1, 0.36, 1)"
-                : "none",
-              willChange: "transform",
-            }}
-            onTransitionEnd={handleTransitionEnd}
-          >
-            {DISPLAY_SLIDES.map((slide, idx) => (
-              <div
-                key={slide.id}
-                aria-hidden={idx !== (currentIndex === HERO_SLIDES.length ? 0 : currentIndex)}
-                className="w-1/4 h-full shrink-0 relative overflow-hidden"
-              >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12 lg:py-16 xl:py-20 lg:min-h-[calc(100svh-5rem)] flex items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center w-full">
+            {/* Mobile First: Image on Mobile (<768px) displays FIRST via order-1 md:order-2 */}
+            <div className="order-1 md:order-2 md:col-span-6 lg:col-span-6 w-full">
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/11] rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-slate-200/80 bg-slate-100">
                 <Image
-                  src={slide.src}
-                  alt={isHindi ? slide.alt_hi : slide.alt}
+                  src="/Hopeful Journey to School-opt.png"
+                  alt={
+                    isHindi
+                      ? "धूप खिली सुबह में सुगम्य विद्यालय कॉरिडोर और स्टेनलेस हैंडरेल युक्त रैंप पर आगे बढ़ता व्हीलचेयर युक्त छात्र"
+                      : "Student with backpack in wheelchair moving forward along accessible school corridor with stainless handrails and ramp towards sunny campus"
+                  }
                   fill
-                  priority={idx === 0}
+                  priority
                   quality={85}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
-                  className={`object-cover select-none ${slide.objectPosition}`}
+                  sizes="(min-width: 1024px) 50vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover select-none object-[65%_center] md:object-[60%_center] lg:object-center"
                 />
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Soft atmospheric gradient on left to ensure crisp text contrast over sky area without obscuring image */}
-          <div
-            className="absolute inset-0 z-[2] bg-gradient-to-r from-white/70 via-white/25 to-transparent md:from-white/50 md:via-white/10 md:to-transparent lg:from-white/35 lg:via-transparent lg:to-transparent pointer-events-none"
-            aria-hidden="true"
-          />
+            {/* Text Content: Below Image on Mobile, Left Column on Tablet/Desktop */}
+            <div className="order-2 md:order-1 md:col-span-6 lg:col-span-6 space-y-4 sm:space-y-6 text-left">
+              {/* Primary Headline: Fluid typography, zero orphans via text-balance */}
+              <h1
+                id="hero-heading"
+                className={`text-[clamp(1.875rem,1.2rem+3.2vw,3.5rem)] font-black tracking-tight text-balance ${
+                  isHindi ? "leading-[1.3] sm:leading-[1.38]" : "leading-[1.12] sm:leading-[1.16]"
+                } font-sans`}
+              >
+                {isHindi ? (
+                  <>
+                    <span className="block text-[#0B2D52]">हर बच्चे के लिए</span>
+                    <span className="block text-[#078F8A]">सुगम विद्यालय,</span>
+                    <span className="block text-[#0B2D52]">हर बच्चे के लिए समान शिक्षा।</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="block text-[#078F8A]">Accessible Schools</span>
+                    <span className="block text-[#0B2D52]">for Every Child,</span>
+                    <span className="block text-[#0B2D52]">Equal Education for All.</span>
+                  </>
+                )}
+              </h1>
 
-          {/* Subtle bottom transition into page background */}
-          <div
-            className="absolute bottom-0 left-0 right-0 z-[2] h-10 sm:h-14 bg-gradient-to-t from-[#FCFDFE] via-[#FCFDFE]/40 to-transparent pointer-events-none"
-            aria-hidden="true"
-          />
-        </div>
+              {/* Supporting Subline */}
+              <p className="text-[clamp(1rem,0.95rem+0.5vw,1.25rem)] text-[#243B53] max-w-[60ch] leading-relaxed font-normal">
+                {heroSubline}
+              </p>
 
-        {/* Content Container positioned over the left/sky area matching Reference Screenshot */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-14 sm:py-20 lg:py-24">
-          <div className="max-w-xl lg:max-w-lg xl:max-w-xl space-y-5 sm:space-y-6 text-left">
-            {/* Primary Headline matching Reference Image typography & colors */}
-            <h1
-              id="hero-heading"
-              className="text-4xl sm:text-5xl lg:text-[46px] xl:text-[50px] font-black tracking-tight leading-[1.18] font-sans"
-            >
-              {isHindi ? (
-                <>
-                  <span className="block text-[#0B2D52]">हर बच्चे के लिए</span>
-                  <span className="block text-[#078F8A]">सुगम विद्यालय,</span>
-                  <span className="block text-[#0B2D52]">हर बच्चे के लिए समान शिक्षा।</span>
-                </>
-              ) : (
-                <>
-                  <span className="block text-[#078F8A]">Accessible Schools</span>
-                  <span className="block text-[#0B2D52]">for Every Child,</span>
-                  <span className="block text-[#0B2D52]">Equal Education for All.</span>
-                </>
-              )}
-            </h1>
+              {/* Action Buttons: Stacked full-width on mobile, inline row on >=sm */}
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                {/* Primary Action Button: Explore School Accessibility */}
+                <Link href="/schools" className="w-full sm:w-auto">
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#0B2D52] hover:bg-[#07213d] text-white px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer min-h-[48px]"
+                  >
+                    <Search className="w-4 h-4 text-teal-300 stroke-[2.5]" aria-hidden="true" />
+                    <span>
+                      {isHindi ? "विद्यालय सुगम्यता खोजें" : "Explore School Accessibility"}
+                    </span>
+                    <ArrowRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
+                  </button>
+                </Link>
 
-            {/* Supporting Text matching Reference Screenshot */}
-            <p className="text-base sm:text-lg text-[#243B53] max-w-xl leading-relaxed font-normal">
-              Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.
-            </p>
-
-            {/* Action Buttons matching Reference Screenshot */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              {/* Primary Action Button: Explore School Accessibility */}
-              <Link href="/schools">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2.5 bg-[#0B2D52] hover:bg-[#07213d] text-white px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer"
-                >
-                  <Search className="w-4 h-4 text-teal-300 stroke-[2.5]" aria-hidden="true" />
-                  <span>
-                    {isHindi ? "Explore School Accessibility" : "Explore School Accessibility"}
-                  </span>
-                  <ArrowRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
-                </button>
-              </Link>
-
-              {/* Secondary Action Button: Watch Project Video */}
-              <Link href="/awareness-advocacy">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2.5 bg-white hover:bg-slate-50 text-[#0B2D52] border border-slate-200/90 hover:border-teal-500 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-xs hover:shadow-md transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer"
-                >
-                  <span className="w-6 h-6 rounded-full bg-[#0284C7] text-white flex items-center justify-center shrink-0">
-                    <Play className="w-3.5 h-3.5 fill-white ml-0.5" aria-hidden="true" />
-                  </span>
-                  <span>Watch Project Video</span>
-                </button>
-              </Link>
+                {/* Secondary Action Button: Watch Project Video */}
+                <Link href="/awareness-advocacy" className="w-full sm:w-auto">
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 text-[#0B2D52] border-2 border-[#0B2D52] hover:border-teal-700 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-xs hover:shadow-md transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-600 focus-visible:ring-offset-2 cursor-pointer min-h-[48px]"
+                  >
+                    <span className="w-6 h-6 rounded-full bg-[#0B2D52] text-white flex items-center justify-center shrink-0">
+                      <Play className="w-3.5 h-3.5 fill-white ml-0.5" aria-hidden="true" />
+                    </span>
+                    <span>{isHindi ? "परियोजना वीडियो देखें" : "Watch Project Video"}</span>
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 2: FOUR FEATURE CARDS — Matching Image 1
+          SECTION 2: FOUR PRIMARY ACTION CARDS (Compact on mobile, 2x2 on sm, 4-col on lg)
           ========================================================================= */}
       <section
-        className="py-10 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full"
+        className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full"
         aria-label={isHindi ? "प्रमुख सुविधाएं" : "Key Platform Features"}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5 min-w-0">
           {/* Card 1: Explore School Accessibility (Soft Blue) */}
           <Link
             href="/schools"
-            className="group flex flex-col justify-between p-6 rounded-2xl bg-[#EAF6FD] border border-[#D4EDFD] hover:border-[#0284C7]/50 hover:shadow-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-blue-500"
+            className="group flex sm:flex-col items-center sm:items-start justify-between p-3.5 sm:p-5 lg:p-6 rounded-2xl bg-[#EAF6FD] border border-[#D4EDFD] hover:border-[#0284C7]/50 hover:shadow-md transition-all duration-150 min-h-[76px] sm:min-h-[220px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 gap-3 min-w-0"
           >
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-white shadow-xs flex items-center justify-center text-[#0284C7] shrink-0">
-                <School className="w-6 h-6 stroke-[2]" aria-hidden="true" />
+            <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-3.5 min-w-0 flex-1">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white shadow-2xs flex items-center justify-center text-[#0284C7] shrink-0">
+                <School className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" aria-hidden="true" />
               </div>
-              <div className="space-y-1.5">
-                <h2 className="text-base sm:text-lg font-bold text-[#0B2D52] group-hover:text-[#0284C7] transition-colors">
-                  Explore School Accessibility
+              <div className="min-w-0 flex-1 space-y-0.5 sm:space-y-1.5">
+                <h2 className="text-sm sm:text-base lg:text-lg font-bold text-[#0B2D52] group-hover:text-[#0284C7] transition-colors truncate sm:whitespace-normal">
+                  {isHindi ? "विद्यालय सुगम्यता खोजें" : "Explore School Accessibility"}
                 </h2>
-                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
-                  Find schools, audit status and available facilities in Danapur.
+                <p className="text-xs sm:text-[13px] text-slate-600 leading-snug line-clamp-1 sm:line-clamp-2 font-normal">
+                  {isHindi
+                    ? "दानापुर के विद्यालयों, ऑडिट स्थिति और सुविधाओं की जानकारी।"
+                    : "Find schools, audit status and available facilities in Danapur."}
                 </p>
               </div>
             </div>
-            <div className="pt-4 flex justify-end">
-              <span className="w-8 h-8 rounded-full bg-[#0284C7] text-white flex items-center justify-center shadow-xs group-hover:translate-x-1 transition-transform">
+            <div className="shrink-0 flex items-center justify-center sm:w-full sm:justify-end sm:pt-4">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0284C7] text-white flex items-center justify-center shadow-2xs group-hover:translate-x-1 transition-transform">
                 <ChevronRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
               </span>
             </div>
@@ -324,23 +300,25 @@ export default function HomePage() {
           {/* Card 2: Read Guidelines (Soft Mint Green) */}
           <Link
             href="/guidelines"
-            className="group flex flex-col justify-between p-6 rounded-2xl bg-[#EAF7F0] border border-[#CEF0DD] hover:border-[#0D9488]/50 hover:shadow-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-teal-500"
+            className="group flex sm:flex-col items-center sm:items-start justify-between p-3.5 sm:p-5 lg:p-6 rounded-2xl bg-[#EAF7F0] border border-[#CEF0DD] hover:border-[#0D9488]/50 hover:shadow-md transition-all duration-150 min-h-[76px] sm:min-h-[220px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 gap-3 min-w-0"
           >
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-white shadow-xs flex items-center justify-center text-[#0D9488] shrink-0">
-                <FileText className="w-6 h-6 stroke-[2]" aria-hidden="true" />
+            <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-3.5 min-w-0 flex-1">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white shadow-2xs flex items-center justify-center text-[#0D9488] shrink-0">
+                <FileText className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" aria-hidden="true" />
               </div>
-              <div className="space-y-1.5">
-                <h2 className="text-base sm:text-lg font-bold text-[#0B2D52] group-hover:text-[#0D9488] transition-colors">
-                  Read Guidelines
+              <div className="min-w-0 flex-1 space-y-0.5 sm:space-y-1.5">
+                <h2 className="text-sm sm:text-base lg:text-lg font-bold text-[#0B2D52] group-hover:text-[#0D9488] transition-colors truncate sm:whitespace-normal">
+                  {isHindi ? "दिशानिर्देश पढ़ें" : "Read Guidelines"}
                 </h2>
-                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
-                  Laws, policies and accessibility standards in simple Hindi.
+                <p className="text-xs sm:text-[13px] text-slate-600 leading-snug line-clamp-1 sm:line-clamp-2 font-normal">
+                  {isHindi
+                    ? "सरल हिंदी में वैधानिक कानून, नीतियां और सुगम्यता मानक।"
+                    : "Laws, policies and accessibility standards in simple Hindi."}
                 </p>
               </div>
             </div>
-            <div className="pt-4 flex justify-end">
-              <span className="w-8 h-8 rounded-full bg-[#0D9488] text-white flex items-center justify-center shadow-xs group-hover:translate-x-1 transition-transform">
+            <div className="shrink-0 flex items-center justify-center sm:w-full sm:justify-end sm:pt-4">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0D9488] text-white flex items-center justify-center shadow-2xs group-hover:translate-x-1 transition-transform">
                 <ChevronRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
               </span>
             </div>
@@ -350,23 +328,25 @@ export default function HomePage() {
           <Link
             href="/survey"
             prefetch={false}
-            className="group flex flex-col justify-between p-6 rounded-2xl bg-[#FFF6E3] border border-[#FDE6BA] hover:border-[#D97706]/50 hover:shadow-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-amber-500"
+            className="group flex sm:flex-col items-center sm:items-start justify-between p-3.5 sm:p-5 lg:p-6 rounded-2xl bg-[#FFF6E3] border border-[#FDE6BA] hover:border-[#D97706]/50 hover:shadow-md transition-all duration-150 min-h-[76px] sm:min-h-[220px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 gap-3 min-w-0"
           >
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-white shadow-xs flex items-center justify-center text-[#D97706] shrink-0">
+            <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-3.5 min-w-0 flex-1">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white shadow-2xs flex items-center justify-center text-[#D97706] shrink-0">
                 <Users className="w-6 h-6 stroke-[2]" aria-hidden="true" />
               </div>
-              <div className="space-y-1.5">
-                <h2 className="text-base sm:text-lg font-bold text-[#0B2D52] group-hover:text-[#D97706] transition-colors">
-                  Participate in Survey
+              <div className="min-w-0 flex-1 space-y-0.5 sm:space-y-1.5">
+                <h2 className="text-sm sm:text-base lg:text-lg font-bold text-[#0B2D52] group-hover:text-[#D97706] transition-colors truncate sm:whitespace-normal">
+                  {isHindi ? "सर्वेक्षण में भाग लें" : "Participate in Survey"}
                 </h2>
-                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
-                  Help us understand school accessibility in Danapur.
+                <p className="text-xs sm:text-[13px] text-slate-600 leading-snug line-clamp-1 sm:line-clamp-2 font-normal">
+                  {isHindi
+                    ? "दानापुर में विद्यालय सुगम्यता को बेहतर बनाने में सहयोग दें।"
+                    : "Help us understand school accessibility in Danapur."}
                 </p>
               </div>
             </div>
-            <div className="pt-4 flex justify-end">
-              <span className="w-8 h-8 rounded-full bg-[#D97706] text-white flex items-center justify-center shadow-xs group-hover:translate-x-1 transition-transform">
+            <div className="shrink-0 flex items-center justify-center sm:w-full sm:justify-end sm:pt-4">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#D97706] text-white flex items-center justify-center shadow-2xs group-hover:translate-x-1 transition-transform">
                 <ChevronRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
               </span>
             </div>
@@ -375,23 +355,25 @@ export default function HomePage() {
           {/* Card 4: View Research Findings (Soft Lavender) */}
           <Link
             href="/reports"
-            className="group flex flex-col justify-between p-6 rounded-2xl bg-[#F2EEFF] border border-[#DFD5FD] hover:border-[#7C3AED]/50 hover:shadow-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-purple-500"
+            className="group flex sm:flex-col items-center sm:items-start justify-between p-3.5 sm:p-5 lg:p-6 rounded-2xl bg-[#F2EEFF] border border-[#DFD5FD] hover:border-[#7C3AED]/50 hover:shadow-md transition-all duration-150 min-h-[76px] sm:min-h-[220px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 gap-3 min-w-0"
           >
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-white shadow-xs flex items-center justify-center text-[#7C3AED] shrink-0">
+            <div className="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-3.5 min-w-0 flex-1">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white shadow-2xs flex items-center justify-center text-[#7C3AED] shrink-0">
                 <BarChart3 className="w-6 h-6 stroke-[2]" aria-hidden="true" />
               </div>
-              <div className="space-y-1.5">
-                <h2 className="text-base sm:text-lg font-bold text-[#0B2D52] group-hover:text-[#7C3AED] transition-colors">
-                  View Research Findings
+              <div className="min-w-0 flex-1 space-y-0.5 sm:space-y-1.5">
+                <h2 className="text-sm sm:text-base lg:text-lg font-bold text-[#0B2D52] group-hover:text-[#7C3AED] transition-colors truncate sm:whitespace-normal">
+                  {isHindi ? "शोध निष्कर्ष देखें" : "View Research Findings"}
                 </h2>
-                <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
-                  Explore data, reports and insights from the field.
+                <p className="text-xs sm:text-[13px] text-slate-600 leading-snug line-clamp-1 sm:line-clamp-2 font-normal">
+                  {isHindi
+                    ? "धरातलीय सर्वेक्षण से प्राप्त आंकड़े, रिपोर्ट और अंतर्दृष्टि।"
+                    : "Explore data, reports and insights from the field."}
                 </p>
               </div>
             </div>
-            <div className="pt-4 flex justify-end">
-              <span className="w-8 h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center shadow-xs group-hover:translate-x-1 transition-transform">
+            <div className="shrink-0 flex items-center justify-center sm:w-full sm:justify-end sm:pt-4">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center shadow-2xs group-hover:translate-x-1 transition-transform">
                 <ChevronRight className="w-4 h-4 stroke-[2.5]" aria-hidden="true" />
               </span>
             </div>
@@ -662,7 +644,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-800 border border-teal-200">
                 <Sparkles className="w-3.5 h-3.5 text-[#078F8A]" aria-hidden="true" />
                 <span>
-                  {isHindi ? "प्रमुख शोध विशेषता E (PRD 6.2-E)" : "Core Feature E (PRD 6.2-E)"}
+                  {isHindi ? "सुधार ट्रैकर" : "Accessibility Improvement Tracker"}
                 </span>
               </div>
               <h2

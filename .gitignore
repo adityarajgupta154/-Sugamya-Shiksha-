@@ -39,3 +39,6 @@ after-metrics.json
 # Agents workspace
 .agents/
 
+# Audit screenshots
+public/responsive-audit-results/
+

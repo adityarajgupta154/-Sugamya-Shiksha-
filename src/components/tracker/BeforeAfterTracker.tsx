@@ -143,14 +143,14 @@ export function BeforeAfterTracker({
         </div>
 
         {/* Filter Toolbar */}
-        <div className="pt-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="pt-6 flex flex-col md:flex-row md:items-center justify-between gap-4 min-w-0 max-w-full">
           {/* Category Chips */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0" role="tablist" aria-label={isHi ? "श्रेणी फ़िल्टर" : "Category Filter"}>
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 max-w-full w-full min-w-0" role="tablist" aria-label={isHi ? "श्रेणी फ़िल्टर" : "Category Filter"}>
             <button
               type="button"
               onClick={() => setActiveCategory("all")}
               className={clsx(
-                "px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600",
+                "px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 shrink-0",
                 activeCategory === "all"
                   ? "bg-navy-900 text-white shadow-xs"
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -168,7 +168,7 @@ export function BeforeAfterTracker({
                     type="button"
                     onClick={() => setActiveCategory(catKey)}
                     className={clsx(
-                      "px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600",
+                      "px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 shrink-0",
                       activeCategory === catKey
                         ? "bg-teal-700 text-white shadow-xs"
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -183,7 +183,7 @@ export function BeforeAfterTracker({
 
           {/* School Selector Dropdown (Optional) */}
           {showSchoolFilter && uniqueSchools.length > 1 && (
-            <div className="flex items-center gap-2 self-start md:self-auto">
+            <div className="flex items-center gap-2 self-start md:self-auto max-w-full min-w-0">
               <label htmlFor="school-filter-select" className="text-xs font-semibold text-slate-700 shrink-0">
                 <Building className="w-3.5 h-3.5 inline mr-1 text-slate-500" aria-hidden="true" />
                 {isHi ? "विद्यालय:" : "School:"}
@@ -192,7 +192,7 @@ export function BeforeAfterTracker({
                 id="school-filter-select"
                 value={activeSchool}
                 onChange={(e) => handleSchoolSelect(e.target.value)}
-                className="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600"
+                className="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 max-w-[200px] sm:max-w-xs truncate"
               >
                 <option value="all">
                   {isHi ? "सभी विद्यालय (दानापुर)" : "All Schools (Danapur)"}
