@@ -21,6 +21,7 @@ import {
   ShieldCheck,
   User,
   Linkedin,
+  Instagram,
 } from "lucide-react";
 import { getCustomSiteContent } from "@/lib/customSchoolsStorage";
 
@@ -458,6 +459,18 @@ export default function AboutPage() {
                     className="w-11 h-11 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20ba5a] transition-all shadow-xs hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
                   >
                     <WhatsAppIcon className="w-5 h-5 text-white" />
+                  </a>
+
+                  {/* Instagram Logo */}
+                  <a
+                    href="https://www.instagram.com/sugamyashikhshabihar?obrf=MWt3dnZoa2hrYWo4NQ=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    title="Instagram"
+                    className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center shadow-xs hover:scale-105 active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2"
+                  >
+                    <Instagram className="w-5 h-5 text-white" aria-hidden="true" />
                   </a>
                 </div>
               </div>

@@ -34,8 +34,21 @@ export function Footer() {
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
               {t("footer.aboutProject")}
             </p>
-            <div className="pt-1 text-xs text-teal-300 font-medium">
-              📍 {t("footer.location", "Patna, Bihar, India")}
+            <div className="pt-2 flex items-center gap-3">
+              <span className="text-xs text-teal-300 font-medium">
+                📍 {t("footer.location", "Patna, Bihar, India")}
+              </span>
+              <span className="text-slate-700" aria-hidden="true">•</span>
+              <a
+                href="https://www.instagram.com/sugamyashikhshabihar?obrf=MWt3dnZoa2hrYWo4NQ=="
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center shadow-md hover:scale-110 active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
+              >
+                <Instagram className="w-4 h-4 text-white" aria-hidden="true" />
+              </a>
             </div>
           </div>
 
@@ -152,9 +165,9 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label="Instagram"
               title="Instagram"
-              className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-slate-300 hover:text-pink-400 transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-md hover:scale-110 active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
             >
-              <Instagram className="w-5 h-5" aria-hidden="true" />
+              <Instagram className="w-4 h-4 text-white" aria-hidden="true" />
             </a>
           </div>
         </div>
