@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Instagram } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function Footer() {
@@ -144,6 +145,17 @@ export function Footer() {
             <span className="min-h-[44px] flex items-center px-1 text-slate-400">
               {locale === "hi" ? "पटना, बिहार, भारत" : "Patna, Bihar, India"}
             </span>
+            <span aria-hidden="true">•</span>
+            <a
+              href="https://www.instagram.com/sugamyashikhshabihar?obrf=MWt3dnZoa2hrYWo4NQ=="
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+              className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-slate-300 hover:text-pink-400 transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+            >
+              <Instagram className="w-5 h-5" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </div>
