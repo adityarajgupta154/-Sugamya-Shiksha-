@@ -4,6 +4,14 @@
 
 export type CampaignType = "poster" | "reel" | "video" | "workshop" | "mobilisation";
 
+export interface ImageFrameSettings {
+  objectFit?: "cover" | "contain";
+  objectPosition?: string; // e.g. "center center", "50% 20%"
+  scale?: number; // Zoom multiplier: 1 to 2
+  posX?: number; // 0 to 100 percentage
+  posY?: number; // 0 to 100 percentage
+}
+
 export interface CampaignItem {
   id: string;
   type: CampaignType;
@@ -21,6 +29,7 @@ export interface CampaignItem {
   location?: string;
   tags: string[];
   published: boolean;
+  frameSettings?: ImageFrameSettings; // Frame crop/fit settings for images only
 }
 
 export const CAMPAIGN_TYPE_META: Record<

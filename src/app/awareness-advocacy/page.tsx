@@ -9,6 +9,10 @@ import {
   DEMO_CAMPAIGN_ITEMS,
 } from "@/data/campaignData";
 import {
+  mergeCampaignsWithLocal,
+  getCustomCampaigns,
+} from "@/lib/customCampaignStorage";
+import {
   Megaphone,
   Download,
   Calendar,
@@ -28,18 +32,26 @@ export default function AwarenessAdvocacyPage() {
   const { locale } = useLanguage();
   const isHindi = locale === "hi";
 
-  const [campaignItems, setCampaignItems] = useState<CampaignItem[]>(DEMO_CAMPAIGN_ITEMS);
+  const [campaignItems, setCampaignItems] = useState<CampaignItem[]>(() =>
+    mergeCampaignsWithLocal(DEMO_CAMPAIGN_ITEMS)
+  );
   const [selectedType, setSelectedType] = useState<string>("all");
   const [expandedTranscriptId, setExpandedTranscriptId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Load published items from Firestore
+  // Load published items from Firestore + LocalStorage
   useEffect(() => {
     let cancelled = false;
+
+    function refreshFromStorage() {
+      setCampaignItems((prev) => mergeCampaignsWithLocal(prev));
+    }
+
     async function loadCampaign() {
       try {
         const { db } = await import("@/lib/firebase/firestore");
         if (!db || cancelled) {
+          setCampaignItems(mergeCampaignsWithLocal(DEMO_CAMPAIGN_ITEMS));
           setLoading(false);
           return;
         }
@@ -52,19 +64,30 @@ export default function AwarenessAdvocacyPage() {
         if (!snap.empty && !cancelled) {
           const list: CampaignItem[] = [];
           snap.forEach((d) => list.push({ id: d.id, ...d.data() } as CampaignItem));
-          setCampaignItems(list);
+          setCampaignItems(mergeCampaignsWithLocal(list));
+        } else if (!cancelled) {
+          setCampaignItems(mergeCampaignsWithLocal(DEMO_CAMPAIGN_ITEMS));
         }
       } catch (err) {
-        console.info("Using demo campaign items (Firestore fallback)");
+        console.info("Using demo/local campaign items (Firestore fallback)");
+        setCampaignItems(mergeCampaignsWithLocal(DEMO_CAMPAIGN_ITEMS));
       } finally {
         if (!cancelled) {
           setLoading(false);
         }
       }
     }
+
     loadCampaign();
+
+    const handleSync = () => refreshFromStorage();
+    window.addEventListener("ssb_campaign_updated", handleSync);
+    window.addEventListener("storage", handleSync);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("ssb_campaign_updated", handleSync);
+      window.removeEventListener("storage", handleSync);
     };
   }, []);
 
@@ -194,7 +217,19 @@ export default function AwarenessAdvocacyPage() {
                     <img
                       src={item.mediaUrl}
                       alt={title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      style={{
+                        objectFit: item.frameSettings?.objectFit || "cover",
+                        objectPosition:
+                          item.frameSettings?.objectPosition ||
+                          (item.frameSettings?.posX !== undefined && item.frameSettings?.posY !== undefined
+                            ? `${item.frameSettings.posX}% ${item.frameSettings.posY}%`
+                            : "center center"),
+                        transform:
+                          item.frameSettings?.scale && item.frameSettings.scale > 1
+                            ? `scale(${item.frameSettings.scale})`
+                            : undefined,
+                      }}
+                      className="w-full h-full transition-transform duration-300"
                     />
                   )}
 
