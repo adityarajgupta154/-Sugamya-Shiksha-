@@ -39,18 +39,21 @@ export default function AwarenessAdvocacyPage() {
   const [expandedTranscriptId, setExpandedTranscriptId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const baseListRef = React.useRef<CampaignItem[]>(DEMO_CAMPAIGN_ITEMS);
+
   // Load published items from Firestore + LocalStorage
   useEffect(() => {
     let cancelled = false;
 
     function refreshFromStorage() {
-      setCampaignItems((prev) => mergeCampaignsWithLocal(prev));
+      setCampaignItems(mergeCampaignsWithLocal(baseListRef.current));
     }
 
     async function loadCampaign() {
       try {
         const { db } = await import("@/lib/firebase/firestore");
         if (!db || cancelled) {
+          baseListRef.current = DEMO_CAMPAIGN_ITEMS;
           setCampaignItems(mergeCampaignsWithLocal(DEMO_CAMPAIGN_ITEMS));
           setLoading(false);
           return;
@@ -64,12 +67,15 @@ export default function AwarenessAdvocacyPage() {
         if (!snap.empty && !cancelled) {
           const list: CampaignItem[] = [];
           snap.forEach((d) => list.push({ id: d.id, ...d.data() } as CampaignItem));
+          baseListRef.current = list;
           setCampaignItems(mergeCampaignsWithLocal(list));
         } else if (!cancelled) {
+          baseListRef.current = DEMO_CAMPAIGN_ITEMS;
           setCampaignItems(mergeCampaignsWithLocal(DEMO_CAMPAIGN_ITEMS));
         }
       } catch (err) {
         console.info("Using demo/local campaign items (Firestore fallback)");
+        baseListRef.current = DEMO_CAMPAIGN_ITEMS;
         setCampaignItems(mergeCampaignsWithLocal(DEMO_CAMPAIGN_ITEMS));
       } finally {
         if (!cancelled) {
