@@ -19,10 +19,8 @@ import {
   FileText,
   Building,
   ShieldCheck,
-  Phone,
   User,
   Linkedin,
-  ExternalLink,
 } from "lucide-react";
 import { getCustomSiteContent } from "@/lib/customSchoolsStorage";
 
@@ -432,34 +430,21 @@ export default function AboutPage() {
                   </a>
                 </div>
 
-                {/* LinkedIn */}
-                <div className="flex items-center gap-2">
-                  <Linkedin className="w-4 h-4 text-[#0A66C2] shrink-0" aria-hidden="true" />
+                {/* Direct Connect: LinkedIn & WhatsApp Logos */}
+                <div className="pt-2 border-t border-slate-100 flex items-center gap-2.5">
+                  {/* LinkedIn Logo */}
                   <a
                     href="https://www.linkedin.com/in/rahul-dayal-a282b3247?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[#0A66C2] font-semibold hover:underline"
-                    aria-label="Rahul Dayal on LinkedIn (opens in a new tab)"
+                    aria-label="LinkedIn"
+                    title="LinkedIn"
+                    className="w-11 h-11 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center hover:bg-[#084e96] transition-all shadow-xs hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] focus-visible:ring-offset-2"
                   >
-                    <span>Rahul Dayal on LinkedIn</span>
-                    <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                    <Linkedin className="w-5 h-5 fill-current" aria-hidden="true" />
                   </a>
-                </div>
 
-                {/* Phone */}
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-emerald-600 shrink-0" aria-hidden="true" />
-                  <a
-                    href="tel:+917050084500"
-                    className="text-slate-800 font-medium hover:text-teal-700"
-                  >
-                    +91 70500 84500
-                  </a>
-                </div>
-
-                {/* WhatsApp Quick Link */}
-                <div className="pt-1">
+                  {/* WhatsApp Logo */}
                   <a
                     href={`https://wa.me/917050084500?text=${encodeURIComponent(
                       isHindi
@@ -468,10 +453,11 @@ export default function AboutPage() {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-300 font-semibold text-xs hover:bg-emerald-100 transition-colors"
+                    aria-label="WhatsApp"
+                    title="WhatsApp"
+                    className="w-11 h-11 rounded-xl bg-[#25D366] text-white flex items-center justify-center hover:bg-[#20ba5a] transition-all shadow-xs hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
                   >
-                    <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>WhatsApp: +91 70500 84500</span>
+                    <WhatsAppIcon className="w-5 h-5 text-white" />
                   </a>
                 </div>
               </div>
@@ -516,7 +502,7 @@ export default function AboutPage() {
                   <div className="p-4 sm:p-5 rounded-xl bg-white border border-emerald-300 shadow-sm space-y-3 text-left">
                     <div className="flex items-center gap-2 text-emerald-800 font-bold text-sm">
                       <WhatsAppIcon className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                      <span>{isHindi ? "WhatsApp पर भेजें (+91 70500 84500)" : "Send via WhatsApp (+91 70500 84500)"}</span>
+                      <span>{isHindi ? "WhatsApp पर भेजें" : "Send via WhatsApp"}</span>
                     </div>
                     <p className="text-xs text-slate-600 leading-relaxed">
                       {isHindi
@@ -530,7 +516,7 @@ export default function AboutPage() {
                       className="w-full inline-flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm shadow-md transition-all active:scale-[0.98]"
                     >
                       <WhatsAppIcon className="w-5 h-5 text-white" />
-                      <span>{isHindi ? "WhatsApp पर चैट खोलें (+91 70500 84500)" : "Open WhatsApp Chat (+91 70500 84500)"}</span>
+                      <span>{isHindi ? "WhatsApp पर चैट खोलें" : "Open WhatsApp Chat"}</span>
                     </a>
                   </div>
                 )}
@@ -655,8 +641,8 @@ export default function AboutPage() {
                       {isHindi ? "WhatsApp पर सीधा प्रेषण:" : "Direct WhatsApp Dispatch:"}
                     </span>{" "}
                     {isHindi
-                      ? "फॉर्म सबमिट करने पर आपकी प्रविष्टि सेव होगी और सीधे WhatsApp (+91 70500 84500) पर विवरण के साथ भेजने का विकल्प खुल जाएगा।"
-                      : "Submitting this form will save your feedback and open WhatsApp with your pre-filled details to +91 70500 84500."}
+                      ? "फॉर्म सबमिट करने पर आपकी प्रविष्टि सेव होगी और सीधे WhatsApp पर विवरण के साथ भेजने का विकल्प खुल जाएगा।"
+                      : "Submitting this form will save your feedback and open WhatsApp with your pre-filled details."}
                   </div>
                 </div>
 
