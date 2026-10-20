@@ -51,27 +51,6 @@ export function ScorecardMethodologyModal({
       size="lg"
     >
       <div className="space-y-6 max-h-[75vh] overflow-y-auto pr-1 text-slate-800 text-sm">
-        {/* Prominent Mandatory Research Disclaimer Banner */}
-        <div className="p-4 rounded-xl bg-amber-50 border-2 border-amber-300 text-amber-950 flex items-start gap-3 shadow-xs">
-          <AlertTriangle
-            className="w-5 h-5 text-amber-700 shrink-0 mt-0.5"
-            aria-hidden="true"
-          />
-          <div className="space-y-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-800 block">
-              {isHindi ? "अनिवार्य शोध प्रकटीकरण (Mandatory Notice)" : "Mandatory Research Disclosure"}
-            </span>
-            <p className="font-semibold text-xs sm:text-sm">
-              {isHindi ? config.disclaimer_hi : config.disclaimer_en}
-            </p>
-            <p className="text-xs text-amber-900/80">
-              {isHindi
-                ? "यह मूल्यांकन NCPEDP फेलोशिप शोध अध्ययन के अंतर्गत निष्पक्ष ऑन-साइट नापजोख पर आधारित है। यह किसी भी शिक्षा विभाग या नगर निगम का आधिकारिक अनापत्ति प्रमाण पत्र (NOC) नहीं है।"
-                : "This assessment is generated through independent academic on-site field measurements under the NCPEDP Fellowship. It does not constitute a statutory clearance, compliance certificate, or government NOC."}
-            </p>
-          </div>
-        </div>
-
         {/* Scoring Formula Box */}
         <div className="p-4 rounded-xl bg-slate-900 text-white space-y-3">
           <div className="flex items-center gap-2 text-teal-300 text-xs font-bold uppercase tracking-wider">

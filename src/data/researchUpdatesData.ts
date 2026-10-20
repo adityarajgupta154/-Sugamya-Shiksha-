@@ -22,24 +22,24 @@ export interface ResearchUpdate {
 
 export const INITIAL_RESEARCH_UPDATES: ResearchUpdate[] = [
   {
-    id: "update-danapur-pilot-2024",
-    slug: "danapur-pilot-audit-summary",
-    title_hi: "दानापुर प्रखंड के 5 विद्यालयों का प्रारंभिक सुगम्यता सर्वेक्षण — मुख्य निष्कर्ष",
-    title_en: "Initial Accessibility Audit of 5 Danapur Schools — Field Observations",
+    id: "update-patna-pilot-2024",
+    slug: "patna-pilot-audit-summary",
+    title_hi: "पटना जिले के 5 विद्यालयों का प्रारंभिक सुगम्यता सर्वेक्षण — मुख्य निष्कर्ष",
+    title_en: "Initial Accessibility Audit of 5 Patna Schools — Field Observations",
     date: "2024-03-20",
     category: "Field Note",
     category_hi: "क्षेत्रीय अध्ययन नोट",
     summary_hi:
-      "दानापुर क्षेत्र में 3 सरकारी एवं 2 निजी विद्यालयों के भौतिक परीक्षण में रैंप ढलान, CwSN शौचालय की उपलब्धता और प्रवेश द्वारों की चौड़ाई का प्राथमिक अध्ययन।",
+      "पटना क्षेत्र में 3 सरकारी एवं 2 निजी विद्यालयों के भौतिक परीक्षण में रैंप ढलान, CwSN शौचालय की उपलब्धता और प्रवेश द्वारों की चौड़ाई का प्राथमिक अध्ययन।",
     summary_en:
-      "Field observations and architectural audit findings from 3 government and 2 private schools in Danapur, analyzing ramp gradients, CwSN toilet provisions, and doorway clearances.",
+      "Field observations and architectural audit findings from 3 government and 2 private schools in Patna, analyzing ramp gradients, CwSN toilet provisions, and doorway clearances.",
     detailedNotes_hi:
       "अध्ययन के दौरान पाया गया कि 5 में से 4 विद्यालयों में रैंप का निर्माण तो किया गया था, परंतु 3 विद्यालयों में ढलान 1:12 के वैधानिक मानक से अधिक तीव्र (Steep) थी। इसके अतिरिक्त, सीडब्ल्यूएसएन शौचालयों में ग्रैब बार का अभाव अथवा गलत ऊंचाई पर स्थापना एक सामान्य समस्या पाई गई।",
     detailedNotes_en:
       "Field inspection revealed ramps constructed in 4 of 5 schools; however, 3 featured gradients significantly steeper than the statutory 1:12 threshold. Lack of compliant grab rails and missing outward-opening doors in CwSN toilets were the most prevalent infrastructural deficits.",
-    location: "दानापुर प्रखंड, पटना, बिहार (Danapur Block, Patna, Bihar)",
-    author_hi: "आदित्य कुमार (एनसीपीईडीपी रिसर्च फेलो)",
-    author_en: "Aditya Kumar (NCPEDP Research Fellow)",
+    location: "पटना, बिहार (Patna, Bihar)",
+    author_hi: "आदित्य कुमार (शोधार्थी, सुगम्य शिक्षा बिहार)",
+    author_en: "Aditya Kumar (Lead Researcher, Sugamya Shiksha Bihar)",
     keyFindings_hi: [
       "रैंप की उपस्थिति 80% विद्यालयों में, लेकिन केवल 20% में मानक 1:12 ढलान एवं दोहरी रेलिंग।",
       "CwSN शौचालय 40% स्कूलों में चिन्हित, परंतु व्हीलचेयर रोटेशन (1500mm) केवल 1 विद्यालय में उपलब्ध।",
@@ -72,7 +72,7 @@ export const INITIAL_RESEARCH_UPDATES: ResearchUpdate[] = [
       "अनेक मामलों में विद्यालय प्रांगण में स्थान की कमी अथवा निर्माण ठेकेदारों को राष्ट्रीय भवन संहिता और हार्मोनाइज्ड गाइडलाइन्स की सही तकनीकी जानकारी न होना तीव्र ढलान का प्रमुख कारण है। एल-आकार या यू-आकार के स्विचबैक रैंप और इंटरमीडिएट लैंडिंग देकर बिना अतिरिक्त ज़मीन के मानक 1:12 प्राप्त किया जा सकता है।",
     detailedNotes_en:
       "Space constraints and lack of accessibility code awareness among civil contractors frequently lead to hazardous ramp slopes. Switchback ramps (L-shaped or U-shaped) with 1500mm resting landings provide an architectural solution that fits within compact school courtyards.",
-    location: "पटना एवं दानापुर (Patna & Danapur)",
+    location: "पटना, बिहार (Patna, Bihar)",
     author_hi: "रिसर्च टीम, सुगम्य शिक्षा बिहार",
     author_en: "Research Team, Sugamya Shiksha Bihar",
     keyFindings_hi: [
@@ -98,14 +98,14 @@ export const INITIAL_RESEARCH_UPDATES: ResearchUpdate[] = [
     category: "Case Study",
     category_hi: "केस स्टडी",
     summary_hi:
-      "मौजूदा विद्यालयी शौचालयों को बिना बड़े ढांचागत बदलाव के दिव्यांग सुलभ बनाने के लिए दानापुर के एक प्राथमिक विद्यालय का पायलट अध्ययन।",
+      "मौजूदा विद्यालयी शौचालयों को बिना बड़े ढांचागत बदलाव के दिव्यांग सुलभ बनाने के लिए पटना के एक प्राथमिक विद्यालय का पायलट अध्ययन।",
     summary_en:
-      "Pilot case study from a Danapur primary school demonstrating low-cost retrofitting of existing lavatories into accessible toilets without structural reconstruction.",
+      "Pilot case study from a Patna primary school demonstrating low-cost retrofitting of existing lavatories into accessible toilets without structural reconstruction.",
     detailedNotes_hi:
       "अंदर की ओर खुलने वाले भारी लकड़ी के दरवाजों को 900 मिमी चौड़े बाहर खुलने वाले स्लाइडिंग/फ्लश दरवाजों में बदलकर, दीवार पर स्टेनलेस स्टील 304 ग्रेड एल-आकार ग्रैब बार लगाकर और वॉशबेसिन को 750 मिमी पर स्थापित करके न्यूनतम बजट में शौचालय सुगम बनाया जा सकता है।",
     detailedNotes_en:
       "By replacing narrow inward-swinging doors with 900mm clear outward-swinging doors, installing SS 304 grade L-shaped grab rails, and lowering washbasins to 750mm with knee recess, existing toilet cubicles can be retrofitted under modest Samagra Shiksha school grants.",
-    location: "दानापुर ग्रामीण संकुल (Danapur Rural Cluster)",
+    location: "पटना ग्रामीण संकुल (Patna Rural Cluster)",
     author_hi: "आदित्य कुमार",
     author_en: "Aditya Kumar",
     keyFindings_hi: [

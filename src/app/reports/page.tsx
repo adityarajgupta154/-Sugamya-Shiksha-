@@ -80,7 +80,7 @@ export default function ReportsPage() {
       <section className="text-center max-w-3xl mx-auto space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-teal-100 text-teal-900 border border-teal-300">
           <FileText className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
-          <span>{isHi ? "शोध प्रलेखन केंद्र • Task 15" : "Research Publications Hub • Task 15"}</span>
+          <span>{isHi ? "शोध प्रलेखन केंद्र" : "Research Publications Hub"}</span>
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-navy-950 tracking-tight">
           {isHi
@@ -89,29 +89,17 @@ export default function ReportsPage() {
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
           {isHi
-            ? "दानापुर के विद्यालयों में किए गए भौतिक सुगम्यता ऑडिट के आधिकारिक निष्कर्ष, शोध प्रतिवेदन, स्कूल प्रबंधन समितियों (SMC) के लिए कम लागत वाली मार्गदर्शिका और वैधानिक अनुपालन तालिकाएं।"
+            ? "पटना के विद्यालयों में किए गए भौतिक सुगम्यता ऑडिट के आधिकारिक निष्कर्ष, शोध प्रतिवेदन, स्कूल प्रबंधन समितियों (SMC) के लिए कम लागत वाली मार्गदर्शिका और वैधानिक अनुपालन तालिकाएं।"
             : "Official quantitative audit logs, interim fellowship monographs, low-cost architectural manuals for School Management Committees, and national compliance matrices."}
         </p>
-
-        {/* Demo Notice Banner */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300">
-            <AlertCircle className="w-3.5 h-3.5 text-amber-800" aria-hidden="true" />
-            <span>
-              {isHi
-                ? "प्रदर्शनात्मक डेमो डेटा — वास्तविक दानापुर सर्वेक्षण निष्कर्ष नहीं।"
-                : "Illustrative demo data — not actual Danapur survey findings."}
-            </span>
-          </div>
-        </div>
 
         {/* Academic Fellowship Badge */}
         <div className="inline-flex items-center gap-2 p-3 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700 font-medium text-left">
           <ShieldCheck className="w-4 h-4 text-teal-700 shrink-0" aria-hidden="true" />
           <span>
             {isHi
-              ? "एनसीपीईडीपी (NCPEDP) फेलोशिप शोध परियोजना के अंतर्गत प्रकाशित आधिकारिक अध्ययन सामग्री।"
-              : "Published under the NCPEDP Fellowship Research Project on School Infrastructure Accessibility."}
+              ? "सुगम्य शिक्षा बिहार शोध परियोजना के अंतर्गत प्रकाशित आधिकारिक अध्ययन सामग्री।"
+              : "Published under the Sugamya Shiksha Bihar Research Project on School Infrastructure Accessibility."}
           </span>
         </div>
       </section>

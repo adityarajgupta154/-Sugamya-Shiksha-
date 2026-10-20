@@ -52,9 +52,9 @@ const CATEGORY_OPTIONS = [
 
 const BLANK_ENTRY: TrackerEntry = {
   id: "",
-  schoolId: "sch-danapur-01",
-  schoolName_hi: "राजकीय मध्य विद्यालय, दानापुर कैंट",
-  schoolName_en: "Govt Middle School, Danapur Cantt",
+  schoolId: "sch-patna-01",
+  schoolName_hi: "राजकीय मध्य विद्यालय, पटना कैंट",
+  schoolName_en: "Govt Middle School, Patna Cantt",
   category: "ramp",
   barrier_hi: "",
   barrier_en: "",
@@ -815,7 +815,7 @@ export function TrackerAdminTab({ isHindi }: Props) {
                 </div>
                 <div>
                   <label className="block font-bold text-slate-700 mb-1">
-                    {isHindi ? "प्रमाणितकर्ता का नाम/पद" : "Verified By (Researcher / Fellowship)"}
+                    {isHindi ? "प्रमाणितकर्ता का नाम/पद" : "Verified By (Lead Researcher)"}
                   </label>
                   <input
                     type="text"

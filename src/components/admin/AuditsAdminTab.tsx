@@ -163,7 +163,7 @@ export function AuditsAdminTab({ isHindi }: AuditsAdminTabProps) {
           <div className="flex items-center justify-between">
             <p className="text-xs text-slate-500">
               {isHindi
-                ? "दानापुर के विद्यालयों के दर्ज किए गए सभी ऑडिट (सत्यापित एवं ड्राफ्ट)।"
+                ? "पटना के विद्यालयों के दर्ज किए गए सभी ऑडिट (सत्यापित एवं ड्राफ्ट)।"
                 : "All logged school accessibility audits (both verified and drafts)."}
             </p>
             <Button

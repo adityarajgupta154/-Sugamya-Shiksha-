@@ -1,6 +1,6 @@
 # Sugamya Shiksha Bihar (सुगम्य शिक्षा बिहार)
 
-An open-access research, audit, and community advocacy platform investigating physical infrastructure accessibility in elementary and secondary schools across the Danapur subdivision of Patna district, Bihar. Developed under the NCPEDP Fellowship.
+An open-access research, audit, and community advocacy platform investigating physical infrastructure accessibility in elementary and secondary schools across the Danapur subdivision of Patna district, Bihar.
 
 ---
 
@@ -10,7 +10,7 @@ An open-access research, audit, and community advocacy platform investigating ph
 - **On-Site Measurement Audit Tool**: Interactive audit interface matching the National Building Code (NBC 2016), RPwD Act 2016, and Harmonised Guidelines 2021.
 - **Community Voices & Barrier Reporting**: Fully consent-governed reporting system (DPDP Act 2023 compliant) with honeypot security and multi-clause opt-ins.
 - **Statutory Guidelines Hub & Visual Guide**: 9 national standards decoded into plain Hindi and English, paired with interactive 2D architectural schematics.
-- **Administrative Portal**: Secure dashboard for fellowship researchers featuring modular tab managers for guidelines, site content, schools, surveys, audits, barrier reviews, and improvement tracking.
+- **Administrative Portal**: Secure dashboard for researchers featuring modular tab managers for guidelines, site content, schools, surveys, audits, barrier reviews, and improvement tracking.
 
 ---
 

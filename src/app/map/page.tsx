@@ -38,7 +38,7 @@ const DanapurSchoolsMap = dynamic(
       <div className="w-full h-[520px] rounded-2xl bg-slate-100 flex flex-col items-center justify-center gap-3 border border-slate-200">
         <div className="w-8 h-8 border-4 border-teal-600 border-t-transparent rounded-full animate-spin" />
         <span className="text-sm font-semibold text-navy-800">
-          Loading Danapur interactive map...
+          Loading interactive map...
         </span>
       </div>
     ),
@@ -171,35 +171,20 @@ export default function InteractiveMapPage() {
       <div className="space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 text-teal-900 text-xs font-bold border border-teal-300">
           <Compass className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
-          <span>{isHindi ? "दानापुर विद्यालय सुगम्यता मानचित्र" : "Danapur School Accessibility Map"}</span>
+          <span>{isHindi ? "विद्यालय सुगम्यता मानचित्र" : "School Accessibility Map"}</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-navy-900 tracking-tight font-hindi">
-          {isHindi ? "दानापुर विद्यालय सुगम्यता इंटरएक्टिव मानचित्र" : "Danapur School Accessibility Interactive Map"}
+          {isHindi ? "विद्यालय सुगम्यता इंटरएक्टिव मानचित्र" : "School Accessibility Interactive Map"}
         </h1>
 
         <p className="text-sm sm:text-base text-slate-600 max-w-4xl leading-relaxed">
           {isHindi
-            ? "दानापुर, पटना के सरकारी एवं निजी विद्यालयों का भौगोलिक मानचित्र। यह उपकरण भौतिक निरीक्षण स्थिति (सत्यापित, पुनः निरीक्षण, प्रतीक्षित) और ऑन-साइट प्रमाणित सुगम सुविधाओं को प्रदर्शित करता है।"
-            : "Explore spatial physical infrastructure accessibility of schools across Danapur subdivision, Patna. Track live audit inspection statuses, verified universal accessibility features, and empirical field findings."}
+            ? "पटना के सरकारी एवं निजी विद्यालयों का भौगोलिक मानचित्र। यह उपकरण भौतिक निरीक्षण स्थिति (सत्यापित, पुनः निरीक्षण, प्रतीक्षित) और ऑन-साइट प्रमाणित सुगम सुविधाओं को प्रदर्शित करता है।"
+            : "Explore spatial physical infrastructure accessibility of schools across Patna, Bihar. Track live audit inspection statuses, verified universal accessibility features, and empirical field findings."}
         </p>
       </div>
 
-      {/* Mandatory Demo Data Notice Banner */}
-      <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
-        <div className="flex items-center gap-2 font-medium">
-          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" aria-hidden="true" />
-          <span>
-            {t(
-              "common.demoNotice",
-              "Illustrative demo data — not actual Danapur survey findings."
-            )}
-          </span>
-        </div>
-        <div className="text-slate-600 text-xs flex items-center gap-1 font-mono">
-          <span>OpenStreetMap • Danapur Cantonment / Khagaul</span>
-        </div>
-      </div>
 
       {/* Search, Filter & View Mode Controls Bar */}
       <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
@@ -213,7 +198,7 @@ export default function InteractiveMapPage() {
               placeholder={
                 isHindi
                   ? "विद्यालय नाम, पता या UDISE कोड से खोजें..."
-                  : "Search school name, location or UDISE code in Danapur..."
+                  : "Search school name, location or UDISE code in Patna..."
               }
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -418,17 +403,6 @@ export default function InteractiveMapPage() {
         )}
       </div>
 
-      {/* Mandatory Academic Research Score Notice Footer */}
-      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 italic">
-        <span>
-          {isHindi
-            ? "यह मानचित्र एवं सुगम्यता स्कोर NCPEDP फेलोशिप शोध अध्ययन पर आधारित है, कोई आधिकारिक सरकारी प्रमाणन नहीं।"
-            : "This interactive map and research scores represent academic fieldwork under the NCPEDP Fellowship — not an official government certification."}
-        </span>
-        <span className="font-semibold text-slate-700 not-italic">
-          Danapur Subdivision • Patna District
-        </span>
-      </div>
     </div>
   );
 }

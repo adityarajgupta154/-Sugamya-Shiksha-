@@ -104,14 +104,14 @@ const COST_TIERS_EN: Record<string, { label: string; desc: string }> = {
 const ACTION_PARTIES_HI: Record<string, string> = {
   SMC: "विद्यालय प्रबंधन समिति (SMC)",
   Headmaster: "प्रधानाध्यापक (Headmaster)",
-  Education_Dept: "शिक्षा विभाग / BEO दानापुर",
+  Education_Dept: "शिक्षा विभाग / BEO पटना",
   Local_Mason: "स्थानीय मिस्त्री / जनसहयोग",
 };
 
 const ACTION_PARTIES_EN: Record<string, string> = {
   SMC: "School Management Committee (SMC)",
   Headmaster: "School Headmaster / Principal",
-  Education_Dept: "Education Department / BEO Danapur",
+  Education_Dept: "Education Department / BEO Patna",
   Local_Mason: "Local Mason / Community Mobilization",
 };
 
@@ -130,11 +130,11 @@ export function SchoolRecommendations({
     recommendations ||
     DEMO_RECOMMENDATIONS.filter((r) => r.schoolId === schoolId);
 
-  // If no recommendations exist specifically, provide default Danapur recommendations
+  // If no recommendations exist specifically, provide default recommendations
   const displayList =
     recList.length > 0
       ? recList
-      : DEMO_RECOMMENDATIONS.filter((r) => r.schoolId === "sch-danapur-01");
+      : DEMO_RECOMMENDATIONS.filter((r) => r.schoolId === "sch-patna-01");
 
   const filteredRecs = displayList.filter(
     (item) => filterPriority === "all" || item.priority === filterPriority

@@ -174,7 +174,7 @@ export default function SchoolDetailPage() {
           }
         }
       } catch (err) {
-        console.info("Firestore offline, falling back to demo data");
+        console.info("Firestore offline, falling back to local dataset");
       }
 
       // Fallback to locally persisted custom schools + demo schools
@@ -271,21 +271,6 @@ export default function SchoolDetailPage() {
         </Link>
       </nav>
 
-      {/* Demo Data Notice */}
-      {school.isDemo && (
-        <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 flex items-center gap-2 text-xs sm:text-sm font-medium">
-          <AlertTriangle
-            className="w-4 h-4 text-amber-600 shrink-0"
-            aria-hidden="true"
-          />
-          <span>
-            {t(
-              "common.demoNotice",
-              "Illustrative demo data — not actual Danapur survey findings."
-            )}
-          </span>
-        </div>
-      )}
 
       {/* School Header Card */}
       <Card as="article" className="p-0 overflow-hidden border-slate-200">
@@ -317,11 +302,7 @@ export default function SchoolDetailPage() {
               {school.auditStatus === "pending" &&
                 t("common.pending", "Pending")}
             </Badge>
-            {school.isDemo && (
-              <Badge variant="default" className="text-[10px]">
-                Demo Record
-              </Badge>
-            )}
+
           </div>
 
           {/* Title & Address */}
@@ -535,8 +516,8 @@ export default function SchoolDetailPage() {
             />
             <p className="italic">
               {isHindi
-                ? "उपरोक्त निष्कर्ष शोध दल द्वारा ऑन-साइट भौतिक निरीक्षण पर आधारित एवं सत्यापित हैं। यह किसी सरकारी संस्था का आधिकारिक प्रमाणन नहीं है।"
-                : "Above findings are based on verified on-site physical inspection by the research team. This is not an official government certification or endorsement."}
+                ? "उपरोक्त निष्कर्ष शोध दल द्वारा ऑन-साइट भौतिक निरीक्षण पर आधारित एवं सत्यापित हैं।"
+                : "Above findings are based on verified on-site physical inspection by the research team."}
             </p>
           </div>
         </Card>

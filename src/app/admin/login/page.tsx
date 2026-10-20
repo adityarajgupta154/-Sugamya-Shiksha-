@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
               {isHindi ? "व्यवस्थापक लॉगिन" : "Admin Authentication"}
             </CardTitle>
             <p className="text-xs text-slate-500">
-              Sugamya Shiksha Bihar • NCPEDP Research Portal
+              Sugamya Shiksha Bihar • Research Portal
             </p>
           </CardHeader>
 

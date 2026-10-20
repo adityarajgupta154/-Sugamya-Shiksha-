@@ -20,10 +20,10 @@ export function SiteContentAdminTab({ isHindi }: SiteContentAdminTabProps) {
     return {
       heroTitleEn: "Accessible Schools for Every Child, Equal Education for Every Child.",
       heroHindi: "हर बच्चे के लिए सुगम विद्यालय, हर बच्चे के लिए समान शिक्षा।",
-      heroEnglish: "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
-      heroSublineHi: "दानापुर, पटना, बिहार में विद्यालय सुगम्यता शोध एवं समावेशी शिक्षा को बढ़ावा।",
+      heroEnglish: "Researching School Accessibility and Advancing Inclusive Education in Patna, Bihar.",
+      heroSublineHi: "पटना, बिहार में विद्यालय सुगम्यता शोध एवं समावेशी शिक्षा को बढ़ावा।",
       introTitle: "About the Research Initiative",
-      introText: "Sugamya Shiksha Bihar is a dedicated research and resource platform created under the NCPEDP Fellowship. Grounded in the Danapur subdivision of Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
+      introText: "Sugamya Shiksha Bihar is a dedicated research and resource platform. Grounded in Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
       ...(saved || {}),
     };
   });
@@ -31,8 +31,8 @@ export function SiteContentAdminTab({ isHindi }: SiteContentAdminTabProps) {
   const [aboutContent, setAboutContent] = useState<Record<string, any>>(() => {
     const saved = getCustomSiteContent<Record<string, any>>("about");
     return {
-      bio_hi: "NCPEDP फेलोशिप के अंतर्गत यह स्वतंत्र शोध परियोजना दानापुर, पटना के विद्यालयों में दिव्यांग बच्चों के लिए भौतिक बुनियादी ढांचे और सार्वभौमिक सुगम्यता की स्थिति का व्यवस्थित अध्ययन कर रही है।",
-      bio_en: "Conducted under the prestigious NCPEDP Fellowship, this independent research initiative systematically investigates physical infrastructure accessibility across Danapur, Patna, Bihar.",
+      bio_hi: "सुगम्य शिक्षा बिहार के अंतर्गत राहुल दयाल द्वारा संचालित यह स्वतंत्र शोध परियोजना पटना के विद्यालयों में दिव्यांग बच्चों के लिए भौतिक बुनियादी ढांचे और सार्वभौमिक सुगम्यता की स्थिति का व्यवस्थित अध्ययन कर रही है।",
+      bio_en: "Conducted by Rahul Dayal under the Sugamya Shiksha Bihar initiative, this independent research initiative systematically investigates physical infrastructure accessibility across Patna, Bihar.",
       methodology_hi: "शोध पद्धति में प्राथमिक ऑन-साइट नापजोख ऑडिट तथा दिव्यांग विद्यार्थियों, अभिभावकों और शिक्षकों के साथ पूर्ण सहमति-आधारित साक्षात्कार शामिल हैं।",
       methodology_en: "The methodology integrates on-site quantitative measurement audits combined with consent-governed qualitative interviews.",
       ...(saved || {}),
@@ -48,7 +48,7 @@ export function SiteContentAdminTab({ isHindi }: SiteContentAdminTabProps) {
       name: "Ramesh Sharma",
       email: "ramesh.sharma@example.org",
       role: "teacher",
-      message: "Interested in organizing an accessibility checklist workshop at our Danapur school.",
+      message: "Interested in organizing an accessibility checklist workshop at our Patna school.",
       date: "2026-10-15",
     },
     {

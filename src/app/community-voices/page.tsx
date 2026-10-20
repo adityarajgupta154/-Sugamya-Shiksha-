@@ -130,8 +130,8 @@ export default function CommunityVoicesPage() {
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-hindi">
               {isHindi
-                ? "दानापुर के दिव्यांग छात्र-छात्राओं, उनके अभिभावकों, शिक्षकों और अधिकार कार्यकर्ताओं के वास्तविक अनुभव। प्रत्येक प्रविष्टि स्पष्ट सहमति, गरिमा और बाल संरक्षण नीति के कड़े मानकों के अनुरूप दर्ज की गई है।"
-                : "Real experiences of students with disabilities, parents, teachers, and disability advocates in Danapur, Patna. Every narrative is recorded with documented consent, strict privacy protection, and child safeguarding standards."}
+                ? "पटना के दिव्यांग छात्र-छात्राओं, उनके अभिभावकों, शिक्षकों और अधिकार कार्यकर्ताओं के वास्तविक अनुभव। प्रत्येक प्रविष्टि स्पष्ट सहमति, गरिमा और बाल संरक्षण नीति के कड़े मानकों के अनुरूप दर्ज की गई है।"
+                : "Real experiences of students with disabilities, parents, teachers, and disability advocates in Patna, Bihar. Every narrative is recorded with documented consent, strict privacy protection, and child safeguarding standards."}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -152,17 +152,6 @@ export default function CommunityVoicesPage() {
           </div>
         </div>
 
-        {/* Demo Notice Banner */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300">
-            <AlertTriangle className="w-3.5 h-3.5 text-amber-800" aria-hidden="true" />
-            <span>
-              {isHindi
-                ? "प्रदर्शनात्मक डेमो डेटा — वास्तविक दानापुर सर्वेक्षण निष्कर्ष नहीं।"
-                : "Illustrative demo data — not actual Danapur survey findings."}
-            </span>
-          </div>
-        </div>
 
         {/* Role Filter Chips */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
@@ -311,8 +300,8 @@ export default function CommunityVoicesPage() {
           </p>
           <p className="leading-relaxed">
             {isHindi
-              ? "यह मंच एनसीपीईडीपी फेलोशिप के तहत शोध और पैरवी के लिए संचालित है। विद्यार्थियों की किसी भी तस्वीर का प्रकाशन माता-पिता/अभिभावक की लिखित सहमति के बिना नहीं किया जाता है।"
-              : "Operated under the NCPEDP Fellowship, this platform strictly respects research consent. No identifiable photographs of minor students are published without explicit written guardian consent."}
+              ? "यह मंच सुगम्य शिक्षा बिहार के तहत शोध और पैरवी के लिए संचालित है। विद्यार्थियों की किसी भी तस्वीर का प्रकाशन माता-पिता/अभिभावक की लिखित सहमति के बिना नहीं किया जाता है।"
+              : "Operated under Sugamya Shiksha Bihar, this platform strictly respects research consent. No identifiable photographs of minor students are published without explicit written guardian consent."}
           </p>
         </div>
       </div>

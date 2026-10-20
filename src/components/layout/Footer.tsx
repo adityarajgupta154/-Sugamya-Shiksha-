@@ -4,33 +4,12 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { ShieldAlert } from "lucide-react";
 
 export function Footer() {
   const { locale, t } = useLanguage();
 
   return (
     <footer className="w-full bg-navy-950 text-slate-300 border-t-4 border-teal-600 mt-auto cv-footer">
-      {/* Mandatory Disclaimers Strip */}
-      <div className="bg-navy-900 border-b border-navy-800 py-3.5 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-300">
-          <div className="flex items-center gap-2 text-amber-300">
-            <ShieldAlert className="w-4 h-4 shrink-0" aria-hidden="true" />
-            <span className="font-medium">
-              {t(
-                "common.scoreDisclaimer",
-                "This is an academic research score based on standard indicators, not an official government certification."
-              )}
-            </span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-400">
-            <span className="font-semibold text-slate-200">
-              {t("common.demoNotice", "Illustrative demo data — not actual Danapur survey findings.")}
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 mb-10">
@@ -41,10 +20,10 @@ export function Footer() {
                 <Image
                   src="/logo.png"
                   alt="Sugamya Shiksha Bihar Emblem"
-                  width={96}
-                  height={71}
-                  sizes="96px"
-                  className="h-10 w-auto object-contain drop-shadow-xs"
+                  width={56}
+                  height={56}
+                  sizes="56px"
+                  className="h-12 w-12 aspect-square object-contain drop-shadow-xs"
                 />
               </div>
               <span className="text-xl font-bold text-white tracking-tight">
@@ -55,7 +34,7 @@ export function Footer() {
               {t("footer.aboutProject")}
             </p>
             <div className="pt-1 text-xs text-teal-300 font-medium">
-              📍 {t("footer.location", "Danapur, Patna, Bihar, India")}
+              📍 {t("footer.location", "Patna, Bihar, India")}
             </div>
           </div>
 
@@ -163,7 +142,7 @@ export function Footer() {
             </Link>
             <span aria-hidden="true">•</span>
             <span className="min-h-[44px] flex items-center px-1 text-slate-400">
-              {locale === "hi" ? "दानापुर, पटना, बिहार" : "Danapur, Patna, Bihar"}
+              {locale === "hi" ? "पटना, बिहार, भारत" : "Patna, Bihar, India"}
             </span>
           </div>
         </div>

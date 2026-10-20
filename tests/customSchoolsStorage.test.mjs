@@ -34,13 +34,13 @@ console.log("🧪 Running Custom Schools Storage & Sync Unit Tests...\n");
 
 // Test 1: Save new school defaults published to true
 const newSchool = {
-  id: "danapur-adarsh-high-school",
-  name_hi: "दानापुर आदर्श उच्च विद्यालय",
-  name_en: "Danapur Adarsh High School",
+  id: "patna-adarsh-high-school",
+  name_hi: "पटना आदर्श उच्च विद्यालय",
+  name_en: "Patna Adarsh High School",
   type: "government",
-  address_hi: "दानापुर स्टेशन रोड, दानापुर, पटना",
-  address_en: "Danapur Station Road, Danapur, Patna",
-  block: "Danapur",
+  address_hi: "स्टेशन रोड, पटना, बिहार",
+  address_en: "Station Road, Patna, Bihar",
+  block: "Patna",
   geo: { lat: 25.635, lng: 85.048 },
   auditStatus: "pending",
   score: 78,
@@ -59,14 +59,14 @@ const newSchool = {
 saveCustomSchool(newSchool);
 const savedList = getCustomSchools();
 assert.strictEqual(savedList.length, 1, "Should have 1 custom school");
-assert.strictEqual(savedList[0].id, "danapur-adarsh-high-school");
+assert.strictEqual(savedList[0].id, "patna-adarsh-high-school");
 assert.strictEqual(savedList[0].published, true, "School must be published");
 console.log("✅ Test 1 Passed: Custom school saved with published = true.");
 
 // Test 2: Merge with base schools
 const baseDemoSchools = [
   {
-    id: "govt-model-danapur-cantt",
+    id: "govt-model-patna-cantt",
     name_hi: "राजकीय मॉडल उच्च माध्यमिक विद्यालय",
     name_en: "Government Model School",
     type: "government",
@@ -76,21 +76,21 @@ const baseDemoSchools = [
 
 const merged = mergeSchoolsWithLocal(baseDemoSchools);
 assert.strictEqual(merged.length, 2, "Merged list should contain base + new custom school");
-assert.ok(merged.some((s) => s.id === "danapur-adarsh-high-school"), "Custom school present in merged list");
+assert.ok(merged.some((s) => s.id === "patna-adarsh-high-school"), "Custom school present in merged list");
 console.log("✅ Test 2 Passed: mergeSchoolsWithLocal integrates custom school with base dataset.");
 
 // Test 3: Updating an existing school overrides in merged list
 const updatedSchool = {
   ...newSchool,
   score: 85,
-  name_en: "Danapur Adarsh Senior Secondary School",
+  name_en: "Patna Adarsh Senior Secondary School",
 };
 saveCustomSchool(updatedSchool);
 const reMerged = mergeSchoolsWithLocal(baseDemoSchools);
 assert.strictEqual(reMerged.length, 2);
-const found = reMerged.find((s) => s.id === "danapur-adarsh-high-school");
+const found = reMerged.find((s) => s.id === "patna-adarsh-high-school");
 assert.strictEqual(found.score, 85, "Updated score reflects in merged list");
-assert.strictEqual(found.name_en, "Danapur Adarsh Senior Secondary School", "Updated name reflects in merged list");
+assert.strictEqual(found.name_en, "Patna Adarsh Senior Secondary School", "Updated name reflects in merged list");
 console.log("✅ Test 3 Passed: Editing school updates merged list without duplicates.");
 
 // Test 4: Bilingual search logic matches both Hindi & English queries
@@ -123,10 +123,10 @@ assert.ok(matchesSearch(newSchool, queryUdise), "Search matches UDISE term");
 console.log("✅ Test 4 Passed: Bilingual search properly matches English and Hindi queries.");
 
 // Test 5: Deleting school removes from custom schools and suppresses from merged
-deleteCustomSchool("danapur-adarsh-high-school");
+deleteCustomSchool("patna-adarsh-high-school");
 const afterDelete = mergeSchoolsWithLocal(baseDemoSchools);
 assert.strictEqual(afterDelete.length, 1, "Deleted school removed from merged list");
-assert.ok(!afterDelete.some((s) => s.id === "danapur-adarsh-high-school"), "Custom school not in merged list");
+assert.ok(!afterDelete.some((s) => s.id === "patna-adarsh-high-school"), "Custom school not in merged list");
 console.log("✅ Test 5 Passed: Deleting school suppresses it completely.");
 
 // Test 6: Site content persistence

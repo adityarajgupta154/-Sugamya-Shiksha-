@@ -6,7 +6,7 @@ Date: 2026-10-17
 Accepted (Change Request to PRD Section 6.1, 10, 11.1, 11.3)
 
 ## Context
-Originally, the platform allowed anonymous survey submissions with client-side rate limiting. However, to preserve research integrity under the NCPEDP Fellowship, prevent duplicate responses (ballot-stuffing), and verify respondent demographic distribution (student vs. parent vs. teacher vs. advocate), a verified authentication mechanism was required for survey participation.
+Originally, the platform allowed anonymous survey submissions with client-side rate limiting. However, to preserve research integrity under Sugamya Shiksha Bihar, prevent duplicate responses (ballot-stuffing), and verify respondent demographic distribution (student vs. parent vs. teacher vs. advocate), a verified authentication mechanism was required for survey participation.
 
 The platform must balance data integrity with user privacy and public access:
 1. Public visitors must still be able to discover and read the survey title, research objectives, and target audience without signing in.
@@ -61,7 +61,7 @@ The platform must balance data integrity with user privacy and public access:
 
 ### Positive
 - Guarantees survey data integrity and prevents duplicate submissions.
-- Verifiable demographic insights for NCPEDP research findings.
+- Verifiable demographic insights for Sugamya Shiksha Bihar research findings.
 - Public pages maintain zero auth performance overhead.
 - Full compliance with Indian data privacy regulations.
 

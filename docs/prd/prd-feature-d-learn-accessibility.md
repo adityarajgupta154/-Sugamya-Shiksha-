@@ -3,7 +3,7 @@
 
 - **Document Version:** 1.0.0
 - **Project:** Sugamya Shiksha Bihar (सुगम्य शिक्षा बिहार)
-- **Fellowship:** NCPEDP Research Fellowship on School Accessibility (Danapur, Patna, Bihar)
+- **Research:** Sugamya Shiksha Bihar School Accessibility Research (Danapur, Patna, Bihar)
 - **Status:** Approved / Production Specification
 - **Author:** Product & Accessibility Engineering Team
 - **Target Audience:** School Principals, PWD/SSA Civil Contractors, SMC Members, Field Auditors, Disabled Student Advocates

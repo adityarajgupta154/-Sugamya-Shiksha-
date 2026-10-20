@@ -3,7 +3,7 @@
     "title": "Sugamya Shiksha Bihar",
     "tagline": "Accessible Schools, Inclusive Futures",
     "project": "Digital Accessibility Research & Resource Platform",
-    "fellowship": "NCPEDP Fellowship Research Project: Understanding Physical Infrastructure Accessibility of Schools in Danapur, Patna & Inclusive Education"
+    "fellowship": "Sugamya Shiksha Bihar: Understanding Physical Infrastructure Accessibility of Schools in Patna & Inclusive Education"
   },
   "a11y": {
     "skipToContent": "Skip to main content",
@@ -54,8 +54,8 @@
     "private": "Private",
     "officialSource": "Official Source",
     "externalLink": "Opens in new tab",
-    "demoNotice": "Illustrative demo data — not actual Danapur survey findings.",
-    "scoreDisclaimer": "This is an academic research score based on standard indicators, not an official government certification.",
+    "demoNotice": "",
+    "scoreDisclaimer": "",
     "loading": "Loading...",
     "search": "Search",
     "filter": "Filter",
@@ -63,9 +63,9 @@
   },
   "home": {
     "heroTitle": "Accessible Schools for Every Child, Equal Education for Every Child.",
-    "heroSubtitle": "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
+    "heroSubtitle": "Researching School Accessibility and Advancing Inclusive Education in Patna, Bihar.",
     "heroHindi": "Accessible Schools for Every Child, Equal Education for Every Child.",
-    "heroEnglish": "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
+    "heroEnglish": "Researching School Accessibility and Advancing Inclusive Education in Patna, Bihar.",
     "actions": {
       "exploreSchools": "Explore School Accessibility",
       "readGuidelines": "Read Guidelines",
@@ -73,12 +73,12 @@
       "viewFindings": "View Research Findings"
     },
     "introTitle": "About the Research Initiative",
-    "introText": "Sugamya Shiksha Bihar is a dedicated research and resource platform created under the NCPEDP Fellowship. Grounded in the Danapur subdivision of Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
+    "introText": "Sugamya Shiksha Bihar is a dedicated research and resource platform. Grounded in Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
     "objectivesTitle": "Key Research Objectives",
     "objectives": [
       {
         "title": "Evaluate Physical Accessibility",
-        "desc": "Systematic on-site audits of ramps, accessible toilets, door widths, pathways, tactile indicators, and emergency exits across Danapur schools."
+        "desc": "Systematic on-site audits of ramps, accessible toilets, door widths, pathways, tactile indicators, and emergency exits across schools in Patna."
       },
       {
         "title": "Bridge Policy & Practice",
@@ -93,7 +93,7 @@
         "desc": "Track tangible physical improvements through a verified Before & After tracker to foster institutional accountability."
       }
     ],
-    "statsTitle": "Danapur Survey Snapshot",
+    "statsTitle": "Patna Survey Snapshot",
     "stats": {
       "schoolsSurveyed": "Schools Surveyed",
       "schoolsSurveyedCount": "05",
@@ -114,7 +114,7 @@
       },
       {
         "type": "Workshop",
-        "title": "Danapur Educators Accessibility Dialogue",
+        "title": "Patna Educators Accessibility Dialogue",
         "desc": "Interactive workshop bringing together school principals and teachers on reasonable accommodation and basic modifications."
       },
       {
@@ -127,8 +127,8 @@
     "activities": [
       {
         "date": "October 2026",
-        "title": "Initial Danapur Pilot Audits Commenced",
-        "desc": "Physical measurement audits began across 5 sample schools in Danapur block using the digital audit framework."
+        "title": "Initial Pilot Audits Commenced",
+        "desc": "Physical measurement audits began across 5 sample schools in Patna district using the digital audit framework."
       },
       {
         "date": "September 2026",
@@ -177,10 +177,10 @@
   },
   "about": {
     "title": "About Researcher & Contact",
-    "subtitle": "NCPEDP Fellowship research project examining physical infrastructure accessibility and inclusive education in Danapur, Patna, Bihar.",
-    "fellowshipTitle": "NCPEDP Fellowship Project",
+    "subtitle": "Sugamya Shiksha Bihar research project examining physical infrastructure accessibility and inclusive education in Patna, Bihar.",
+    "fellowshipTitle": "Sugamya Shiksha Bihar",
     "methodologyTitle": "Research Methodology",
-    "objectivesTitle": "Fellowship Objectives",
+    "objectivesTitle": "Research Objectives",
     "collaborationsTitle": "Collaborations & Institutional Engagement",
     "contactInfoTitle": "Contact Information",
     "formTitle": "Send a Message / Research Query",
@@ -208,12 +208,12 @@
   },
   "schools": {
     "title": "School Accessibility Directory",
-    "subtitle": "Physical infrastructure inventory of government and private schools in Danapur block, inspection status, verified facilities, and research findings.",
+    "subtitle": "Physical infrastructure inventory of government and private schools in Patna district, inspection status, verified facilities, and research findings.",
     "filterType": "School Type",
     "filterStatus": "Audit Status",
     "allTypes": "All School Types",
     "allStatuses": "All Audit Statuses",
-    "searchPlaceholder": "Search by school name, location, or UDISE in Danapur...",
+    "searchPlaceholder": "Search by school name, location, or UDISE in Patna...",
     "resultsCount": "Showing {count} schools",
     "noSchoolsFound": "No schools match the selected criteria.",
     "clearFilters": "Reset Filters",
@@ -232,7 +232,7 @@
       "scorecardTitle": "Accessibility Scorecard",
       "facilitiesTitle": "Physical Infrastructure Facilities",
       "findingsTitle": "Verified Field Audit Findings",
-      "notCertifiedNotice": "Academic research score based on standard indicators, not an official government certification."
+      "notCertifiedNotice": "Accessibility score based on standard indicators."
     },
     "facilitiesList": {
       "ramp": "Ramp with Handrails",
@@ -245,9 +245,9 @@
   },
   "survey": {
     "title": "Participate in School Accessibility Survey",
-    "subtitle": "Your lived experience and observations help document physical infrastructure barriers across Danapur schools.",
-    "researchTag": "NCPEDP Fellowship Community Survey",
-    "instructions": "Please answer the questions based on your visits or knowledge of schools in Danapur. All questions marked with an asterisk (*) are mandatory.",
+    "subtitle": "Your lived experience and observations help document physical infrastructure barriers across schools in Patna.",
+    "researchTag": "Sugamya Shiksha Bihar Community Survey",
+    "instructions": "Please answer the questions based on your visits or knowledge of schools in Patna. All questions marked with an asterisk (*) are mandatory.",
     "signInRequiredTitle": "Google Sign-In Required for Participation",
     "signInRequiredDesc": "Sign-in ensures one response per person and protects survey research integrity. Your name, email, and contact number will be stored confidentially for research purposes only and never published.",
     "signInWithGoogle": "Sign in with Google to Participate",
@@ -258,7 +258,7 @@
     "alreadySubmittedNotice": "You have already participated in this survey. You may review and update your answers below.",
     "updateButton": "Update Survey Response",
     "privacyNoticeTitle": "Research Ethics & Privacy Commitment",
-    "privacyNoticeText": "This survey is conducted solely for independent academic research under the NCPEDP Fellowship to evaluate school accessibility in Danapur. Your participation is completely voluntary. Personal identifiers are never sold, shared publicly, or linked to individual school evaluations. All findings are anonymized and reported in aggregate form.",
+    "privacyNoticeText": "This survey is conducted solely for independent academic research under Sugamya Shiksha Bihar to evaluate school accessibility in Patna. Your participation is completely voluntary. Personal identifiers are never sold, shared publicly, or linked to individual school evaluations. All findings are anonymized and reported in aggregate form.",
     "consentLabel": "I agree that my name, contact number and email will be stored for this research project, used only for research purposes and not shown publicly.",
     "consentError": "You must agree to the research privacy and data storage terms to submit.",
     "respondentSection": "1. Verified Respondent Information",
@@ -280,7 +280,7 @@
     "submitButton": "Submit Survey Response",
     "submitting": "Submitting Response...",
     "successTitle": "Thank You for Your Valuable Contribution!",
-    "successMessage": "Your survey response has been securely recorded in our research database. The insights you shared directly support improving physical infrastructure and advancing inclusive education for children in Danapur.",
+    "successMessage": "Your survey response has been securely recorded in our research database. The insights you shared directly support improving physical infrastructure and advancing inclusive education for children in Patna.",
     "viewSchools": "Explore School Directory",
     "backHome": "Return to Homepage",
     "rateLimitWarning": "You have recently submitted a survey response from this browser. Please wait a few moments before submitting again to prevent duplicates.",
@@ -288,10 +288,10 @@
     "genericError": "Could not save your survey response. Please check all fields and try again."
   },
   "footer": {
-    "aboutProject": "Sugamya Shiksha Bihar is an independent research project conducted under the NCPEDP Fellowship, investigating physical infrastructure barriers in Danapur schools to advance accessible education across Bihar.",
+    "aboutProject": "Sugamya Shiksha Bihar is an independent research project investigating physical infrastructure barriers in schools to advance accessible education across Bihar.",
     "quickLinks": "Quick Links",
-    "contact": "Contact & Fellowship",
-    "location": "Danapur, Patna, Bihar, India",
+    "contact": "Contact & Research",
+    "location": "Patna, Bihar, India",
     "rights": "All rights reserved. Dedicated to open research and public accessibility.",
     "accessibilityCommitment": "Designed to conform with WCAG 2.2 Level AA accessibility standards."
   }

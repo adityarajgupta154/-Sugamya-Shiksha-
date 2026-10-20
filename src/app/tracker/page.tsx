@@ -78,21 +78,10 @@ export default function TrackerPage() {
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
           {isHi
-            ? "दानापुर के विद्यालयों में ऑन-साइट ऑडिट के दौरान पाई गई भौतिक बाधाएं, वैधानिक मानकों के आधार पर दिए गए सुझाव और विद्यालय प्रबंधन समिति (SMC) द्वारा किए गए वास्तविक सुधारों का सचित्र प्रमाण।"
+            ? "पटना के विद्यालयों में ऑन-साइट ऑडिट के दौरान पाई गई भौतिक बाधाएं, वैधानिक मानकों के आधार पर दिए गए सुझाव और विद्यालय प्रबंधन समिति (SMC) द्वारा किए गए वास्तविक सुधारों का सचित्र प्रमाण।"
             : "Transparent documentation of school infrastructure barriers identified during field audits, recommendations delivered under national standards, and verified transformations achieved on the ground."}
         </p>
 
-        {/* Demo Notice Banner */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300">
-            <ShieldAlert className="w-3.5 h-3.5 text-amber-800" aria-hidden="true" />
-            <span>
-              {isHi
-                ? "प्रदर्शनात्मक डेमो डेटा — वास्तविक दानापुर सर्वेक्षण निष्कर्ष नहीं।"
-                : "Illustrative demo data — not actual Danapur survey findings."}
-            </span>
-          </div>
-        </div>
 
         {/* Academic Notice Pill */}
         <div className="inline-flex items-center gap-2 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 font-medium text-left">
@@ -100,7 +89,7 @@ export default function TrackerPage() {
           <span>
             {isHi
               ? "गोपनीयता एवं शुद्धता गारंटी: केवल शोध दल द्वारा मौके पर सत्यापित और प्रमाणित प्रविष्टियां ही सार्वजनिक प्रदर्शित की जाती हैं।"
-              : "Verification Guarantee: Only on-site verified entries reviewed by the fellowship team are publicly visible."}
+              : "Verification Guarantee: Only on-site verified entries reviewed by the research team are publicly visible."}
           </span>
         </div>
       </section>
@@ -127,7 +116,7 @@ export default function TrackerPage() {
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 {isHi
-                  ? "यदि दानापुर के किसी विद्यालय में रैंप, शौचालय या प्रवेश द्वार में सुगम्यता की कमी है, तो फोटो सहित बाधा रिपोर्ट दर्ज करें। शोध दल द्वारा निरीक्षण कर सुधार हेतु पहल की जाएगी।"
+                  ? "यदि किसी विद्यालय में रैंप, शौचालय या प्रवेश द्वार में सुगम्यता की कमी है, तो फोटो सहित बाधा रिपोर्ट दर्ज करें। शोध दल द्वारा निरीक्षण कर सुधार हेतु पहल की जाएगी।"
                   : "Submit an accessibility barrier report with photos. Our research team reviews submissions, verifies them on-site, and advocates for SMC rectification."}
               </p>
             </div>
@@ -151,8 +140,8 @@ export default function TrackerPage() {
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 {isHi
-                  ? "दानापुर के सरकारी एवं निजी विद्यालयों के 100-बिंदु सुगम्यता स्कोर, 4 स्तंभों का भार एवं ऑडिट निष्कर्षों की विस्तृत डायरेक्टरी देखें।"
-                  : "Inspect 100-point accessibility ratings, facility audits, and compliance breakdowns across all surveyed Danapur schools."}
+                  ? "पटना के सरकारी एवं निजी विद्यालयों के 100-बिंदु सुगम्यता स्कोर, 4 स्तंभों का भार एवं ऑडिट निष्कर्षों की विस्तृत डायरेक्टरी देखें।"
+                  : "Inspect 100-point accessibility ratings, facility audits, and compliance breakdowns across all surveyed schools in Patna."}
               </p>
             </div>
             <Link

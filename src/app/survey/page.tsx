@@ -623,7 +623,7 @@ export default function SurveyPage() {
             <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
               {t(
                 "survey.successMessage",
-                "Your survey response has been securely recorded in our research database. The insights you shared directly support improving physical infrastructure and advancing inclusive education for children in Danapur."
+                "Your survey response has been securely recorded in our research database. The insights you shared directly support improving physical infrastructure and advancing inclusive education for children in Patna."
               )}
             </p>
           </div>
@@ -666,7 +666,7 @@ export default function SurveyPage() {
       <header className="space-y-4 text-center sm:text-left border-b border-slate-100 pb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-800 border border-teal-200">
           <Sparkles className="w-3.5 h-3.5 text-teal-600" aria-hidden="true" />
-          <span>{t("survey.researchTag", "NCPEDP Fellowship Community Survey")}</span>
+          <span>{t("survey.researchTag", "Sugamya Shiksha Bihar Community Survey")}</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0B2D52] tracking-tight">
           {isHindi ? survey.title_hi : survey.title_en}
@@ -1059,7 +1059,7 @@ export default function SurveyPage() {
             <p className="text-xs text-slate-500 mt-0.5">
               {isHindi
                 ? "शोध अध्ययन एवं सत्यनिष्ठा हेतु आपके मूल विवरण (गूगल खाते द्वारा सत्यापित)"
-                : "Basic respondent verification for NCPEDP research study integrity"}
+                : "Basic respondent verification for Sugamya Shiksha Bihar research study integrity"}
             </p>
           </div>
 
@@ -1235,7 +1235,7 @@ export default function SurveyPage() {
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                 {t(
                   "survey.privacyNoticeText",
-                  "This survey is conducted solely for independent academic research under the NCPEDP Fellowship to evaluate school accessibility in Danapur. Your participation is completely voluntary. Personal identifiers are never sold, shared publicly, or linked to individual school evaluations. All findings are anonymized and reported in aggregate form."
+                  "This survey is conducted solely for independent academic research under Sugamya Shiksha Bihar to evaluate school accessibility in Patna. Your participation is completely voluntary. Personal identifiers are never sold, shared publicly, or linked to individual school evaluations. All findings are anonymized and reported in aggregate form."
                 )}
               </p>
             </div>
@@ -1291,7 +1291,7 @@ export default function SurveyPage() {
               {t("survey.questionsSection", "2. School Accessibility Questionnaire")}
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              {t("survey.instructions", "Please answer the questions based on your visits or knowledge of schools in Danapur.")}
+              {t("survey.instructions", "Please answer the questions based on your visits or knowledge of schools in Patna.")}
             </p>
           </div>
 

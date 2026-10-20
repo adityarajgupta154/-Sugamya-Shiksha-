@@ -74,7 +74,7 @@ export function CommunityVoicesAdvocacyTab({ isHindi }: Props) {
           setCampaigns(list);
         }
       } catch (e) {
-        console.warn("Using demo data for voices/advocacy admin:", e);
+        console.warn("Using fallback dataset for voices/advocacy admin:", e);
       }
     }
     loadData();
@@ -260,8 +260,8 @@ export function CommunityVoicesAdvocacyTab({ isHindi }: Props) {
                 keyTheme_hi: "सुगम्यता अनुभव",
                 keyTheme_en: "Accessibility Experience",
                 isAnonymous: true,
-                authorDisplayName_hi: "एक छात्र (दानापुर)",
-                authorDisplayName_en: "A Student (Danapur)",
+                authorDisplayName_hi: "एक छात्र (पटना)",
+                authorDisplayName_en: "A Student (Patna)",
                 consentRecorded: true,
                 consentDetails: {
                   consentDate: new Date().toISOString().split("T")[0],

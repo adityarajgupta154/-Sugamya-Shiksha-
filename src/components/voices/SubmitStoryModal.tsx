@@ -99,8 +99,8 @@ export function SubmitStoryModal({ isOpen, onClose, onSuccess }: SubmitStoryModa
           displayName_hi = "एक दिव्यांग छात्र (पहचान सुरक्षित)";
           displayName_en = "Student with Disability (Anonymous)";
         } else if (role === "parent") {
-          displayName_hi = "एक अभिभावक (दानापुर)";
-          displayName_en = "Parent of CwSN (Danapur)";
+          displayName_hi = "एक अभिभावक (पटना)";
+          displayName_en = "Parent of CwSN (Patna)";
         } else if (role === "teacher") {
           displayName_hi = "एक शिक्षक (पहचान सुरक्षित)";
           displayName_en = "Educator (Anonymous)";
@@ -282,7 +282,7 @@ export function SubmitStoryModal({ isOpen, onClose, onSuccess }: SubmitStoryModa
                 type="text"
                 value={schoolName}
                 onChange={(e) => setSchoolName(e.target.value)}
-                placeholder={isHindi ? "उदा. राजकीय मध्य विद्यालय, दानापुर" : "e.g. Govt Middle School, Danapur"}
+                placeholder={isHindi ? "उदा. राजकीय मध्य विद्यालय, पटना" : "e.g. Govt Middle School, Patna"}
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"
               />
             </div>
@@ -364,8 +364,8 @@ export function SubmitStoryModal({ isOpen, onClose, onSuccess }: SubmitStoryModa
                 />
                 <span className="text-slate-700 font-medium">
                   {isHindi
-                    ? "1. मैं एनसीपीईडीपी फेलोशिप शोध एवं सुगम्यता सुधार हेतु यह अनुभव साझा करने की स्पष्ट सहमति देता/देती हूँ।"
-                    : "1. I give explicit consent for this story to be used in NCPEDP fellowship research and advocacy."}
+                    ? "1. मैं सुगम्य शिक्षा बिहार शोध एवं सुगम्यता सुधार हेतु यह अनुभव साझा करने की स्पष्ट सहमति देता/देती हूँ।"
+                    : "1. I give explicit consent for this story to be used in Sugamya Shiksha Bihar research and advocacy."}
                 </span>
               </label>
               {errors.consentResearch && (

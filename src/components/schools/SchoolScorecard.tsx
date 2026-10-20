@@ -297,22 +297,6 @@ export function SchoolScorecard({
                 })}
               </div>
             </div>
-
-            {/* Mandatory Academic Research Disclaimer Box */}
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
-                <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" aria-hidden="true" />
-                <span>{isHindi ? "वैधानिक शोध सूचना" : "Academic Research Notice"}</span>
-              </div>
-              <p className="text-xs leading-relaxed font-hindi">
-                {isHindi ? scorecard.disclaimer_hi : scorecard.disclaimer_en}
-              </p>
-              <p className="text-[11px] text-slate-500 italic">
-                {isHindi
-                  ? "यह स्कोर किसी सरकारी प्रमाणीकरण या अनापत्ति प्रमाण-पत्र (NOC) का विकल्प नहीं है। यह NCPEDP फेलोशिप शोध अध्ययन के अंतर्गत निर्मित स्वतंत्र विश्लेषणात्मक मूल्यांकन है।"
-                  : "This research score is not an official government certification or building endorsement. It is an independent academic research evaluation developed under the NCPEDP Fellowship."}
-              </p>
-            </div>
           </div>
         )}
       </Card>

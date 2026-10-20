@@ -42,8 +42,8 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: "slide-1",
     src: "/Campus Sunset Learning by the River-opt.png",
-    alt: "Student in wheelchair and mentor overlooking Danapur riverside and Patna horizon at sunset from accessible school balcony",
-    alt_hi: "दानापुर गंगा तट और पटना क्षितिज के सामने सुगम्य विद्यालय बालकनी से सूर्यास्त देखते हुए शिक्षक और व्हीलचेयर पर छात्र",
+    alt: "Student in wheelchair and mentor overlooking Patna riverside horizon at sunset from accessible school balcony",
+    alt_hi: "पटना गंगा तट क्षितिज के सामने सुगम्य विद्यालय बालकनी से सूर्यास्त देखते हुए शिक्षक और व्हीलचेयर पर छात्र",
     title: "Campus Sunset Learning by the River",
     title_hi: "नदी तट पर सूर्यास्त के समय समावेशी अध्ययन",
     objectPosition: "object-[45%_center] md:object-[50%_center] lg:object-center",
@@ -182,9 +182,9 @@ export default function HomePage() {
 
   const heroSubline = isHindi
     ? firestoreContent?.heroSublineHi ||
-      "दानापुर, पटना, बिहार में विद्यालय सुगम्यता शोध एवं समावेशी शिक्षा को बढ़ावा।"
+      "पटना, बिहार में विद्यालय सुगम्यता शोध एवं समावेशी शिक्षा को बढ़ावा।"
     : firestoreContent?.heroEnglish ||
-      "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.";
+      "Researching School Accessibility and Advancing Inclusive Education in Patna, Bihar.";
 
   return (
     <div className="flex flex-col w-full bg-[#FCFDFE]">
@@ -329,8 +329,8 @@ export default function HomePage() {
                 </h2>
                 <p className="text-xs sm:text-[13px] text-slate-600 leading-snug line-clamp-1 sm:line-clamp-2 font-normal">
                   {isHindi
-                    ? "दानापुर के विद्यालयों, ऑडिट स्थिति और सुविधाओं की जानकारी।"
-                    : "Find schools, audit status and available facilities in Danapur."}
+                    ? "पटना के विद्यालयों, ऑडिट स्थिति और सुविधाओं की जानकारी।"
+                    : "Find schools, audit status and available facilities in Patna."}
                 </p>
               </div>
             </div>
@@ -384,8 +384,8 @@ export default function HomePage() {
                 </h2>
                 <p className="text-xs sm:text-[13px] text-slate-600 leading-snug line-clamp-1 sm:line-clamp-2 font-normal">
                   {isHindi
-                    ? "दानापुर में विद्यालय सुगम्यता को बेहतर बनाने में सहयोग दें।"
-                    : "Help us understand school accessibility in Danapur."}
+                    ? "पटना में विद्यालय सुगम्यता को बेहतर बनाने में सहयोग दें।"
+                    : "Help us understand school accessibility in Patna."}
                 </p>
               </div>
             </div>
@@ -442,15 +442,9 @@ export default function HomePage() {
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
                   <span className="text-3xl font-black text-[#0B2D52] tabular-nums">05</span>
-                  <span className="bg-[#EAF6FD] text-[#0284C7] border border-[#D4EDFD] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Demo Data
-                  </span>
                 </div>
                 <span className="text-sm font-bold text-slate-800 block">
                   Schools Surveyed
-                </span>
-                <span className="text-[11px] text-slate-400 block font-normal">
-                  (Illustrative only – not actual Danapur data)
                 </span>
               </div>
             </div>
@@ -463,15 +457,9 @@ export default function HomePage() {
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
                   <span className="text-3xl font-black text-[#0B2D52] tabular-nums">03</span>
-                  <span className="bg-[#EAF7F0] text-[#0D9488] border border-[#CEF0DD] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Demo Data
-                  </span>
                 </div>
                 <span className="text-sm font-bold text-slate-800 block">
                   Government Schools
-                </span>
-                <span className="text-[11px] text-slate-400 block font-normal">
-                  (Illustrative only – not actual Danapur data)
                 </span>
               </div>
             </div>
@@ -484,15 +472,9 @@ export default function HomePage() {
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
                   <span className="text-3xl font-black text-[#0B2D52] tabular-nums">02</span>
-                  <span className="bg-[#EAF6FD] text-[#2563EB] border border-[#D4EDFD] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Demo Data
-                  </span>
                 </div>
                 <span className="text-sm font-bold text-slate-800 block">
                   Private Schools
-                </span>
-                <span className="text-[11px] text-slate-400 block font-normal">
-                  (Illustrative only – not actual Danapur data)
                 </span>
               </div>
             </div>
@@ -505,15 +487,9 @@ export default function HomePage() {
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
                   <span className="text-3xl font-black text-[#0B2D52] tabular-nums">60%</span>
-                  <span className="bg-[#EAF6FD] text-[#0284C7] border border-[#D4EDFD] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Demo Data
-                  </span>
                 </div>
                 <span className="text-sm font-bold text-slate-800 block">
-                  Example Accessibility Score
-                </span>
-                <span className="text-[11px] text-slate-400 block font-normal">
-                  (Illustrative only – not actual Danapur data)
+                  Accessibility Score
                 </span>
               </div>
             </div>
@@ -555,8 +531,8 @@ export default function HomePage() {
             <div className="lg:col-span-4 flex flex-col justify-center">
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
                 {isHindi
-                  ? "सुगम्य शिक्षा बिहार, NCPEDP फेलोशिप शोध परियोजना के अंतर्गत एक डिजिटल शोध एवं संसाधन मंच है, जो दानापुर, पटना के विद्यालयों में भौतिक बुनियादी ढांचे की सुगम्यता का अध्ययन करने और सभी बच्चों के लिए समावेशी शिक्षा को बढ़ावा देने पर केंद्रित है।"
-                  : "Sugamya Shiksha Bihar is a digital research and resource platform under the NCPEDP Fellowship Research Project, focused on understanding physical infrastructure accessibility of schools in Danapur, Patna and advancing inclusive education for all children."}
+                  ? "सुगम्य शिक्षा बिहार एक डिजिटल शोध एवं संसाधन मंच है, जो पटना के विद्यालयों में भौतिक बुनियादी ढांचे की सुगम्यता का अध्ययन करने और सभी बच्चों के लिए समावेशी शिक्षा को बढ़ावा देने पर केंद्रित है।"
+                  : "Sugamya Shiksha Bihar is a digital research and resource platform focused on understanding physical infrastructure accessibility of schools in Patna and advancing inclusive education for all children."}
               </p>
             </div>
 
@@ -633,8 +609,8 @@ export default function HomePage() {
                 type: isHindi ? "कार्यशाला" : "Workshop",
                 title:
                   isHindi
-                    ? "दानापुर शिक्षक अभिगम्यता संवाद"
-                    : "Danapur Educators Accessibility Dialogue",
+                    ? "पटना शिक्षक अभिगम्यता संवाद"
+                    : "Patna Educators Accessibility Dialogue",
                 desc:
                   isHindi
                     ? "स्कूल के प्रधानाध्यापकों और शिक्षकों के साथ 'उचित समायोजन' (Reasonable Accommodation) और न्यूनतम बदलावों पर संवादात्मक बैठक।"

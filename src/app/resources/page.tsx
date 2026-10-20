@@ -161,8 +161,8 @@ export default function ResourcesPage() {
               </h1>
               <p className="mt-2 text-base sm:text-lg text-muted-foreground max-w-3xl">
                 {isHi
-                  ? "विद्यालय सुगम्यता ऑडिट प्रारूप, आरटीआई आवेदन टेम्प्लेट, आधिकारिक दिशानिर्देश (PDF), जागरूकता पोस्टर और दानापुर फेलोशिप शोध अपडेट।"
-                  : "Free school accessibility audit formats, RTI application templates, official statutory guidelines (PDF), awareness posters, and fellowship research updates."}
+                  ? "विद्यालय सुगम्यता ऑडिट प्रारूप, आरटीआई आवेदन टेम्प्लेट, आधिकारिक दिशानिर्देश (PDF), जागरूकता पोस्टर और क्षेत्रीय शोध अपडेट।"
+                  : "Free school accessibility audit formats, RTI application templates, official statutory guidelines (PDF), awareness posters, and research updates."}
               </p>
             </div>
 
@@ -375,16 +375,16 @@ export default function ResourcesPage() {
 
         {/* Tab 2: Research Updates Listing */}
         {activeTab === "research" && (
-          <section className="space-y-8" aria-label={isHi ? "शोध अपडेट सूची" : "Fellowship research updates list"}>
+          <section className="space-y-8" aria-label={isHi ? "शोध अपडेट सूची" : "Research updates list"}>
             <div className="bg-primary/5 border border-primary/20 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <h2 className="text-lg font-bold text-foreground">
-                  {isHi ? "दानापुर फेलोशिप शोध टिप्पणियां एवं वर्किंग पेपर्स" : "Danapur Fellowship Research Notes & Working Papers"}
+                  {isHi ? "क्षेत्रीय शोध टिप्पणियां एवं वर्किंग पेपर्स" : "Field Research Notes & Working Papers"}
                 </h2>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                   {isHi
-                    ? "एनसीपीईडीपी फेलोशिप के अंतर्गत दानापुर के विद्यालयों के स्थल निरीक्षण से प्राप्त प्राथमिक शोध निष्कर्ष।"
-                    : "Interim qualitative & quantitative field findings from school visits conducted under the NCPEDP Fellowship."}
+                    ? "सुगम्य शिक्षा बिहार के अंतर्गत पटना के विद्यालयों के स्थल निरीक्षण से प्राप्त प्राथमिक शोध निष्कर्ष।"
+                    : "Interim qualitative & quantitative field findings from school visits conducted under Sugamya Shiksha Bihar."}
                 </p>
               </div>
               <Badge variant="default">

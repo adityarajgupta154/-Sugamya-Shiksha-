@@ -20,25 +20,18 @@ export function SugamyaLogo({ compact = false, className = "", imgClassName = ""
         <Image
           src="/logo.png"
           alt="Sugamya Shiksha Bihar Emblem"
-          width={104}
-          height={77}
-          sizes="104px"
+          width={56}
+          height={56}
+          sizes="56px"
           priority
-          className={`h-8 sm:h-10 md:h-12 w-auto max-w-none object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105 ${imgClassName}`}
+          className={`h-9 sm:h-11 md:h-12 w-9 sm:w-11 md:w-12 aspect-square object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105 ${imgClassName}`}
         />
       </div>
 
       {/* Brand Text */}
-      <div className="flex flex-col text-left min-w-0">
-        <span className="text-sm sm:text-base md:text-lg lg:text-xl font-black text-[#0B2D52] tracking-tight leading-tight group-hover:text-teal-700 transition-colors truncate">
-          Sugamya Shiksha Bihar
-        </span>
-        {!compact && (
-          <span className="hidden md:block text-[11px] sm:text-xs text-slate-500 font-medium leading-tight tracking-normal truncate">
-            NCPEDP Fellowship Research Project • Danapur
-          </span>
-        )}
-      </div>
+      <span className="text-sm sm:text-base md:text-lg lg:text-xl font-black text-[#0B2D52] tracking-tight leading-tight group-hover:text-teal-700 transition-colors whitespace-nowrap">
+        Sugamya Shiksha Bihar
+      </span>
     </Link>
   );
 }

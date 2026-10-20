@@ -81,8 +81,8 @@ export default function ReportBarrierPage() {
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-hindi">
               {isHindi
-                ? "दानापुर के विद्यालयों में रैंप, शौचालय, चौड़े द्वार, पेयजल, स्पर्शनीय मार्ग या आपात निकास संबंधी बाधाओं की जानकारी साझा करें। आपके द्वारा दी गई जानकारी का उपयोग विद्यालय प्रबंधन समिति (SMC) व शिक्षा विभाग के साथ पैरवी और अकादमिक शोध हेतु किया जाता है।"
-                : "Report physical infrastructure barriers at Danapur schools (steep ramps, narrow doors, inaccessible toilets, lack of drinking water). Your observations empower advocacy with School Management Committees (SMC) and ground academic research."}
+                ? "पटना के विद्यालयों में रैंप, शौचालय, चौड़े द्वार, पेयजल, स्पर्शनीय मार्ग या आपात निकास संबंधी बाधाओं की जानकारी साझा करें। आपके द्वारा दी गई जानकारी का उपयोग विद्यालय प्रबंधन समिति (SMC) व शिक्षा विभाग के साथ पैरवी और अकादमिक शोध हेतु किया जाता है।"
+                : "Report physical infrastructure barriers at schools in Patna (steep ramps, narrow doors, inaccessible toilets, lack of drinking water). Your observations empower advocacy with School Management Committees (SMC) and ground academic research."}
             </p>
 
             {/* Privacy Promise Banner */}
@@ -97,7 +97,7 @@ export default function ReportBarrierPage() {
               </span>
               <span className="flex items-center gap-1.5">
                 <FileCheck2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{isHindi ? "एनसीपीईडीपी फेलोशिप शोध" : "NCPEDP Fellowship Research"}</span>
+                <span>{isHindi ? "सुगम्य शिक्षा शोध" : "Accessibility Research"}</span>
               </span>
             </div>
           </div>
@@ -147,17 +147,6 @@ export default function ReportBarrierPage() {
           </div>
         ) : (
           <div className="space-y-6">
-            {/* Demo Notice Banner */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300">
-                <ShieldAlert className="w-3.5 h-3.5 text-amber-800" aria-hidden="true" />
-                <span>
-                  {isHindi
-                    ? "प्रदर्शनात्मक डेमो डेटा — वास्तविक दानापुर सर्वेक्षण निष्कर्ष नहीं।"
-                    : "Illustrative demo data — not actual Danapur survey findings."}
-                </span>
-              </div>
-            </div>
 
             <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs text-emerald-900 flex items-start gap-3">
               <ShieldCheck className="w-5 h-5 shrink-0 text-emerald-700 mt-0.5" />
@@ -175,8 +164,8 @@ export default function ReportBarrierPage() {
         <div className="p-4 rounded-2xl bg-slate-100 border border-slate-200 text-center text-xs text-slate-500">
           <p>
             {isHindi
-              ? "अभिगम्यता बाधा रिपोर्टिंग प्रणाली एनसीपीईडीपी फेलोशिप के अंतर्गत दानापुर, पटना क्षेत्र के विद्यालयों में समावेशी शिक्षा को बढ़ावा देने के उद्देश्य से संचालित एक स्वतंत्र शैक्षणिक पहल है।"
-              : "This accessibility barrier reporting system is an independent research initiative under the NCPEDP Fellowship, advancing inclusive education across schools in Danapur, Patna."}
+              ? "अभिगम्यता बाधा रिपोर्टिंग प्रणाली सुगम्य शिक्षा बिहार के अंतर्गत पटना क्षेत्र के विद्यालयों में समावेशी शिक्षा को बढ़ावा देने के उद्देश्य से संचालित एक स्वतंत्र शैक्षणिक पहल है।"
+              : "This accessibility barrier reporting system is an independent research initiative under Sugamya Shiksha Bihar, advancing inclusive education across schools in Patna, Bihar."}
           </p>
         </div>
       </div>

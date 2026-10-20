@@ -24,7 +24,7 @@ service firebase.storage {
       allow write: if isAdmin();
     }
 
-    // Fellowship research papers and notes
+    // Research papers and notes
     match /researchReports/{fileName} {
       allow read: if true;
       allow write: if isAdmin();

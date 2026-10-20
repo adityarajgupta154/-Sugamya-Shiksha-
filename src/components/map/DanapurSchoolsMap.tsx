@@ -30,8 +30,8 @@ interface DanapurSchoolsMapProps {
   className?: string;
 }
 
-// Center of Danapur, Patna cluster
-const DANAPUR_CENTER = {
+// Center of Patna cluster
+const PATNA_CENTER = {
   lat: 25.626,
   lng: 85.044,
   zoom: 13,
@@ -65,8 +65,8 @@ export function DanapurSchoolsMap({
 
         // Create Leaflet map instance
         const map = L.map(mapContainerRef.current, {
-          center: [DANAPUR_CENTER.lat, DANAPUR_CENTER.lng],
-          zoom: DANAPUR_CENTER.zoom,
+          center: [PATNA_CENTER.lat, PATNA_CENTER.lng],
+          zoom: PATNA_CENTER.zoom,
           zoomControl: false, // Custom accessible controls placed on top right
           attributionControl: true,
           scrollWheelZoom: true,
@@ -261,11 +261,6 @@ export function DanapurSchoolsMap({
                 <span>&rarr;</span>
               </a>
             </div>
-
-            <!-- Research Notice -->
-            <p class="text-[9px] text-slate-400 italic text-center pt-1 border-t border-slate-100">
-              ${isHindi ? "यह शोध मूल्यांकन है, कोई सरकारी प्रमाणन नहीं।" : "Academic research score — not an official government certification."}
-            </p>
           </div>
         `;
 
@@ -309,8 +304,8 @@ export function DanapurSchoolsMap({
   const handleResetCenter = () => {
     if (mapInstanceRef.current) {
       mapInstanceRef.current.setView(
-        [DANAPUR_CENTER.lat, DANAPUR_CENTER.lng],
-        DANAPUR_CENTER.zoom
+        [PATNA_CENTER.lat, PATNA_CENTER.lng],
+        PATNA_CENTER.zoom
       );
     }
   };
@@ -322,20 +317,20 @@ export function DanapurSchoolsMap({
       role="region"
       aria-label={
         isHindi
-          ? "दानापुर विद्यालय सुगम्यता इंटरएक्टिव मानचित्र"
-          : "Danapur Schools Universal Accessibility Interactive Map"
+          ? "विद्यालय सुगम्यता इंटरएक्टिव मानचित्र"
+          : "School Accessibility Interactive Map"
       }
     >
       {/* Map DOM Target */}
       <div
         ref={mapContainerRef}
-        id="danapur-leaflet-map"
+        id="patna-leaflet-map"
         className="w-full h-full z-0"
         tabIndex={0}
         aria-label={
           isHindi
-            ? "दानापुर विद्यालयों का मानचित्र। कीबोर्ड उपयोगकर्ताओं के लिए नीचे सुलभ सूची विकल्प उपलब्ध है।"
-            : "Map of Danapur schools. Keyboard users can use the accessible list alternative below."
+            ? "पटना के विद्यालयों का मानचित्र। कीबोर्ड उपयोगकर्ताओं के लिए नीचे सुलभ सूची विकल्प उपलब्ध है।"
+            : "Map of schools in Patna. Keyboard users can use the accessible list alternative below."
         }
       />
 
@@ -347,17 +342,17 @@ export function DanapurSchoolsMap({
             aria-hidden="true"
           />
           <span className="text-sm font-semibold">
-            {isHindi ? "मानचित्र लोड हो रहा है..." : "Loading Danapur map..."}
+            {isHindi ? "मानचित्र लोड हो रहा है..." : "Loading map..."}
           </span>
         </div>
       )}
 
-      {/* Top Floating Control Bar: Danapur Center & Zoom Controls */}
+      {/* Top Floating Control Bar: Center & Zoom Controls */}
       <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
         <button
           onClick={handleResetCenter}
-          title={isHindi ? "दानापुर केंद्र पर रीसेट करें" : "Reset to Danapur Center"}
-          aria-label={isHindi ? "दानापुर केंद्र पर रीसेट करें" : "Reset to Danapur Center"}
+          title={isHindi ? "मानचित्र केंद्र पर रीसेट करें" : "Reset Map Center"}
+          aria-label={isHindi ? "मानचित्र केंद्र पर रीसेट करें" : "Reset Map Center"}
           className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur-xs border border-slate-200 shadow-md text-slate-700 hover:text-navy-900 hover:bg-white flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-teal-600"
         >
           <RotateCcw className="w-4 h-4" />
@@ -389,8 +384,8 @@ export function DanapurSchoolsMap({
           <MapPin className="w-3.5 h-3.5 text-teal-400 shrink-0" aria-hidden="true" />
           <span>
             {isHindi
-              ? `दानापुर: ${schools.length} विद्यालय प्रदर्शित`
-              : `Danapur: ${schools.length} Schools Shown`}
+              ? `पटना: ${schools.length} विद्यालय प्रदर्शित`
+              : `Patna: ${schools.length} Schools Shown`}
           </span>
         </div>
       </div>

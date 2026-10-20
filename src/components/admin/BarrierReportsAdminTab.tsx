@@ -119,7 +119,7 @@ export function BarrierReportsAdminTab({ isHindi }: BarrierReportsAdminTabProps)
         name: "स्थानीय नागरिक (Demo)",
         role: "parent",
         phone: "9876543210",
-        email: "citizen.danapur@example.com",
+        email: "citizen.patna@example.com",
       });
     }
 

@@ -86,8 +86,8 @@ export const INITIAL_RESOURCES: ResourceItem[] = [
   // 2. Survey Forms
   {
     id: "res-survey-form-print",
-    title_hi: "दानापुर विद्यालय अभिगम्यता समुदाय सर्वेक्षण प्रपत्र (मुद्रण योग्य)",
-    title_en: "Danapur School Accessibility Community Survey Form (Printable Questionnaire)",
+    title_hi: "पटना विद्यालय अभिगम्यता समुदाय सर्वेक्षण प्रपत्र (मुद्रण योग्य)",
+    title_en: "Patna School Accessibility Community Survey Form (Printable Questionnaire)",
     category: "survey_forms",
     description_hi: "दिव्यांग विद्यार्थियों, अभिभावकों एवं समुदाय कार्यकर्ताओं द्वारा स्कूल भ्रमण के दौरान भौतिक सुविधाओं के मूल्यांकन हेतु ऑफलाइन फॉर्म।",
     description_en: "Printable paper questionnaire for field-based physical infrastructure documentation by parents, students, and community auditors.",
@@ -95,8 +95,8 @@ export const INITIAL_RESOURCES: ResourceItem[] = [
     fileType: "PDF",
     fileSize: "380 KB",
     downloadCount: 76,
-    sourceOrg_hi: "NCPEDP फेलोशिप शोध पहल",
-    sourceOrg_en: "NCPEDP Fellowship Initiative",
+    sourceOrg_hi: "सुगम्य शिक्षा बिहार शोध पहल",
+    sourceOrg_en: "Sugamya Shiksha Bihar Research Initiative",
     published: true,
     updatedAt: "2026-03-01",
   },
@@ -119,9 +119,9 @@ export const INITIAL_RESOURCES: ResourceItem[] = [
 
   // 3. School Audit Formats
   {
-    id: "res-danapur-audit-format",
-    title_hi: "विद्यालय भौतिक अवसंरचना ऑन-साइट ऑडिट फॉर्मेट (दानापुर रिसर्च प्रारूप)",
-    title_en: "School Physical Infrastructure On-Site Audit Format (Danapur Research Standard)",
+    id: "res-patna-audit-format",
+    title_hi: "विद्यालय भौतिक अवसंरचना ऑन-साइट ऑडिट फॉर्मेट (पटना रिसर्च प्रारूप)",
+    title_en: "School Physical Infrastructure On-Site Audit Format (Patna Research Standard)",
     category: "audit_formats",
     description_hi: "रैंप ढलान, दरवाजे की चौड़ाई, शौचालय ग्रैब बार, पेयजल ऊंचाई तथा टैक्टाइल पाथ की सटीक नापजोख दर्ज करने वाली ऑडिट शीट।",
     description_en: "Standard measurement recording sheet for ramp slopes, door clearances, accessible toilets, tactile paving, and emergency exits.",
@@ -215,8 +215,8 @@ export const INITIAL_RESOURCES: ResourceItem[] = [
     fileType: "ZIP",
     fileSize: "12.4 MB",
     downloadCount: 185,
-    sourceOrg_hi: "NCPEDP फेलोशिप वकालत अभियान",
-    sourceOrg_en: "NCPEDP Fellowship Advocacy Campaign",
+    sourceOrg_hi: "सुगम्य शिक्षा बिहार वकालत अभियान",
+    sourceOrg_en: "Sugamya Shiksha Bihar Advocacy Campaign",
     published: true,
     updatedAt: "2026-03-10",
   },

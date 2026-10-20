@@ -453,7 +453,7 @@ export function ReportBarrierForm({ onSuccess }: ReportBarrierFormProps) {
         <div className="space-y-3">
           <div>
             <label htmlFor="school-select" className="block text-xs font-bold text-slate-700 mb-1.5">
-              {isHindi ? "दानापुर के विद्यालयों की सूची:" : "Danapur Schools Directory:"}
+              {isHindi ? "पटना के विद्यालयों की सूची:" : "Patna Schools Directory:"}
             </label>
             <select
               id="school-select"
@@ -484,7 +484,7 @@ export function ReportBarrierForm({ onSuccess }: ReportBarrierFormProps) {
                 type="text"
                 value={customSchoolName}
                 onChange={(e) => setCustomSchoolName(e.target.value)}
-                placeholder={isHindi ? "उदा. प्राथमिक विद्यालय, दानापुर दियारा" : "e.g. Primary School, Danapur Diyara"}
+                placeholder={isHindi ? "उदा. प्राथमिक विद्यालय, पटना" : "e.g. Primary School, Patna"}
                 className={`w-full px-4 py-3 rounded-xl border ${
                   errors.schoolName ? "border-rose-500 bg-rose-50/50" : "border-slate-300"
                 } focus:outline-none focus:ring-2 focus:ring-teal-600 text-sm`}
@@ -810,8 +810,8 @@ export function ReportBarrierForm({ onSuccess }: ReportBarrierFormProps) {
             />
             <span className="text-xs text-slate-700 leading-relaxed font-medium">
               {isHindi
-                ? "1. मैं पुष्टि करता/करती हूँ कि यह जानकारी एनसीपीईडीपी फेलोशिप के अंतर्गत अकादमिक शोध एवं विद्यालय सुगम्यता सुधार हेतु साझा की जा रही है।"
-                : "1. I confirm that this information is submitted for academic research and school accessibility advocacy under the NCPEDP Fellowship."}
+                ? "1. मैं पुष्टि करता/करती हूँ कि यह जानकारी सुगम्य शिक्षा बिहार के अंतर्गत अकादमिक शोध एवं विद्यालय सुगम्यता सुधार हेतु साझा की जा रही है।"
+                : "1. I confirm that this information is submitted for academic research and school accessibility advocacy under Sugamya Shiksha Bihar."}
             </span>
           </label>
           {errors.consentResearch && (

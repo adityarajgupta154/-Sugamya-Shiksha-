@@ -37,14 +37,14 @@ export const BARRIER_CATEGORIES: Array<{
 
 export const DEMO_BARRIER_REPORTS: BarrierReportItem[] = [
   {
-    id: "rep-danapur-001",
-    schoolId: "sch-danapur-01",
-    schoolName: "राजकीय मध्य विद्यालय, दानापुर कैंट (Govt Middle School, Danapur Cantt)",
+    id: "rep-patna-001",
+    schoolId: "sch-patna-01",
+    schoolName: "राजकीय मध्य विद्यालय, पटना कैंट (Govt Middle School, Patna Cantt)",
     category: "ramp",
     description: "मुख्य प्रवेश द्वार का रैंप मानक 1:12 के विपरीत लगभग 1:7 तीव्र ढलान पर बना है। किनारे पर कोई 760mm/900mm की दोहरी सुरक्षा रेलिंग नहीं है, जिससे व्हीलचेयर गिरने का गंभीर जोखिम बना रहता है।",
     photos: [
       {
-        name: "danapur_cantt_steep_ramp.jpg",
+        name: "patna_cantt_steep_ramp.jpg",
         url: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80",
       },
     ],
@@ -54,9 +54,9 @@ export const DEMO_BARRIER_REPORTS: BarrierReportItem[] = [
     adminNotes: "मौके पर नापजोख में ढलान 1:6.8 पाया गया। विद्यालय प्रबंधन समिति (SMC) को सुधार ज्ञापन सौंपा गया।",
   },
   {
-    id: "rep-danapur-002",
-    schoolId: "sch-danapur-02",
-    schoolName: "दानापुर कन्या उच्चतर माध्यमिक विद्यालय (Danapur Girls High School)",
+    id: "rep-patna-002",
+    schoolId: "sch-patna-02",
+    schoolName: "पटना कन्या उच्चतर माध्यमिक विद्यालय (Patna Girls High School)",
     category: "toilet",
     description: "बालिका CwSN शौचालय का दरवाज़ा बाहर की बजाय अंदर की ओर खुलता है और चौड़ाई मात्र 720mm है। अंदर व्हीलचेयर मोड़ने हेतु 1500mm का घुमावदार स्थान उपलब्ध नहीं है।",
     photos: [
@@ -71,9 +71,9 @@ export const DEMO_BARRIER_REPORTS: BarrierReportItem[] = [
     adminNotes: "हार्मनाइज्ड गाइडलाइंस 2021 क्लॉज 7.2 का उल्लंघन। दरवाज़े का रुख उलटने का अनुरोध दर्ज।",
   },
   {
-    id: "rep-danapur-003",
-    schoolId: "sch-danapur-03",
-    schoolName: "उत्क्रमित मध्य विद्यालय, तकिया पर, दानापुर",
+    id: "rep-patna-003",
+    schoolId: "sch-patna-03",
+    schoolName: "उत्क्रमित मध्य विद्यालय, तकिया पर, पटना",
     category: "drinkingWater",
     description: "पेयजल नल का चबूतरा 2.5 फीट ऊंचे कंक्रीट बेस पर स्थित है। कोई रैंप नहीं है और नल की टोंटी 1150mm की ऊंचाई पर है, जो छोटे व व्हीलचेयर सवार बच्चों की पहुंच से बाहर है।",
     photos: [
@@ -87,9 +87,9 @@ export const DEMO_BARRIER_REPORTS: BarrierReportItem[] = [
     createdAt: "2026-10-16T09:40:00.000Z",
   },
   {
-    id: "rep-danapur-004",
-    schoolId: "sch-danapur-04",
-    schoolName: "सेंट जोसेफ कॉन्वेंट हाई स्कूल, दानापुर",
+    id: "rep-patna-004",
+    schoolId: "sch-patna-04",
+    schoolName: "सेंट जोसेफ कॉन्वेंट हाई स्कूल, पटना",
     category: "other",
     description: "गैर-प्रासंगिक परीक्षण रिपोर्ट — कोई भौतिक अवरोध का विवरण नहीं है।",
     photos: [],

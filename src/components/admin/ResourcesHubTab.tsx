@@ -259,9 +259,9 @@ export function ResourcesHubTab({ isHindi }: ResourcesHubTabProps) {
     summary_en: "",
     detailedNotes_hi: "",
     detailedNotes_en: "",
-    location: "दानापुर प्रखंड, पटना (Danapur Block, Patna)",
-    author_hi: "आदित्य कुमार (एनसीपीईडीपी रिसर्च फेलो)",
-    author_en: "Aditya Kumar (NCPEDP Research Fellow)",
+    location: "पटना, बिहार (Patna, Bihar)",
+    author_hi: "आदित्य कुमार (शोधार्थी, सुगम्य शिक्षा बिहार)",
+    author_en: "Aditya Kumar (Lead Researcher, Sugamya Shiksha Bihar)",
     keyFindings_hi: [""],
     keyFindings_en: [""],
     fileUrl: "#",
@@ -327,7 +327,7 @@ export function ResourcesHubTab({ isHindi }: ResourcesHubTabProps) {
           <p className="text-xs text-slate-500">
             {isHindi
               ? "डाउनलोड केंद्र, समावेशी शिक्षा पृष्ठ एवं शोध रिपोर्ट प्रबंधित करें"
-              : "Manage downloadable resources, inclusive education pillars, and fellowship research notes"}
+              : "Manage downloadable resources, inclusive education pillars, and research notes"}
           </p>
         </div>
 
@@ -563,8 +563,8 @@ export function ResourcesHubTab({ isHindi }: ResourcesHubTabProps) {
           <div className="flex items-center justify-between">
             <p className="text-xs text-slate-500">
               {isHindi
-                ? "दानापुर फेलोशिप के अंतर्गत प्रकाशित फील्ड नोट्स, अंतरिम रिपोर्ट एवं वर्किंग पेपर्स।"
-                : "Danapur NCPEDP fellowship field notes, interim reports, and technical working papers."}
+                ? "पटना के अंतर्गत प्रकाशित फील्ड नोट्स, अंतरिम रिपोर्ट एवं वर्किंग पेपर्स।"
+                : "Patna field notes, interim reports, and technical working papers."}
             </p>
             <Button
               size="sm"

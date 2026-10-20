@@ -122,7 +122,7 @@ export default function AdminDashboardPage() {
         <p className="text-sm text-slate-600">
           {isHindi
             ? "यह क्षेत्र केवल अधिकृत शोधकर्ताओं एवं व्यवस्थापकों के लिए सुरक्षित है।"
-            : "This administrative area is restricted to authorized fellowship research staff."}
+            : "This administrative area is restricted to authorized research staff."}
         </p>
         <Link href="/admin/login">
           <Button variant="primary">

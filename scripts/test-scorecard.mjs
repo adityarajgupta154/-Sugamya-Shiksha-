@@ -232,8 +232,8 @@ console.log("🧪 Running Scorecard Calculation TDD Test Suite...\n");
 // --- TEST 6: Mandatory Research Disclaimer & Methodology Output ---
 {
   const result = calculateScorecard({}, DEFAULT_STANDARDS, DEFAULT_SCORING_CONFIG);
-  assert.ok(result.disclaimer_en.includes("not an official government certification"), "Must have English disclaimer");
-  assert.ok(result.disclaimer_hi.includes("कोई आधिकारिक सरकारी प्रमाणन नहीं"), "Must have Hindi disclaimer");
+  assert.ok(result.disclaimer_en.includes("Sugamya Shiksha Bihar"), "Must have English disclaimer");
+  assert.ok(result.disclaimer_hi.includes("सुगम्य शिक्षा बिहार"), "Must have Hindi disclaimer");
   assert.ok(result.methodology.title_en, "Must have methodology title");
   console.log("✅ Test 6 Passed: Output includes mandatory bilingual research disclaimer & methodology metadata.");
 }

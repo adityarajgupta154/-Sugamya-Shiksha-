@@ -58,12 +58,12 @@ export interface SurveyResponse {
 
 export const DEFAULT_COMMUNITY_SURVEY: SurveyDefinition = {
   id: "danapur-community-survey-2026",
-  title_hi: "दानापुर विद्यालय अभिगम्यता समुदाय सर्वेक्षण 2026",
-  title_en: "Danapur School Accessibility Community Survey 2026",
+  title_hi: "पटना विद्यालय अभिगम्यता समुदाय सर्वेक्षण 2026",
+  title_en: "Patna School Accessibility Community Survey 2026",
   description_hi:
-    "यह सर्वेक्षण NCPEDP फेलोशिप शोध परियोजना के अंतर्गत दानापुर, पटना के प्राथमिक और माध्यमिक विद्यालयों में भौतिक बुनियादी ढांचे और दिव्यांग विद्यार्थियों के लिए सुगम्यता की जमीनी हकीकत का अध्ययन करने हेतु आयोजित किया जा रहा है।",
+    "यह सर्वेक्षण सुगम्य शिक्षा बिहार शोध परियोजना के अंतर्गत पटना के प्राथमिक और माध्यमिक विद्यालयों में भौतिक बुनियादी ढांचे और दिव्यांग विद्यार्थियों के लिए सुगम्यता की जमीनी हकीकत का अध्ययन करने हेतु आयोजित किया जा रहा है।",
   description_en:
-    "Conducted under the NCPEDP Fellowship Research Initiative, this community survey gathers first-hand experiences regarding physical infrastructure accessibility across government and private schools in Danapur, Patna.",
+    "Conducted under the Sugamya Shiksha Bihar Research Initiative, this community survey gathers first-hand experiences regarding physical infrastructure accessibility across government and private schools in Patna.",
   targetAudience_hi: "दिव्यांग विद्यार्थी, अभिभावक, शिक्षक, विशेष शिक्षक एवं स्थानीय नागरिक",
   targetAudience_en: "Students with Disabilities, Parents, Teachers, Special Educators, and Community Members",
   published: true,
@@ -72,10 +72,10 @@ export const DEFAULT_COMMUNITY_SURVEY: SurveyDefinition = {
   questions: [
     {
       id: "q_school_name",
-      label_hi: "विद्यालय का नाम एवं दानापुर में स्थान / मोहल्ला",
-      label_en: "School Name & Location / Mohalla in Danapur",
-      helpText_hi: "उदाहरण: राजकीय उच्च माध्यमिक विद्यालय, दानापुर कैंट",
-      helpText_en: "e.g., Government High School, Danapur Cantt",
+      label_hi: "विद्यालय का नाम एवं पटना में स्थान / मोहल्ला",
+      label_en: "School Name & Location / Mohalla in Patna",
+      helpText_hi: "उदाहरण: राजकीय उच्च माध्यमिक विद्यालय, पटना कैंट",
+      helpText_en: "e.g., Government High School, Patna Cantt",
       type: "text",
       required: true,
       placeholder_hi: "विद्यालय का नाम दर्ज करें...",
@@ -253,7 +253,7 @@ export const DEMO_SURVEY_RESPONSES: SurveyResponse[] = [
     submittedAt: "2026-10-10T11:20:00Z",
     demo: true,
     answers: {
-      q_school_name: "राजकीय कन्या उच्च विद्यालय, दानापुर बाजार",
+      q_school_name: "राजकीय कन्या उच्च विद्यालय, पटना बाजार",
       q_school_type: "government",
       q_ramp_access: "steep_or_damaged",
       q_toilet_facility: "locked_or_storage",
@@ -275,7 +275,7 @@ export const DEMO_SURVEY_RESPONSES: SurveyResponse[] = [
     submittedAt: "2026-10-12T14:45:00Z",
     demo: true,
     answers: {
-      q_school_name: "मध्य विद्यालय, सगुना मोड़, दानापुर",
+      q_school_name: "मध्य विद्यालय, सगुना मोड़, पटना",
       q_school_type: "government",
       q_ramp_access: "accessible_ramp",
       q_toilet_facility: "functional_accessible",
@@ -296,7 +296,7 @@ export const DEMO_SURVEY_RESPONSES: SurveyResponse[] = [
     submittedAt: "2026-10-14T09:15:00Z",
     demo: true,
     answers: {
-      q_school_name: "डी.ए.वी. पब्लिक स्कूल, दानापुर कैंट रोड",
+      q_school_name: "डी.ए.वी. पब्लिक स्कूल, पटना कैंट रोड",
       q_school_type: "private",
       q_ramp_access: "steps_only",
       q_toilet_facility: "standard_only",

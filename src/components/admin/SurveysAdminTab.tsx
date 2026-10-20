@@ -85,8 +85,8 @@ export function SurveysAdminTab() {
     const surveyTitleMap: Record<string, string> = {
       [surveyDef.id]: isHindi ? surveyDef.title_hi : surveyDef.title_en,
       "danapur-community-survey-2026": isHindi
-        ? "दानापुर विद्यालय अभिगम्यता समुदाय सर्वेक्षण 2026"
-        : "Danapur School Accessibility Community Survey 2026",
+        ? "पटना विद्यालय अभिगम्यता समुदाय सर्वेक्षण 2026"
+        : "Patna School Accessibility Community Survey 2026",
     };
 
     const loadLocalSubmissions = (): SurveyResponseDoc[] => {
@@ -272,7 +272,7 @@ export function SurveysAdminTab() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `danapur_survey_responses_${new Date().toISOString().split("T")[0]}.csv`);
+    link.setAttribute("download", `patna_survey_responses_${new Date().toISOString().split("T")[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -291,7 +291,7 @@ export function SurveysAdminTab() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `danapur_survey_responses_${new Date().toISOString().split("T")[0]}.json`);
+    link.setAttribute("download", `patna_survey_responses_${new Date().toISOString().split("T")[0]}.json`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -308,8 +308,8 @@ export function SurveysAdminTab() {
       const surveyTitleMap: Record<string, string> = {
         [surveyDef.id]: isHindi ? surveyDef.title_hi : surveyDef.title_en,
         "danapur-community-survey-2026": isHindi
-          ? "दानापुर विद्यालय अभिगम्यता समुदाय सर्वेक्षण 2026"
-          : "Danapur School Accessibility Community Survey 2026",
+          ? "पटना विद्यालय अभिगम्यता समुदाय सर्वेक्षण 2026"
+          : "Patna School Accessibility Community Survey 2026",
       };
       const docs = snap.docs.map((d) => normalizeSurveyResponse(d.data(), d.id, surveyTitleMap));
       setSurveyResponses(docs);
@@ -820,7 +820,7 @@ export function SurveysAdminTab() {
             {/* Responses List Cards */}
             <div className="space-y-3 pt-1">
               {paginatedSurveyResponses.map((resp) => {
-                const schoolAnswer = resp.answers?.q_school_name || "Danapur School";
+                const schoolAnswer = resp.answers?.q_school_name || "Patna School";
                 const rating = resp.answers?.q_overall_rating;
                 const isConfirming = responseDeleteConfirmId === resp.id;
 
@@ -832,7 +832,7 @@ export function SurveysAdminTab() {
                     <div className="space-y-2 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-[10px] font-semibold text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 truncate max-w-xs">
-                          {resp.surveyTitle || "Danapur Community Survey 2026"}
+                          {resp.surveyTitle || "Patna Community Survey 2026"}
                         </span>
                         <Badge variant="default" className="text-[10px] uppercase font-bold">
                           {resp.role}

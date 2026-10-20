@@ -136,7 +136,7 @@ export function BeforeAfterTracker({
                 {isHi ? "100% सत्यापित प्रविष्टियां" : "Strictly Verified Entries"}
               </div>
               <div className="text-xs text-emerald-800 font-medium">
-                {isHi ? "केवल शोधकर्ता द्वारा प्रमाणित रिकॉर्ड" : "Only verified by NCPEDP Fellowship"}
+                {isHi ? "केवल शोधकर्ता द्वारा प्रमाणित रिकॉर्ड" : "Only verified by Lead Researcher"}
               </div>
             </div>
           </div>
@@ -195,7 +195,7 @@ export function BeforeAfterTracker({
                 className="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 max-w-[200px] sm:max-w-xs truncate"
               >
                 <option value="all">
-                  {isHi ? "सभी विद्यालय (दानापुर)" : "All Schools (Danapur)"}
+                  {isHi ? "सभी विद्यालय (पटना)" : "All Schools (Patna)"}
                 </option>
                 {uniqueSchools.map((s) => (
                   <option key={s.id} value={s.id}>

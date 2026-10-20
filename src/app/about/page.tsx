@@ -20,8 +20,26 @@ import {
   Building,
   ShieldCheck,
   Phone,
+  User,
+  Linkedin,
+  ExternalLink,
 } from "lucide-react";
 import { getCustomSiteContent } from "@/lib/customSchoolsStorage";
+
+function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  );
+}
 
 export default function AboutPage() {
   const { locale, t } = useLanguage();
@@ -43,6 +61,7 @@ export default function AboutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [submittedWhatsappUrl, setSubmittedWhatsappUrl] = useState<string>("");
 
   useEffect(() => {
     // Generate simple accessible captcha challenge
@@ -97,8 +116,8 @@ export default function AboutPage() {
   const researcherBio =
     siteData?.[isHindi ? "bio_hi" : "bio_en"] ||
     (isHindi
-      ? "NCPEDP (नेशनल सेंटर फॉर प्रमोशन ऑफ एम्प्लॉयमेंट फॉर डिसेबल्ड पीपल) फेलोशिप के अंतर्गत यह स्वतंत्र शोध परियोजना दानापुर, पटना (बिहार) के विद्यालयों में दिव्यांग बच्चों (CwSN) के लिए भौतिक बुनियादी ढांचे और सार्वभौमिक सुगम्यता की स्थिति का व्यवस्थित अध्ययन कर रही है। [शोधकर्ता का आधिकारिक परिचय एवं बायोडाटा: ग्राहक पुष्टि प्रतीक्षित]"
-      : "Conducted under the prestigious NCPEDP Fellowship, this independent research initiative systematically investigates physical infrastructure accessibility and inclusive education across primary and secondary schools in Danapur, Patna, Bihar. [Official Researcher Biography: Pending final client input]");
+      ? "सुगम्य शिक्षा बिहार के अंतर्गत राहुल दयाल द्वारा संचालित यह स्वतंत्र शोध परियोजना पटना (बिहार) के विद्यालयों में दिव्यांग बच्चों (CwSN) के लिए भौतिक बुनियादी ढांचे और सार्वभौमिक सुगम्यता की स्थिति का व्यवस्थित अध्ययन कर रही है।"
+      : "Conducted by Rahul Dayal under the Sugamya Shiksha Bihar initiative, this independent research initiative systematically investigates physical infrastructure accessibility and inclusive education across primary and secondary schools in Patna, Bihar.");
 
   const methodologyText =
     siteData?.[isHindi ? "methodology_hi" : "methodology_en"] ||
@@ -137,6 +156,46 @@ export default function AboutPage() {
     }
 
     if (!validate()) return;
+
+    // Generate WhatsApp text with all filled-in user details for +91 7050084500
+    const roleLabels: Record<string, { hi: string; en: string }> = {
+      student: { hi: "विद्यार्थी / शोधार्थी", en: "Student / Scholar" },
+      parent: { hi: "दिव्यांग बच्चे के अभिभावक", en: "Parent / Family of CwSN" },
+      teacher: { hi: "शिक्षक / विशेष शिक्षक", en: "Teacher / Special Educator" },
+      advocate: { hi: "दिव्यांगता अधिकार अधिवक्ता", en: "Disability Rights Advocate" },
+      official: { hi: "शिक्षा विभाग अधिकारी", en: "Education Department Official" },
+      other: { hi: "समुदाय सदस्य / अन्य", en: "Community Member / Other" },
+    };
+
+    const selectedRole = roleLabels[formData.role] || { hi: formData.role, en: formData.role };
+    const roleText = isHindi ? selectedRole.hi : selectedRole.en;
+
+    const waLines = [
+      isHindi
+        ? "📝 *सुगम्य शिक्षा बिहार — नई प्रतिक्रिया / शोध प्रश्न*"
+        : "📝 *Sugamya Shiksha Bihar — Feedback / Query*",
+      "",
+      `👤 *${isHindi ? "नाम" : "Name"}:* ${formData.name.trim()}`,
+      `📧 *${isHindi ? "ईमेल" : "Email"}:* ${formData.email.trim()}`,
+      formData.phone.trim() ? `📞 *${isHindi ? "फोन" : "Phone"}:* ${formData.phone.trim()}` : null,
+      `🏷️ *${isHindi ? "भूमिका" : "Role"}:* ${roleText}`,
+      "",
+      `💬 *${isHindi ? "संदेश" : "Message"}:*`,
+      formData.message.trim(),
+      "",
+      "───────────────",
+      "_Sent via Sugamya Shiksha Bihar Portal (sugamyashikshabihar.org)_",
+    ].filter(Boolean);
+
+    const whatsappUrl = `https://wa.me/917050084500?text=${encodeURIComponent(waLines.join("\n"))}`;
+    setSubmittedWhatsappUrl(whatsappUrl);
+
+    // Trigger WhatsApp redirect / new tab directly on click
+    try {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    } catch (popupErr) {
+      console.warn("Browser blocked automatic popup, fallback CTA displayed:", popupErr);
+    }
 
     setIsSubmitting(true);
     try {
@@ -229,14 +288,14 @@ export default function AboutPage() {
           <Card as="article" className="p-6 sm:p-8 space-y-5 border-slate-200 shadow-sm">
             <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
               <div className="w-12 h-12 rounded-full bg-navy-800 text-teal-300 flex items-center justify-center font-bold text-xl">
-                NF
+                RD
               </div>
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-navy-800">
-                  {isHindi ? "शोधकर्ता परिचय एवं फेलोशिप" : "Researcher Introduction"}
+                  {isHindi ? "राहुल दयाल" : "Rahul Dayal"}
                 </h2>
                 <p className="text-xs text-teal-700 font-semibold tracking-wide">
-                  NCPEDP National Disability Research Fellowship
+                  {isHindi ? "शोधकर्ता • सुगम्य शिक्षा बिहार" : "Lead Researcher • Sugamya Shiksha Bihar"}
                 </p>
               </div>
             </div>
@@ -250,7 +309,7 @@ export default function AboutPage() {
                 {isHindi ? "संस्थागत संबद्धता:" : "Institutional Affiliation:"}
               </span>
               <p>
-                National Centre for Promotion of Employment for Disabled People (NCPEDP) Fellowship Programme.
+                Sugamya Shiksha Bihar Research Project.
               </p>
             </div>
           </Card>
@@ -282,12 +341,12 @@ export default function AboutPage() {
             </div>
           </Card>
 
-          {/* Fellowship Objectives Card */}
+          {/* Research Objectives Card */}
           <Card as="article" className="p-6 sm:p-8 space-y-4 border-slate-200 shadow-sm">
             <div className="flex items-center gap-2.5">
               <Target className="w-5 h-5 text-amber-600" aria-hidden="true" />
               <CardTitle as="h2" className="text-xl">
-                {t("about.objectivesTitle", "Fellowship Objectives")}
+                {t("about.objectivesTitle", "Research Objectives")}
               </CardTitle>
             </div>
             <ul className="space-y-3 text-sm text-slate-700" role="list">
@@ -295,8 +354,8 @@ export default function AboutPage() {
                 <span className="text-teal-700 font-bold">1.</span>
                 <span>
                   {isHindi
-                    ? "दानापुर के सरकारी और निजी स्कूलों में भौतिक बाधाओं का दस्तावेजीकरण करना।"
-                    : "Document structural and physical infrastructure barriers in Danapur government and private schools."}
+                    ? "पटना के सरकारी और निजी स्कूलों में भौतिक बाधाओं का दस्तावेजीकरण करना।"
+                    : "Document structural and physical infrastructure barriers in Patna government and private schools."}
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
@@ -327,20 +386,85 @@ export default function AboutPage() {
               </div>
               <p className="text-xs text-slate-600 leading-relaxed">
                 {isHindi
-                  ? "दानापुर के स्थानीय स्कूल प्रशासन, दिव्यांग अधिकार कार्यकर्ताओं एवं शिक्षा सहयोगियों के साथ खुला संवाद।"
-                  : "Active engagement with Danapur school heads, parent groups, local advocacy networks, and civil society partners."}
+                  ? "स्थानीय स्कूल प्रशासन, दिव्यांग अधिकार कार्यकर्ताओं एवं शिक्षा सहयोगियों के साथ खुला संवाद।"
+                  : "Active engagement with local school heads, parent groups, advocacy networks, and civil society partners."}
               </p>
             </Card>
 
-            <Card as="article" className="p-5 border-slate-200 shadow-sm space-y-2">
-              <div className="flex items-center gap-2 text-navy-800 font-bold text-sm">
+            <Card as="article" className="p-5 border-slate-200 shadow-sm space-y-3">
+              <div className="flex items-center gap-2 text-navy-800 font-bold text-sm border-b border-slate-100 pb-2">
                 <Mail className="w-4 h-4 text-teal-600" aria-hidden="true" />
                 <span>{t("about.contactInfoTitle", "Contact Information")}</span>
               </div>
-              <div className="text-xs text-slate-600 space-y-1">
-                <p>📍 {isHindi ? "दानापुर, पटना, बिहार" : "Danapur, Patna, Bihar, India"}</p>
-                <p>✉️ <span className="text-slate-800 font-medium">research@sugamyashikshabihar.org</span></p>
-                <p className="text-slate-500 italic">[Official Phone/Direct Address: Pending client confirmation]</p>
+              <div className="text-xs text-slate-700 space-y-2.5">
+                {/* Researcher Name */}
+                <div className="flex items-center gap-2">
+                  <User className="w-4 h-4 text-teal-700 shrink-0" aria-hidden="true" />
+                  <div>
+                    <span className="font-bold text-slate-900 text-sm">Rahul Dayal</span>
+                    <span className="text-[11px] text-teal-700 block font-medium">
+                      {isHindi ? "शोधकर्ता (Lead Researcher)" : "Lead Researcher"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-rose-600 shrink-0" aria-hidden="true" />
+                  <span className="font-medium text-slate-800">
+                    {isHindi ? "पटना, बिहार" : "Patna, Bihar"}
+                  </span>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-amber-600 shrink-0" aria-hidden="true" />
+                  <a
+                    href="mailto:Rahul.fellowship@gmail.com"
+                    className="text-slate-800 font-medium hover:text-teal-700 hover:underline break-all"
+                  >
+                    Rahul.fellowship@gmail.com
+                  </a>
+                </div>
+
+                {/* LinkedIn */}
+                <div className="flex items-center gap-2">
+                  <Linkedin className="w-4 h-4 text-[#0A66C2] shrink-0" aria-hidden="true" />
+                  <a
+                    href="https://www.linkedin.com/in/rahul-dayal-a282b3247?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[#0A66C2] font-semibold hover:underline"
+                    aria-label="Rahul Dayal on LinkedIn (opens in a new tab)"
+                  >
+                    <span>Rahul Dayal on LinkedIn</span>
+                    <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                  </a>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-emerald-600 shrink-0" aria-hidden="true" />
+                  <a
+                    href="tel:+917050084500"
+                    className="text-slate-800 font-medium hover:text-teal-700"
+                  >
+                    +91 70500 84500
+                  </a>
+                </div>
+
+                {/* WhatsApp Quick Link */}
+                <div className="pt-1">
+                  <a
+                    href="https://wa.me/917050084500"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-300 font-semibold text-xs hover:bg-emerald-100 transition-colors"
+                  >
+                    <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>WhatsApp: +91 70500 84500</span>
+                  </a>
+                </div>
               </div>
             </Card>
           </div>
@@ -362,20 +486,54 @@ export default function AboutPage() {
               <div
                 role="status"
                 aria-live="polite"
-                className="mt-6 p-6 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-950 space-y-3 text-center"
+                className="mt-6 p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-emerald-50 via-teal-50/30 to-white border border-emerald-300 text-slate-800 space-y-5 text-center shadow-sm"
               >
-                <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" aria-hidden="true" />
-                <h3 className="text-lg font-bold">
-                  {t("about.successTitle", "Message Received Successfully")}
-                </h3>
-                <p className="text-sm text-emerald-900 leading-relaxed">
-                  {t("about.successMessage")}
-                </p>
+                <div className="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-300 flex items-center justify-center mx-auto text-emerald-600 shadow-xs">
+                  <CheckCircle2 className="w-8 h-8" aria-hidden="true" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-navy-900 font-hindi">
+                    {isHindi ? "प्रतिक्रिया सफलतापूर्वक दर्ज हो गई!" : "Feedback Received Successfully!"}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {isHindi
+                      ? "आपकी प्रतिक्रिया हमारे शोध डेटाबेस में सुरक्षित कर ली गई है।"
+                      : "Your message has been securely recorded in our research database."}
+                  </p>
+                </div>
+
+                {/* Prominent WhatsApp CTA Box */}
+                {submittedWhatsappUrl && (
+                  <div className="p-4 sm:p-5 rounded-xl bg-white border border-emerald-300 shadow-sm space-y-3 text-left">
+                    <div className="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                      <WhatsAppIcon className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                      <span>{isHindi ? "WhatsApp पर भेजें (+91 70500 84500)" : "Send via WhatsApp (+91 70500 84500)"}</span>
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {isHindi
+                        ? "आपके भरे हुए विवरण के साथ WhatsApp चैट लिंक तैयार है। यदि WhatsApp विंडो स्वतः नहीं खुली है, तो नीचे दिए गए बटन पर क्लिक करें:"
+                        : "Your message with all your details is ready. If WhatsApp didn't open automatically, click the button below:"}
+                    </p>
+                    <a
+                      href={submittedWhatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm shadow-md transition-all active:scale-[0.98]"
+                    >
+                      <WhatsAppIcon className="w-5 h-5 text-white" />
+                      <span>{isHindi ? "WhatsApp पर चैट खोलें (+91 70500 84500)" : "Open WhatsApp Chat (+91 70500 84500)"}</span>
+                    </a>
+                  </div>
+                )}
+
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setSubmitSuccess(false)}
-                  className="mt-2 text-emerald-800 border-emerald-400"
+                  onClick={() => {
+                    setSubmitSuccess(false);
+                    setSubmittedWhatsappUrl("");
+                  }}
+                  className="text-slate-700 border-slate-300 hover:bg-white text-xs"
                 >
                   {isHindi ? "नया संदेश भेजें" : "Send Another Message"}
                 </Button>
@@ -480,6 +638,19 @@ export default function AboutPage() {
                   />
                 </div>
 
+                {/* WhatsApp notice banner before submit */}
+                <div className="flex items-start gap-2.5 p-3 rounded-xl bg-emerald-50/80 border border-emerald-200 text-emerald-950 text-xs">
+                  <WhatsAppIcon className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                  <div className="leading-snug">
+                    <span className="font-bold">
+                      {isHindi ? "WhatsApp पर सीधा प्रेषण:" : "Direct WhatsApp Dispatch:"}
+                    </span>{" "}
+                    {isHindi
+                      ? "फॉर्म सबमिट करने पर आपकी प्रविष्टि सेव होगी और सीधे WhatsApp (+91 70500 84500) पर विवरण के साथ भेजने का विकल्प खुल जाएगा।"
+                      : "Submitting this form will save your feedback and open WhatsApp with your pre-filled details to +91 70500 84500."}
+                  </div>
+                </div>
+
                 {submitError && (
                   <p role="alert" className="text-xs font-bold text-red-700 flex items-center gap-1">
                     <AlertCircle className="w-4 h-4" aria-hidden="true" />
@@ -492,12 +663,13 @@ export default function AboutPage() {
                   variant="primary"
                   size="lg"
                   isLoading={isSubmitting}
-                  className="w-full font-bold shadow-md bg-navy-800 hover:bg-navy-900 border-navy-700"
+                  className="w-full font-bold shadow-md bg-emerald-700 hover:bg-emerald-800 border-emerald-800 text-white min-h-[48px]"
+                  leftIcon={<WhatsAppIcon className="w-5 h-5 text-white" />}
                   rightIcon={<Send className="w-4 h-4" />}
                 >
                   {isSubmitting
-                    ? t("about.submittingButton", "Submitting...")
-                    : t("about.submitButton", "Send Message")}
+                    ? (isHindi ? "सबमिट हो रहा है..." : "Submitting...")
+                    : (isHindi ? "सबमिट करें और WhatsApp पर भेजें" : "Submit & Send on WhatsApp")}
                 </Button>
               </form>
             )}

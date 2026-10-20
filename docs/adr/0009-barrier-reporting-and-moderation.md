@@ -18,7 +18,7 @@ We designed a decoupled, privacy-first reporting architecture:
 
 1. **Pure Validation Seam (`src/lib/barrierReportValidation.ts`)**:
    - Enforces a mandatory **3-Clause Consent**:
-     - Clause 1: Research usage under NCPEDP Fellowship.
+     - Clause 1: Research usage under Sugamya Shiksha Bihar.
      - Clause 2: Child privacy / confirmation of no unconsented faces.
      - Clause 3: Acknowledgment of moderation & pending review before publication.
    - Requires valid school name, category, and minimum 15-character detailed description.

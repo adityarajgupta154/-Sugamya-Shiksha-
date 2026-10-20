@@ -210,9 +210,9 @@ export const DEFAULT_SCORING_CONFIG: ScoringConfig = {
     ],
   },
   disclaimer_en:
-    "Academic research score based on standard indicators — not an official government certification.",
+    "Sugamya Shiksha Bihar school accessibility evaluation based on standard national indicators.",
   disclaimer_hi:
-    "यह शोध मूल्यांकन है, कोई आधिकारिक सरकारी प्रमाणन नहीं।",
+    "राष्ट्रीय मानकों के आधार पर सुगम्य शिक्षा बिहार विद्यालय सुगम्यता मूल्यांकन।",
   updatedAt: "2026-10-16T23:30:00Z",
-  updatedBy: "NCPEDP Fellow & Lead Researcher",
+  updatedBy: "Sugamya Shiksha Lead Researcher",
 };

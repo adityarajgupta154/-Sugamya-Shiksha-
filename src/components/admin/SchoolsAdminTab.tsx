@@ -26,7 +26,7 @@ const BLANK_SCHOOL: SchoolItem = {
   type: "government",
   address_hi: "",
   address_en: "",
-  block: "Danapur",
+  block: "Patna",
   geo: { lat: 25.62, lng: 85.05 },
   udiseCode: "",
   auditStatus: "pending",
@@ -214,11 +214,7 @@ export function SchoolsAdminTab({ isHindi }: SchoolsAdminTabProps) {
                     Unpublished
                   </Badge>
                 )}
-                {school.isDemo && (
-                  <Badge variant="default" className="text-[10px]">
-                    Demo
-                  </Badge>
-                )}
+
               </div>
 
               <h3 className="text-base font-bold text-navy-900">
@@ -563,19 +559,7 @@ export function SchoolsAdminTab({ isHindi }: SchoolsAdminTabProps) {
                   {isHindi ? "प्रकाशित (सार्वजनिक दृश्यमान)" : "Published (publicly visible)"}
                 </span>
               </label>
-              <label className="flex items-center gap-2 text-sm font-semibold cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={selectedSchool.isDemo}
-                  onChange={(e) =>
-                    setSelectedSchool({ ...selectedSchool, isDemo: e.target.checked })
-                  }
-                  className="w-4 h-4 rounded border-slate-300 text-amber-600 focus:ring-amber-600"
-                />
-                <span className="text-navy-800">
-                  {isHindi ? "डेमो रिकॉर्ड" : "Demo record"}
-                </span>
-              </label>
+
             </div>
 
             {/* Findings */}

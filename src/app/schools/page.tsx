@@ -39,7 +39,7 @@ const DanapurSchoolsMap = dynamic(
       <div className="w-full h-[500px] rounded-2xl bg-slate-100 flex flex-col items-center justify-center gap-3 border border-slate-200">
         <div className="w-8 h-8 border-4 border-teal-600 border-t-transparent rounded-full animate-spin" />
         <span className="text-sm font-semibold text-navy-800">
-          Loading Danapur map...
+          Loading map...
         </span>
       </div>
     ),
@@ -157,21 +157,6 @@ export default function SchoolsDirectoryPage() {
         </p>
       </div>
 
-      {/* Mandatory Demo Data Notice Banner */}
-      <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs sm:text-sm">
-        <div className="flex items-center gap-2 font-medium">
-          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" aria-hidden="true" />
-          <span>
-            {t(
-              "common.demoNotice",
-              "Illustrative demo data — not actual Danapur survey findings."
-            )}
-          </span>
-        </div>
-        <span className="text-slate-600 text-xs">
-          Danapur Subdivision • Patna, Bihar
-        </span>
-      </div>
 
       {/* Filter and Search Bar */}
       <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs space-y-4">
@@ -404,22 +389,7 @@ const SchoolCardItem = React.memo(function SchoolCardItem({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1">
               <span className="text-xs font-semibold text-slate-600">
-                {t("schools.card.score", "Research Score")}
-              </span>
-              <span
-                title={
-                  isHindi
-                    ? "शोध मूल्यांकन — कोई आधिकारिक सरकारी प्रमाणन नहीं"
-                    : "Academic research score — not an official government certification"
-                }
-                className="text-[11px] text-slate-400 cursor-help"
-                aria-label={
-                  isHindi
-                    ? "शोध मूल्यांकन — कोई आधिकारिक सरकारी प्रमाणन नहीं"
-                    : "Academic research score — not an official government certification"
-                }
-              >
-                ℹ️
+                {isHindi ? "सुगम्यता स्कोर" : "Accessibility Score"}
               </span>
             </div>
 
@@ -459,17 +429,6 @@ const SchoolCardItem = React.memo(function SchoolCardItem({
             )}
           </div>
 
-          {/* Notice wherever score appears (PRD Task 10) */}
-          <div className="text-[10px] text-slate-500 italic bg-white/80 px-2 py-1 rounded border border-slate-200/60 flex items-center gap-1">
-            <span className="font-semibold text-slate-700 shrink-0">
-              {isHindi ? "शोध स्कोर:" : "Note:"}
-            </span>
-            <span className="truncate">
-              {isHindi
-                ? "यह शोध मूल्यांकन है, सरकारी प्रमाणन नहीं।"
-                : "Research score, not a government certification."}
-            </span>
-          </div>
 
           {/* Facilities checklist icons */}
           <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-600">

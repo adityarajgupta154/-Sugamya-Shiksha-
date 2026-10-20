@@ -4,7 +4,7 @@
 
 ## 1. Product Summary
 
-**Sugamya Shiksha Bihar** ("Accessible Education Bihar") is a **Digital Accessibility Research & Resource Platform** for an NCPEDP Fellowship project studying physical infrastructure accessibility of schools in Danapur, Patna, Bihar. It is **not** a general NGO site; it is a research-driven platform with school audits, guidelines, community voices, and impact tracking.
+**Sugamya Shiksha Bihar** ("Accessible Education Bihar") is a **Digital Accessibility Research & Resource Platform** studying physical infrastructure accessibility of schools in Danapur, Patna, Bihar. It is **not** a general NGO site; it is a research-driven platform with school audits, guidelines, community voices, and impact tracking.
 
 The platform has **12 website sections** and **5 unique features (A–E)**.
 
@@ -94,7 +94,6 @@ The platform has **12 website sections** and **5 unique features (A–E)**.
 | Term | Meaning |
 |------|---------|
 | CwSN | Children with Special Needs |
-| NCPEDP | National Centre for Promotion of Employment for Disabled People |
 | RPwD Act | Rights of Persons with Disabilities Act, 2016 |
 | RTE Act | Right of Children to Free and Compulsory Education Act, 2009 |
 | NEP 2020 | National Education Policy 2020 |
@@ -173,7 +172,7 @@ All items from Section 14 (Q1–Q7) of the PRD — see Assumptions table above.
 
 - **Task 4 — About Researcher & Contact**: ✅ **Completed**
   - About Researcher page (`/about`) built reusing Task 1 accessible UI components (`Card`, `Input`, `Textarea`, `Button`, `Badge`).
-  - Researcher introduction, NCPEDP fellowship details, research methodology, objectives, and collaborations read from Firestore `siteContent/about` with placeholder seed fallbacks.
+  - Researcher introduction, research methodology, objectives, and collaborations read from Firestore `siteContent/about` with placeholder seed fallbacks.
   - Accessible contact form with strict validation, error alerts, live polite announcements, accessible spam verification (dynamic math question + bot honeypot), saving submissions to Firestore `contactSubmissions`.
   - Zero new dependencies added; full keyboard and screen reader accessibility verified.
 
@@ -332,7 +331,7 @@ All items from Section 14 (Q1–Q7) of the PRD — see Assumptions table above.
 
 - **Task 13 — Report an Accessibility Barrier**: ✅ **Completed**
   - **Grill with Docs Confirmation**:
-    - Confirmed strict 3-clause consent: (1) NCPEDP fellowship academic research usage, (2) Child protection / no unconsented identifiable faces, (3) Moderation & pending verification before publication.
+    - Confirmed strict 3-clause consent: (1) Academic research usage, (2) Child protection / no unconsented identifiable faces, (3) Moderation & pending verification before publication.
     - Confirmed reporter contact handling: strictly optional, stored in isolated private sub-document, accessible only to admin for verification, and never published.
     - Confirmed 3-state moderation workflow: `pending` (initial on submit) -> Admin reviews and verifies to `verified` (publicly displayed) or `rejected` (internal reason note).
   - **Matt Pocock TDD Validation Seam (`src/lib/barrierReportValidation.ts` & `scripts/test-barrier-validation.mjs`)**:

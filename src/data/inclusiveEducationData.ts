@@ -126,12 +126,12 @@ export const INCLUSIVE_EDUCATION_TOPICS: InclusiveEducationTopic[] = [
       "Structured parental counseling and home-based learning continuity strategies.",
     ],
     actionSteps_hi: [
-      "दानापुर प्रखंड के संकुल संसाधन केंद्रों (CRC) में रिसोर्स शिक्षकों की नियमित उपस्थिति सुनिश्चित करें।",
+      "पटना जिले के संकुल संसाधन केंद्रों (CRC) में रिसोर्स शिक्षकों की नियमित उपस्थिति सुनिश्चित करें।",
       "सामान्य शिक्षकों और विशेष शिक्षकों के बीच साप्ताहिक समन्वय बैठक आयोजित करें।",
       "IEP लक्ष्यों की प्रगति का दस्तावेजीकरण करें और रिपोर्ट कार्ड में केवल अंकों के बजाय कौशल विकास को स्थान दें।",
     ],
     actionSteps_en: [
-      "Establish structured roster visits for itinerant special educators across Danapur cluster schools.",
+      "Establish structured roster visits for itinerant special educators across Patna cluster schools.",
       "Schedule weekly planning time between general classroom teachers and resource personnel.",
       "Track developmental milestones alongside curricular marks in holistic progress cards.",
     ],

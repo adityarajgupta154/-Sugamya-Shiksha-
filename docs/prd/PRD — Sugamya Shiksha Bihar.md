@@ -1,6 +1,6 @@
 # **PRD — Sugamya Shiksha Bihar** 
 
-**Tagline:** Accessible Schools, Inclusive Futures **Project:** Digital Accessibility Research & Resource Platform for the NCPEDP Fellowship Research Project _"Understanding Physical Infrastructure Accessibility of Schools in Danapur, Patna & Inclusive Education"_ **Backend:** Firebase | **Status:** Draft v1 (built strictly from client requirements) 
+**Tagline:** Accessible Schools, Inclusive Futures **Project:** Digital Accessibility Research & Resource Platform for Sugamya Shiksha Bihar Research Project _"Understanding Physical Infrastructure Accessibility of Schools in Danapur, Patna & Inclusive Education"_ **Backend:** Firebase | **Status:** Draft v1 (built strictly from client requirements) 
 
 ## **0. Instructions for the implementing agent** 
 
@@ -24,7 +24,7 @@ The first research area is **Danapur, Patna** . The platform must be designed so
 
 ## **2. Goals** 
 
-- Present the fellowship research (data, findings, reports) in an easily understandable public form. 
+- Present the research (data, findings, reports) in an easily understandable public form. 
 
 - Provide a school accessibility directory, audit tool, map and scorecard for Danapur schools. 
 

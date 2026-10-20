@@ -55,10 +55,10 @@ const DEFAULT_FEEDBACK_ITEMS: FeedbackItem[] = [
   {
     id: "demo-fb-1",
     name: "Ramesh Sharma",
-    email: "ramesh.sharma@danapurschool.edu.in",
+    email: "ramesh.sharma@patnaschool.edu.in",
     phone: "9876543210",
     role: "teacher",
-    message: "हमारे दानापुर विद्यालय में रैंप और सीडब्ल्यूएसएन शौचालय मानकों को लेकर एक कार्यशाला आयोजित करना चाहते हैं। क्या शोध टीम से कोई गाइडेंस मिल सकती है?",
+    message: "हमारे पटना विद्यालय में रैंप और सीडब्ल्यूएसएन शौचालय मानकों को लेकर एक कार्यशाला आयोजित करना चाहते हैं। क्या शोध टीम से कोई गाइडेंस मिल सकती है?",
     createdAt: "2026-10-17T11:30:00.000Z",
     status: "unread",
   },
@@ -68,7 +68,7 @@ const DEFAULT_FEEDBACK_ITEMS: FeedbackItem[] = [
     email: "pooja.verma82@gmail.com",
     phone: "9812345678",
     role: "parent",
-    message: "मेरी 9 वर्षीय बेटी व्हीलचेयर यूजर है। दानापुर कैंटोनमेंट के प्राइमरी स्कूल में भूतल पर कक्षाएं कराने के लिए आरपीडब्ल्यूडी एक्ट 2016 के तहत क्या नियम हैं?",
+    message: "मेरी 9 वर्षीय बेटी व्हीलचेयर यूजर है। पटना कैंटोनमेंट के प्राइमरी स्कूल में भूतल पर कक्षाएं कराने के लिए आरपीडब्ल्यूडी एक्ट 2016 के तहत क्या नियम हैं?",
     createdAt: "2026-10-15T09:15:00.000Z",
     status: "read",
     adminNotes: "Sent guideline PDF link for RPwD Act 2016 Reasonable Accommodations.",
@@ -76,7 +76,7 @@ const DEFAULT_FEEDBACK_ITEMS: FeedbackItem[] = [
   {
     id: "demo-fb-3",
     name: "Amit Kumar",
-    email: "amit.danapur.student@outlook.com",
+    email: "amit.patna.student@outlook.com",
     phone: "9701234567",
     role: "student",
     message: "स्कूल के मुख्य गेट पर रैंप तो है लेकिन बहुत खड़ी ढलान है, बिना किसी की मदद के ऊपर नहीं जा सकते। कृपया अपनी रिपोर्ट में इस पर ध्यान दें।",
@@ -367,11 +367,11 @@ export function FeedbackAdminTab({ isHindi }: FeedbackAdminTabProps) {
     const newSample: FeedbackItem = {
       id: "fb_" + Date.now(),
       name: isHindi ? "आलोक कुमार (परीक्षण)" : "Alok Kumar (Test)",
-      email: "alok.danapur@example.com",
+      email: "alok.patna@example.com",
       phone: "9876501234",
       role: "parent",
       message: isHindi
-        ? "यह एक परीक्षण फीडबैक संदेश है। कृपया दानापुर प्राथमिक विद्यालय के सुगम्यता स्कोरकार्ड को अद्यतन करें।"
+        ? "यह एक परीक्षण फीडबैक संदेश है। कृपया पटना प्राथमिक विद्यालय के सुगम्यता स्कोरकार्ड को अद्यतन करें।"
         : "This is a live test feedback submission verifying the admin real-time sync.",
       createdAt: new Date().toISOString(),
       status: "unread",
@@ -408,7 +408,7 @@ export function FeedbackAdminTab({ isHindi }: FeedbackAdminTabProps) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `danapur_feedback_inquiries_${new Date().toISOString().split("T")[0]}.csv`;
+    link.download = `patna_feedback_inquiries_${new Date().toISOString().split("T")[0]}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -537,7 +537,7 @@ export function FeedbackAdminTab({ isHindi }: FeedbackAdminTabProps) {
           </div>
           <div className="text-2xl font-extrabold text-[#0B2D52] mt-2">{totalCount}</div>
           <div className="text-[11px] text-slate-500 mt-1">
-            {isHindi ? "दानापुर शोध व जनसंपर्क" : "Danapur research inquiries"}
+            {isHindi ? "पटना शोध व जनसंपर्क" : "Patna research inquiries"}
           </div>
         </Card>
 
@@ -975,7 +975,7 @@ export function FeedbackAdminTab({ isHindi }: FeedbackAdminTabProps) {
                 href={`mailto:${selectedFeedback.email}?subject=${encodeURIComponent(
                   "Re: Sugamya Shiksha Bihar Inquiry - " + selectedFeedback.name
                 )}&body=${encodeURIComponent(
-                  `Dear ${selectedFeedback.name},\n\nThank you for reaching out to the Sugamya Shiksha Bihar Fellowship research project regarding:\n"${selectedFeedback.message}"\n\n`
+                  `Dear ${selectedFeedback.name},\n\nThank you for reaching out to the Sugamya Shiksha Bihar research project regarding:\n"${selectedFeedback.message}"\n\n`
                 )}`}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-teal-700 hover:bg-teal-800 text-white shadow-xs"
               >

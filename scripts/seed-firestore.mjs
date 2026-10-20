@@ -42,7 +42,7 @@ async function seed() {
       heroHindi: "हर बच्चे के लिए सुगम विद्यालय, हर बच्चे के लिए समान शिक्षा।",
       heroEnglish: "Researching School Accessibility and Advancing Inclusive Education in Danapur, Patna, Bihar.",
       introTitle: "About the Research Initiative",
-      introText: "Sugamya Shiksha Bihar is a dedicated research and resource platform created under the NCPEDP Fellowship. Grounded in the Danapur subdivision of Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
+      introText: "Sugamya Shiksha Bihar is a dedicated research and resource platform. Grounded in the Danapur subdivision of Patna district, this project documents physical infrastructure barriers in schools, evaluates compliance with national universal design standards, and amplifies community voices for inclusive education.",
       updatedAt: new Date().toISOString(),
     }, { merge: true });
     console.log("✓ Successfully connected and seeded siteContent/home");

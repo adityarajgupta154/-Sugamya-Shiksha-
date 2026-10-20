@@ -53,8 +53,8 @@ export function SchoolMapListAlternative({
       role="region"
       aria-label={
         isHindi
-          ? "मानचित्र का सुलभ सूची विकल्प — दानापुर विद्यालय"
-          : "Accessible List Alternative to Map — Danapur Schools"
+          ? "मानचित्र का सुलभ सूची विकल्प — पटना विद्यालय"
+          : "Accessible List Alternative to Map — Patna Schools"
       }
     >
       <div className="flex items-center justify-between text-xs text-slate-500 pb-1 border-b border-slate-200">
@@ -172,9 +172,6 @@ export function SchoolMapListAlternative({
                         </span>
                         <span className="text-xs text-slate-400 font-bold">/100 pts</span>
                       </div>
-                      <span className="text-[10px] text-slate-500 block">
-                        {isHindi ? "सरकारी प्रमाणन नहीं" : "Not a govt certification"}
-                      </span>
                     </div>
                   )}
                 </div>

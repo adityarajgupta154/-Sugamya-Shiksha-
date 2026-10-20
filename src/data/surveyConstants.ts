@@ -88,7 +88,7 @@ export function normalizeSurveyResponse(data: any, docId: string, surveyTitleMap
   const surveyId = safeData.surveyId || DEFAULT_SURVEY_ID;
   const surveyTitle = surveyTitleMap?.[surveyId] || (
     surveyId === DEFAULT_SURVEY_ID
-      ? "Danapur School Accessibility Community Survey 2026"
+      ? "Patna School Accessibility Community Survey 2026"
       : surveyId
   );
 

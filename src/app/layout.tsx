@@ -30,18 +30,26 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Sugamya Shiksha Bihar | Digital School Accessibility Research & Resource Platform",
   description:
-    "Accessible Schools, Inclusive Futures — NCPEDP Fellowship Research Project examining physical infrastructure accessibility and inclusive education in schools across Danapur, Patna, Bihar.",
+    "Accessible Schools, Inclusive Futures — Sugamya Shiksha Bihar Research Project examining physical infrastructure accessibility and inclusive education in schools across Patna, Bihar.",
   keywords: [
     "School Accessibility",
     "Sugamya Shiksha Bihar",
-    "Danapur Schools",
+    "Patna Schools",
     "Inclusive Education",
-    "NCPEDP Fellowship",
     "Accessibility Code 2024",
     "RPwD Act 2016",
     "Patna Bihar Education",
   ],
-  authors: [{ name: "NCPEDP Research Fellow" }],
+  authors: [{ name: "Sugamya Shiksha Bihar Research Team" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
