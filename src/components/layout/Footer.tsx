@@ -158,17 +158,6 @@ export function Footer() {
             <span className="min-h-[44px] flex items-center px-1 text-slate-400">
               {locale === "hi" ? "पटना, बिहार, भारत" : "Patna, Bihar, India"}
             </span>
-            <span aria-hidden="true">•</span>
-            <a
-              href="https://www.instagram.com/sugamyashikhshabihar?obrf=MWt3dnZoa2hrYWo4NQ=="
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              title="Instagram"
-              className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-md hover:scale-110 active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
-            >
-              <Instagram className="w-4 h-4 text-white" aria-hidden="true" />
-            </a>
           </div>
         </div>
       </div>
