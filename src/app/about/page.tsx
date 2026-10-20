@@ -171,21 +171,26 @@ export default function AboutPage() {
     const roleText = isHindi ? selectedRole.hi : selectedRole.en;
 
     const waLines = [
+      isHindi ? "नमस्ते राहुल जी," : "Hello Rahul ji,",
+      "",
       isHindi
-        ? "📝 *सुगम्य शिक्षा बिहार — नई प्रतिक्रिया / शोध प्रश्न*"
-        : "📝 *Sugamya Shiksha Bihar — Feedback / Query*",
+        ? "मैं सुगम्य शिक्षा बिहार पोर्टल के माध्यम से आपसे संपर्क कर रहा/रही हूँ:"
+        : "I am reaching out via the Sugamya Shiksha Bihar portal with the following inquiry / feedback:",
       "",
-      `👤 *${isHindi ? "नाम" : "Name"}:* ${formData.name.trim()}`,
-      `📧 *${isHindi ? "ईमेल" : "Email"}:* ${formData.email.trim()}`,
-      formData.phone.trim() ? `📞 *${isHindi ? "फोन" : "Phone"}:* ${formData.phone.trim()}` : null,
-      `🏷️ *${isHindi ? "भूमिका" : "Role"}:* ${roleText}`,
+      isHindi ? "*प्रेषक विवरण (Sender Details):*" : "*Sender Details:*",
+      `• ${isHindi ? "नाम" : "Name"}: ${formData.name.trim()}`,
+      `• ${isHindi ? "ईमेल" : "Email"}: ${formData.email.trim()}`,
+      formData.phone.trim() ? `• ${isHindi ? "फोन" : "Phone"}: ${formData.phone.trim()}` : null,
+      `• ${isHindi ? "भूमिका" : "Role"}: ${roleText}`,
       "",
-      `💬 *${isHindi ? "संदेश" : "Message"}:*`,
+      isHindi ? "*संदेश (Message):*" : "*Message:*",
       formData.message.trim(),
       "",
-      "───────────────",
-      "_Sent via Sugamya Shiksha Bihar Portal (sugamyashikshabihar.org)_",
-    ].filter(Boolean);
+      "---",
+      isHindi
+        ? "_सुगम्य शिक्षा बिहार पोर्टल (sugamyashikshabihar.org)_"
+        : "_Sent via Sugamya Shiksha Bihar (sugamyashikshabihar.org)_",
+    ].filter((item) => item !== null && item !== undefined);
 
     const whatsappUrl = `https://wa.me/917050084500?text=${encodeURIComponent(waLines.join("\n"))}`;
     setSubmittedWhatsappUrl(whatsappUrl);
@@ -456,7 +461,11 @@ export default function AboutPage() {
                 {/* WhatsApp Quick Link */}
                 <div className="pt-1">
                   <a
-                    href="https://wa.me/917050084500"
+                    href={`https://wa.me/917050084500?text=${encodeURIComponent(
+                      isHindi
+                        ? "नमस्ते राहुल जी,\nमैं सुगम्य शिक्षा बिहार परियोजना के संबंध में संपर्क करना चाहता/चाहती हूँ।"
+                        : "Hello Rahul ji,\nI would like to connect regarding the Sugamya Shiksha Bihar initiative."
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-300 font-semibold text-xs hover:bg-emerald-100 transition-colors"
